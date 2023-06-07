@@ -10,7 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-	<h1 class="text-3xl font-bold underline">
+	<h1 class="text-3xl font-bold underline mt-40">
 		Hello world!
 	</h1>
 
