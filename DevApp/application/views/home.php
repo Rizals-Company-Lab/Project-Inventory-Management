@@ -10,10 +10,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-    <h1 class="text-3xl font-bold underline mt-40">
-        Hello world!kdfhsduiothui
-    </h1>
-
+    <nav>
+        <div class="flex justify-evenly">
+            <h1>LOGO</h1>
+            <div>
+                <ul class="flex ">
+                    <li class=""><a href="">HOME</a></li>
+                    <li><a href="">PRODUK</a></li>
+                    <li><a href="">TRANSAKSI</a></li>
+                    <li><a href="">KONTAK</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </body>
 
 </html>

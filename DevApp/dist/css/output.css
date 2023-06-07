@@ -667,10 +667,6 @@ video {
   margin-top: 0.5rem;
 }
 
-.mt-40 {
-  margin-top: 10rem;
-}
-
 .box-border {
   box-sizing: border-box;
 }
@@ -1880,11 +1876,6 @@ video {
 
 .align-super {
   vertical-align: super;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 
 .font-bold {
