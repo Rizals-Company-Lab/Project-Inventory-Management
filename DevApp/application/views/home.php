@@ -1,5 +1,7 @@
-<!doctype html>
-<html>
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+?>
+<!DOCTYPE html>
 
 <head>
 	<meta charset="UTF-8">
@@ -11,6 +13,7 @@
 	<h1 class="text-3xl font-bold underline">
 		Hello world!
 	</h1>
+
 </body>
 
 </html>
