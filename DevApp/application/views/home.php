@@ -53,10 +53,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			min-height: 96px;
 		}
 
-		p {
-			margin: 0 0 10px;
-			padding: 0;
-		}
 
 		p.footer {
 			text-align: right;
