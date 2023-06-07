@@ -627,10 +627,6 @@ video {
   inset-inline-end: 0.25rem;
 }
 
-.right-4 {
-  right: 1rem;
-}
-
 .isolate {
   isolation: isolate;
 }
@@ -675,12 +671,20 @@ video {
   margin-top: 0.5rem;
 }
 
-.mr-\[100px\] {
-  margin-right: 100px;
+.mt-4 {
+  margin-top: 1rem;
 }
 
-.ml-\[100px\] {
-  margin-left: 100px;
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
 }
 
 .box-border {
@@ -780,6 +784,10 @@ video {
 
 .hidden {
   display: none;
+}
+
+.w-48 {
+  width: 12rem;
 }
 
 .flex-shrink {
@@ -1859,9 +1867,27 @@ video {
   padding: 1.25rem;
 }
 
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .text-left {
@@ -2425,8 +2451,30 @@ video {
     display: none;
   }
 
+  .sm\:rounded-none {
+    border-radius: 0px;
+  }
+
+  .sm\:border-none {
+    border-style: none;
+  }
+
+  .sm\:p-5 {
+    padding: 1.25rem;
+  }
+
+  .sm\:p-4 {
+    padding: 1rem;
+  }
+
   .sm\:underline {
     text-decoration-line: underline;
+  }
+
+  .sm\:shadow-none {
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
 }
 
