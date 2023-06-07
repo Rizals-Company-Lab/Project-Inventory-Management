@@ -4,15 +4,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <!DOCTYPE html>
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="<?= base_url() ?>/dist/css/output.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="<?= base_url() ?>/dist/css/output.css" rel="stylesheet">
 </head>
 
 <body>
-	<h1 class="text-3xl font-bold underline mt-40">
-		Hello world!
-	</h1>
+    <h1 class="text-3xl font-bold underline mt-40">
+        Hello world!kdfhsduiothui
+    </h1>
 
 </body>
 
