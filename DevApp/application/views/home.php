@@ -11,7 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <body>
     <!-- Navbar star -->
-    <nav class="mt-4 ml-2 mr-2">
+    <nav class="mt-4 ml-4 mr-4 w-auto">
         <div class="sm:flex justify-around border rounded-md shadow-md">
             <div class="flex justify-between">
                 <h1 class=" p-5">LOGO</h1>
@@ -24,7 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
             <div class="sm:flex  ">
-                <ul class="sm:flex  sm:border-none sm:rounded-none sm:shadow-none border rounded-md shadow-md hidden  ml-2 mr-2 mb-2"
+                <ul class="sm:flex  sm:border-none sm:rounded-none sm:shadow-none border rounded-md shadow-md hidden  ml-2 mr-2 mb-2;"
                     id="hilang" nama="hilang">
                     <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white" href="#">HOME</a>
                     </li>
@@ -39,6 +39,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
     </nav>
     <!-- navbar end -->
+    <div class="p-5 sm:relative ml-4 mr-4 mt-3 mx-auto w-auto h-auto border rounded-md shadow-md">
+        <div class="w-auto bg-bg h-[400px] rounded-md border-white shadow-md">
+        </div>
+        <div class="card">
+            <div class="flex p-4 mt-4 sm:w-[400px] bg-bg2 w-auto h-[200px] rounded-md shadow-md">
+                <div class="w-[500px] h-[150px] bg-bg"></div>
+                <div class="ml-4">
+                    <h1>MENU BARANG</h1>
+                    <p class="text-sm p-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia amet, tempore
+                        temporibus sit
+                        nulla, placeat minima voluptate quidem magni!</p>
+                    <button class="bg-primary rounded-md shadow-md px-6 py-1 ml-[10px]"><a href="#">Detail
+                            Barang</a></button>
+                </div>
+            </div>
+            <div class="flex p-4 mt-4 sm:w-[400px] bg-bg2 w-auto h-[200px] rounded-md shadow-md">
+                <div class="w-[500px] h-[150px] bg-bg"></div>
+                <div class="ml-4">
+                    <h1>MENU TRANSAKSI</h1>
+                    <p class="text-sm p-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia amet, tempore
+                        temporibus sit
+                        nulla, placeat minima voluptate quidem magni!</p>
+                    <button class="bg-primary rounded-md shadow-md px-6 py-1 ml-[10px]"><a href="#">Detail
+                            Barang</a></button>
+                </div>
+            </div>
+            <div class="flex p-4 mt-4 sm:w-[400px] bg-bg2 w-auto h-[200px] rounded-md shadow-md">
+                <div class="w-[500px] h-[150px] bg-bg"></div>
+                <div class="ml-4">
+                    <h1>MENU BARANG</h1>
+                    <p class="text-sm p-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia amet, tempore
+                        temporibus sit
+                        nulla, placeat minima voluptate quidem magni!</p>
+                    <button class="bg-primary rounded-md shadow-md px-6 py-1 ml-[10px]"><a href="#">Detail
+                            Barang</a></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <script src="<?= base_url() ?>/dist/js/script.js"></script>
 </body>
 
