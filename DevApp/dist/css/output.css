@@ -799,32 +799,32 @@ video {
   display: none;
 }
 
-.h-\[150px\] {
-  height: 150px;
-}
-
 .h-\[200px\] {
   height: 200px;
 }
 
-.h-\[400px\] {
-  height: 400px;
+.h-\[300px\] {
+  height: 300px;
 }
 
 .h-auto {
   height: auto;
 }
 
-.w-\[500px\] {
-  width: 500px;
+.h-3 {
+  height: 0.75rem;
 }
 
-.w-auto {
-  width: auto;
+.h-5 {
+  height: 1.25rem;
 }
 
 .w-\[300px\] {
   width: 300px;
+}
+
+.w-auto {
+  width: auto;
 }
 
 .flex-shrink {
@@ -1805,6 +1805,16 @@ video {
   background-color: rgb(16 174 219 / var(--tw-bg-opacity));
 }
 
+.bg-slate-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+}
+
+.bg-dark {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+}
+
 .decoration-slice {
   -webkit-box-decoration-break: slice;
           box-decoration-break: slice;
@@ -1944,6 +1954,16 @@ video {
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .text-left {
@@ -2460,14 +2480,30 @@ video {
     position: relative;
     margin-left: 1rem;
     margin-right: 1rem;
-    margin-top: -150px;
+    margin-top: -100px;
     display: flex;
     height: 240px;
     justify-content: space-evenly;
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   }
+}
 
+.gambar {
+  -webkit-clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+          clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+
+.box {
+  --mask: radial-gradient(106.21px at 50% 150.15px, #000 99%, #0000 101%)
+			calc(50% - 154px) 0/308px 100%,
+		radial-gradient(106.21px at 50% -73.15px, #0000 99%, #000 101%) 50% 77px/308px
+			100% repeat-x;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+@media (min-width: 640px) {
   .sm\:container {
     width: 100%;
   }
@@ -2540,6 +2576,14 @@ video {
     position: relative;
   }
 
+  .sm\:ml-\[30px\] {
+    margin-left: 30px;
+  }
+
+  .sm\:ml-\[40px\] {
+    margin-left: 40px;
+  }
+
   .sm\:flex {
     display: flex;
   }
@@ -2548,8 +2592,28 @@ video {
     display: none;
   }
 
+  .sm\:h-\[400px\] {
+    height: 400px;
+  }
+
+  .sm\:h-\[450px\] {
+    height: 450px;
+  }
+
+  .sm\:h-\[620px\] {
+    height: 620px;
+  }
+
+  .sm\:h-\[500px\] {
+    height: 500px;
+  }
+
   .sm\:w-\[400px\] {
     width: 400px;
+  }
+
+  .sm\:w-\[500px\] {
+    width: 500px;
   }
 
   .sm\:rounded-none {
