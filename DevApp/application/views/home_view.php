@@ -40,54 +40,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
     </nav> -->
     <!-- navbar end -->
 
-    <div class="p-5 sm:relative ml-4 mr-4 mt-3 mx-auto w-auto h-auto sm:h-[620px] border rounded-md shadow-md">
+    <div class="p-5  bg-dark sm:relative ml-4 mr-4 mt-3 mx-auto w-auto h-auto sm:h-[620px] border rounded-md shadow-md">
         <!-- homepage -->
-        <div class="relative flex w-auto p-1 bg-bg h-[300px] sm:h-[450px] rounded-md border-white shadow-md">
+        <div
+            class="relative overflow-hidden flex sm:w-auto p-1 bg-white h-[300px] sm:h-[450px] rounded-md border-white shadow-md">
             <img class="gambar sm:ml-[30px] sm:w-[500px] w-[300px] h-[300px] sm:h-[500px]"
                 src="<?= base_url() ?>/dist/img/gam.jpg" alt="gambar">
-
-
         </div>
+        <div class="gambar ml-20 blur-lg bg-secondary/25 sm:w-[300px] sm:h-[300px] -mt-[300px] absolute"></div>
+        <div class="gambar ml-10 blur-lg bg-white/50 sm:w-[300px] sm:h-[300px] -mt-[300px] absolute"></div>
+        <div class="gambar blur-lg bg-white/80 sm:w-[300px] sm:h-[300px] -mt-[300px] absolute"></div>
         <!--end homepage -->
 
-        <div class="card">
-            <div
-                class="flex p-4 mt-4 sm:w-[400px] bg-secondary2/80 hover:bg-bg2/100 backdrop-blur-md w-auto h-[200px] rounded-md shadow-md">
-                <div class=" bg-bg w-[50px] h-[50px]"></div>
-                <div class="ml-4">
-                    <h1>MENU BARANG</h1>
-                    <p class="text-sm p-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia amet, tempore
-                        temporibus sit
-                        nulla, placeat minima voluptate quidem magni!</p>
-                    <button class="bg-primary rounded-md shadow-md px-6 py-1 ml-[10px]"><a href="#">Detail
-                            Barang</a></button>
-                </div>
-            </div>
-            <div class="flex p-4 mt-4 sm:w-[400px] bg-bg2 w-auto h-[200px] rounded-md shadow-md">
-                <div class=" bg-bg"></div>
-                <div class="ml-4">
-                    <h1>MENU BARANG</h1>
-                    <p class="text-sm p-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia amet, tempore
-                        temporibus sit
-                        nulla, placeat minima voluptate quidem magni!</p>
-                    <button class="bg-primary rounded-md shadow-md px-6 py-1 ml-[10px]"><a href="#">Detail
-                            Barang</a></button>
-                </div>
-            </div>
-            <div class="flex p-4 mt-4 sm:w-[400px] bg-bg2 w-auto h-[200px] rounded-md shadow-md">
-                <div class=" bg-bg"></div>
-                <div class="ml-4">
-                    <h1>MENU BARANG</h1>
-                    <p class="text-sm p-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia amet, tempore
-                        temporibus sit
-                        nulla, placeat minima voluptate quidem magni!</p>
-                    <button class="bg-primary rounded-md shadow-md px-6 py-1 ml-[10px]"><a href="#">Detail
-                            Barang</a></button>
-                </div>
-            </div>
+        <div class="sm:w-[500px] sm:h-[300px] ml-[700px] absolute bg-bg rounded-md -mt-[400px]">
+            <div class="product"></div>
         </div>
-
     </div>
+
     <script src="<?= base_url() ?>/dist/js/script.js"></script>
 </body>
 
