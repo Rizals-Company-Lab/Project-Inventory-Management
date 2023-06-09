@@ -16,7 +16,7 @@
 	@apply -rotate-45;
 }
 .card {
-	@apply sm:ml-4 sm:mr-4 sm:relative mt-3 sm:-mt-[100px] sm:flex sm:h-[240px]  w-auto sm:justify-evenly h-[700px] rounded-md shadow-md sm:bg-white;
+	@apply sm:ml-4 sm:mr-4 sm:relative mt-3 sm:-mt-[100px] sm:flex sm:h-[240px]  w-auto sm:justify-evenly h-[700px] rounded-md shadow-md sm:bg-white/25 sm:backdrop-blur-md;
 }
 .gambar {
 	clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);

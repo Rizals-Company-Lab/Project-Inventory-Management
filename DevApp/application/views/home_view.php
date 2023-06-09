@@ -51,8 +51,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <!--end homepage -->
 
         <div class="card">
-            <div class="flex p-4 mt-4 sm:w-[400px] bg-bg2 w-auto h-[200px] rounded-md shadow-md">
-                <div class=" bg-bg"></div>
+            <div
+                class="flex p-4 mt-4 sm:w-[400px] bg-secondary2/80 hover:bg-bg2/100 backdrop-blur-md w-auto h-[200px] rounded-md shadow-md">
+                <div class=" bg-bg w-[50px] h-[50px]"></div>
                 <div class="ml-4">
                     <h1>MENU BARANG</h1>
                     <p class="text-sm p-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia amet, tempore
