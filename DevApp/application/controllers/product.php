@@ -10,4 +10,10 @@ class product extends CI_Controller
 	function add_new(){
 		$this->load->view('add_product_view');
 	}
+	function riwayat(){
+		$this->load->view('riwayat_view');
+	}
+	function details(){
+		$this->load->view('details_view');
+	}
 }
