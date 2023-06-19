@@ -7,7 +7,7 @@ class product extends CI_Controller
 	{
 		$this->load->view('product_view');
 	}
-	function add_new(){
+	function add_barang(){
 		$this->load->view('add_product_view');
 	}
 	function riwayat(){

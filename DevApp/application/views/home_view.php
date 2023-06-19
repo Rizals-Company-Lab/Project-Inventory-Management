@@ -55,7 +55,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="sm:w-[500px] sm:h-[300px] ml-[700px] absolute bg-bg rounded-md -mt-[400px]">
             <div class="product"></div>
         </div>
+
     </div>
+
 
     <script src="<?= base_url() ?>/dist/js/script.js"></script>
 </body>
