@@ -27,50 +27,6 @@
 	-webkit-mask: var(--mask);
 	mask: var(--mask);
 }
-.product {
-	animation: product 20s ease infinite;
-}
-@keyframes product {
-	0% {
-		background-image: url(../dist/img/baja.png);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		background-size: 400px 400px;
-	}
-	20% {
-		background-image: url(../dist/img/baja.png);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		background-size: 400px 400px;
-	}
-	40% {
-		background-image: url(../dist/img/baja.png);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		background-size: 400px 400px;
-	}
-	60% {
-		background-image: url(../dist/img/reng.png);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		background-size: 400px 400px;
-	}
-	80% {
-		background-image: url(../dist/img/reng.png);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		background-size: 400px 400px;
-	}
-	100% {
-		background-image: url(../dist/img/reng.png);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		background-size: 400px 400px;
-	}
+.kolom {
+	@apply sm:px-7 px-7  border shadow-md bg-bg;
 }
