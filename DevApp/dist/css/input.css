@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tombol-line {
+	@apply w-[30px] h-[2px] my-2 block bg-black;
+}
+
+.tombol-active > span:nth-child(1) {
+	@apply rotate-45;
+}
+.tombol-active > span:nth-child(2) {
+	@apply scale-0;
+}
+.tombol-active > span:nth-child(3) {
+	@apply -rotate-45;
+}
+
+.gambar {
+	clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+.box {
+	--mask: radial-gradient(106.21px at 50% 150.15px, #000 99%, #0000 101%)
+			calc(50% - 154px) 0/308px 100%,
+		radial-gradient(106.21px at 50% -73.15px, #0000 99%, #000 101%) 50% 77px/308px
+			100% repeat-x;
+	-webkit-mask: var(--mask);
+	mask: var(--mask);
+}
+.kolom {
+	@apply sm:px-7 px-7  border shadow-md bg-bg;
+}
