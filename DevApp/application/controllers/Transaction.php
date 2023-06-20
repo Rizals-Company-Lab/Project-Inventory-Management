@@ -101,5 +101,7 @@ class Transaction extends CI_Controller
         var_dump($this->input->post());
         // $idOrder = $this->Transaction_model->get_new_idOrder();
         $this->Transaction_model->save_transaction($this->input->post());
+
+        redirect('Transaction');
     }
 }

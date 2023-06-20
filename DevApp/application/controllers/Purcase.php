@@ -8,6 +8,7 @@ class Purcase extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Purcase_model');
+        $this->load->model('Product_model');
     }
 
     public function index($row_no = 0)
@@ -80,7 +81,24 @@ class Purcase extends CI_Controller
 
     public function add_purcase()
     {
-        $data['product'] = $this->Purcase_model->get_product();
+        $data['product'] = $this->Product_model->get_product();
         $this->load->view('purcase/add_purcasing_view.php', $data);
+    }
+
+    public function save_purcase()
+    {
+        var_dump($this->input->post());
+
+        $SKU = $this->input->post('SKU');
+        $buyingPrice = $this->input->post('buyingPrice');
+        $qtyPurcase = $this->input->post('qtyPurcase');
+        $priceAmount = $buyingPrice * $qtyPurcase;
+        $purcaseTimestamp = $this->input->post('purcaseTimestamp');
+        $this->Purcase_model->save_purcase($SKU, $buyingPrice, $qtyPurcase, $priceAmount, $purcaseTimestamp);
+
+        // $data['product'] = $this->Product_model->get_product();
+        // $this->load->view('purcase/add_purcasing_view.php', $data);
+
+        redirect('Purcase');
     }
 }

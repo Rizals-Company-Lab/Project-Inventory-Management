@@ -11,9 +11,9 @@
 <body>
     <form action="<?= site_url('transaction/save_transaction'); ?>" method="post">
         <label for="buyerName">Nama Pembeli</label>
-        <input type="text" name="buyerName" id="buyerName">
+        <input required type="text" name="buyerName" id="buyerName">
         <label for="bankAccountNumber">Rekening</label>
-        <input type="text" name="bankAccountNumber" id="bankAccountNumber">
+        <input required type="text" name="bankAccountNumber" id="bankAccountNumber">
 
         <div id="allContent">
             <table>
@@ -81,7 +81,7 @@
                             </td>
                             <td>
 
-                                <input type="number" name="qtyOrder<?= $row->idCheckout ?>" max="<?php foreach ($product->result() as $singleView):
+                                <input type="number" name="qtyOrder<?= $row->idCheckout ?>" value="1" min="1" max="<?php foreach ($product->result() as $singleView):
                                       if ($row->SKU == $singleView->SKU) {
                                           echo $singleView->sisa_stock;
                                       }

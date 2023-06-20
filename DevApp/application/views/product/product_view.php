@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <a href="<?= site_url('Product/add_new_product'); ?>" class="btn btn-primary mb-3">Tambah
+    <a href="<?= site_url('Product/add_product'); ?>" class="btn btn-primary mb-3">Tambah
         Product</a>
 
     <table>
@@ -40,6 +40,8 @@
             </tr>
         <?php endforeach; ?>
     </table>
+    <?= $pagination ?>
+
 </body>
 
 </html>

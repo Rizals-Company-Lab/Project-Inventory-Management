@@ -51,6 +51,7 @@
             </tr>
         <?php endforeach; ?>
     </table>
+    <?= $pagination ?>
 </body>
 
 </html>

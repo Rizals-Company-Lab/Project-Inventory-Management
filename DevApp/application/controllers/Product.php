@@ -44,8 +44,8 @@ class Product extends CI_Controller
 
         // Pagination Configuration
         // All record count
-        $config['total_rows'] = $this->Product_model->get_purcase_count($searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
-        $config['base_url'] = base_url() . 'purcase/index';
+        $config['total_rows'] = $this->Product_model->get_product_count($searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $config['base_url'] = base_url() . 'product/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
 
@@ -55,7 +55,7 @@ class Product extends CI_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         // Get record
-        $data['product'] = $this->Product_model->get_product($row_no, $row_per_page, $searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $data['product'] = $this->Product_model->get_stock_product_limit($row_no, $row_per_page, $searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
 
         $data['row'] = $row_no;
 
@@ -70,4 +70,26 @@ class Product extends CI_Controller
         // $this->load->view('purcase/purcase_view', $data);
     }
 
+
+    public function add_product()
+    {
+        // $data['product'] = $this->Product_model->get_product();
+        $this->load->view('product/add_product_view.php');
+    }
+
+    public function save_product()
+    {
+        var_dump($this->input->post());
+
+        $SKU = $this->input->post('SKU');
+        $productName = $this->input->post('productName');
+        $productDescription = $this->input->post('productDescription');
+        $sellingPrice = $this->input->post('sellingPrice');
+        $this->Product_model->save_product($SKU, $productName, $productDescription, $sellingPrice);
+
+        // $data['product'] = $this->Product_model->get_product();
+        // $this->load->view('purcase/add_purcasing_view.php', $data);
+
+        redirect('Product');
+    }
 }
