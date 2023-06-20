@@ -7,44 +7,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?= base_url() ?>/dist/css/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <!-- Navbar star -->
-    <!-- <nav class="mt-4 ml-4 mr-4 w-auto">
-        <div class="sm:flex justify-around border rounded-md shadow-md">
-            <div class="flex justify-between">
-                <h1 class=" p-5">LOGO</h1>
-                <div class="flex items-center relative px-4 sm:hidden">
-                    <button class="" id="tombolMenu" name="tombolMenu" type="button">
-                        <span class="tombol-line transition duration-300 ease-in-out origin-top-left"></span>
-                        <span class="tombol-line"></span>
-                        <span class="tombol-line transition duration-300 ease-in-out origin-bottom-left"></span>
-                    </button>
-                </div>
-            </div>
-            <div class="sm:flex  ">
-                <ul class="sm:flex  sm:border-none sm:rounded-none sm:shadow-none border rounded-md shadow-md hidden  ml-2 mr-2 mb-2;"
-                    id="hilang" nama="hilang">
-                    <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white" href="#">HOME</a>
-                    </li>
-                    <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white" href="#">PRODUK</a>
-                    </li>
-                    <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                            href="">TRANSAKSI</a></li>
-                    <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white" href="">KONTAK</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
-    <!-- navbar end -->
-
-    <div class="p-5  bg-dark sm:relative ml-4 mr-4 mt-3 mx-auto w-auto h-auto sm:h-[620px] border rounded-md shadow-md">
+    <div class="p-5  bg-dark sm:relative ml-1 mr-1 mt-2 mx-auto w-auto h-auto sm:h-auto border rounded-md shadow-md">
         <!-- homepage -->
+
         <div
-            class="relative overflow-hidden flex sm:w-auto p-1 bg-white h-[300px] sm:h-[450px] rounded-md border-white shadow-md">
-            <img class="gambar sm:ml-[30px] sm:w-[500px] w-[300px] h-[300px] sm:h-[500px]"
+            class="relative overflow-hidden flex sm:w-auto p-1 bg-white h-[200px] sm:h-[400px] rounded-md border-white shadow-md">
+            <div
+                class="absolute overflow-hidden flex sm:w-[99%] bg-dark  h-[200px] sm:h-[350px] rounded-md border-white shadow-md">
+            </div>
+            <img class="w-[300px] h-[300px] absolute z-10 sm:ml-[1000px] sm:-mt-14 "
+                src="<?= base_url() ?>/dist/img/abk3.png" alt="">
+            <img class="gambar sm:ml-[30px] sm:w-[500px] w-[200px] h-[200px] sm:h-[500px]"
                 src="<?= base_url() ?>/dist/img/gam.jpg" alt="gambar">
         </div>
         <div class="gambar ml-20 blur-lg bg-secondary/25 sm:w-[300px] sm:h-[300px] -mt-[300px] absolute"></div>
@@ -52,13 +29,88 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="gambar blur-lg bg-white/80 sm:w-[300px] sm:h-[300px] -mt-[300px] absolute"></div>
         <!--end homepage -->
 
-        <div class="sm:w-[500px] sm:h-[300px] ml-[700px] absolute bg-bg rounded-md -mt-[400px]">
-            <div class="product"></div>
+
+
+        <div class=" sm:flex justify-around mt-7 ">
+            <!-- card1 -->
+            <div
+                class=" flex sm:w-96 hover:-mt-3 w-auto flex-col rounded-xl mx-auto mb-3 hover:backdrop-blur-sm hover:bg-white/95  bg-white bg-clip-border text-gray-700 shadow-md group">
+                <div class="p-6 ">
+                    <h5
+                        class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                        <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
+                        <i class="fa fa-table w-10" aria-hidden="true"></i>
+                        MENU BARANG
+                    </h5>
+                    <p
+                        class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
+                        The place is close to Barceloneta Beach....
+                    </p>
+                </div>
+                <div class="p-6 pt-0">
+                    <button
+                        class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                        type="button" data-ripple-light="true">
+                        Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- card2 -->
+            <div
+                class=" flex sm:w-96 hover:-mt-3 w-auto flex-col rounded-xl mx-auto mb-3 hover:backdrop-blur-sm hover:bg-white/95  bg-white bg-clip-border text-gray-700 shadow-md group">
+                <div class="p-6 ">
+                    <h5
+                        class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                        <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
+                        MENU TRANSAKSI
+                    </h5>
+                    <p
+                        class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
+                        The place is close to Barceloneta Beach....
+                    </p>
+                </div>
+                <div class="p-6 pt-0">
+                    <button
+                        class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                        type="button" data-ripple-light="true">
+                        Details
+                    </button>
+                </div>
+            </div>
+            <!-- card3 -->
+            <div
+                class=" flex sm:w-96 hover:-mt-3 w-auto flex-col rounded-xl mx-auto mb-3 hover:backdrop-blur-sm hover:bg-white/95  bg-white bg-clip-border text-gray-700 shadow-md group">
+                <div class="p-6 ">
+                    <h5
+                        class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                        <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
+                        <i class="fa fa-list w-10" aria-hidden="true"></i>
+                        RIWAYAT TRANSAKSI
+                    </h5>
+                    <p
+                        class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
+                        The place is close to Barceloneta Beach....
+                    </p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="<?= base_url() ?>product">
+                        <button
+                            class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button" data-ripple-light="true">
+                            Details
+                        </button>
+                    </a>
+                </div>
+            </div>
         </div>
-
     </div>
-
-
+    <footer
+        class=" w-full items-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between">
+        <p class="block font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
+            © 2023 Material ALI Baja Galvalum Plavon
+        </p>
+    </footer>
     <script src="<?= base_url() ?>/dist/js/script.js"></script>
 </body>
 
