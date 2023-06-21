@@ -65,7 +65,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <h5
                         class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
                         <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
-                        MENU TRANSAKSI
+
+                        MENU PENJUALAN
                     </h5>
                     <p
                         class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
@@ -73,11 +74,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </p>
                 </div>
                 <div class="p-6 pt-0">
-                    <button
-                        class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                        type="button" data-ripple-light="true">
-                        Details
-                    </button>
+                    <a href="<?= base_url() ?>transaction">
+                        <button
+                            class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button" data-ripple-light="true">
+                            Details
+                        </button>
+                    </a>
                 </div>
             </div>
             <!-- card3 -->
@@ -88,7 +91,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
                         <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
                         <i class="fa fa-list w-10" aria-hidden="true"></i>
-                        RIWAYAT TRANSAKSI
+                        MENU KOLAKAN
                     </h5>
                     <p
                         class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
@@ -96,12 +99,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </p>
                 </div>
                 <div class="p-6 pt-0">
+                    <a href="<?= base_url() ?>purcase">
 
-                    <button
-                        class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                        type="button" data-ripple-light="true">
-                        Details
-                    </button>
+                        <button
+                            class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button" data-ripple-light="true">
+                            Details
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
