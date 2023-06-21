@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
+    <title>Page-Riwayat-pembelian</title>
     <link href="<?= base_url() ?>/dist/css/output.css" rel="stylesheet">
 
 </head>
@@ -43,8 +43,8 @@
     <!-- tabel penjualan -->
     <div class="mt-10">
 
-        <h1 class="text-center sm:text-3xl text-xl font-bold bg-bg2 py-3 ml-3 mr-3">
-            BARANG LIST
+        <h1 class="text-center sm:text-3xl text-xl font-bold  bg-bg2 py-3 ml-3 mr-3">
+            RIWAYAT PEMBELIAN LIST
         </h1>
         <br>
 
@@ -53,71 +53,55 @@
     <div class="h-auto w-auto overflow-x-auto  sm:ml-5 sm:mr-5 rounded-md shadow-sm  ">
         <div class="flex mt-3">
             <div>
-                <a class="bg-blue-500 text-white  text-[11px] ml-3 sm:ml-32 sm:text-xl hover:bg-blue-700 px-3 py-2 rounded-md"
-                    href="<?php echo site_url('product/add_barang');?>">TAMBAH BARANG</a>
-            </div>
-            <div>
-                <a class="bg-blue-500 text-white text-[11px] ml-3 sm:ml-5 sm:text-xl  hover:bg-blue-700 px-3 py-2 rounded-md"
-                    href="<?php echo site_url('product/riwayat');?>">RIWAYAT TRANSAKSI</a>
+                <a class="bg-blue-500 text-white sm:ml-48 ml-3 sm:text-xl text-sm hover:bg-blue-700 px-3 py-2 rounded-md"
+                    href="<?php echo site_url('product/transaksi');?>">TAMBAH TRANSAKSI</a>
             </div>
         </div>
         <table class="w-auto mx-auto mb-10 mt-10  shadow-2xl border-2 sm:text-xl text-[11px]">
             <thead>
                 <tr class="cursor-pointer duration-300">
                     <th class="p-1 border shadow-md bg-bg ">No</th>
-                    <th class="kolom">SKU</th>
-                    <th class="kolom">PRODUCT NAME</th>
-                    <th class="kolom">PRODUCT DESCRIPTION</th>
-                    <th class="kolom">HARGA BELI</th>
-                    <th class="kolom">STOK</th>
-                    <th class="kolom">SELLING PRICE</th>
+                    <th class="kolom">Nama PEMBELI</th>
+                    <th class="kolom">WAKTU ORDER</th>
+                    <th class="kolom">STATUS PEMBAYARAN</th>
                     <th class="kolom">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="cursor-pointer hover:bg-slate-100 duration-300">
                     <td class="border-2 p-2">1</td>
-                    <td class="border-2 p-1 shadow-md">BJR-TBL055-PNJ6</td>
-                    <td class="border-2 p-1  shadow-md ">Baja Ringan 55</td>
-                    <td class="border-2 p-1  shadow-md ">Tebal : 0,55 Panjang : 6M</td>
-                    <td class="border-2 p-1  shadow-md ">90.000</td>
-                    <td class="border-2 p-1  shadow-md ">100</td>
-                    <td class="border-2 p-1  shadow-md ">100.000</td>
+                    <td class="border-2 p-1 shadow-md">Hanss</td>
+                    <td class="border-2 p-1  shadow-md ">2023-3-24 16:03:45 0</td>
+                    <td class="border-2 p-1  shadow-md ">Lunas</td>
                     <td class="border-2 p-1 text-white flex shadow-md">
                         <a class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             href="<?php echo site_url('product/get_edit/');?>">Update</a>
-                        <a class="bg-red-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-red-700"
-                            href="<?php echo site_url('product/get_delete/');?>">Delete</a>
+                        <a class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
+                            href="<?php echo site_url('product/details/');?>">Details</a>
                     </td>
                 </tr>
                 <tr class="cursor-pointer hover:bg-slate-100 duration-300">
                     <td class="border-2 p-2">2</td>
-                    <td class="border-2 p-1 shadow-md">BJR-TBL075-PNJ6</td>
-                    <td class="border-2 p-1  shadow-md ">Baja Ringan 75</td>
-                    <td class="border-2 p-1  shadow-md ">Tebal : 0,75 Panjang : 6M</td>
-                    <td class="border-2 p-1  shadow-md ">90.000</td>
-                    <td class="border-2 p-1  shadow-md ">100</td>
-                    <td class="border-2 p-1  shadow-md ">110.000</td>
+                    <td class="border-2 p-1 shadow-md">Rijal</td>
+                    <td class="border-2 p-1  shadow-md ">2023-3-24 16:03:45 0</td>
+                    <td class="border-2 p-1  shadow-md ">Lunas</td>
                     <td class="border-2 p-1 text-white flex shadow-md">
                         <a class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             href="<?php echo site_url('product/get_edit/');?>">Update</a>
-                        <a class="bg-red-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-red-700"
-                            href="<?php echo site_url('product/get_delete/');?>">Delete</a>
+                        <a class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
+                            href="<?php echo site_url('product/details/');?>">Details</a>
                     </td>
                 </tr>
                 <tr class="cursor-pointer hover:bg-slate-100 duration-300">
                     <td class="border-2 p-2">3</td>
-                    <td class="border-2 p-1 shadow-md">BJR-TBL065-PNJ6</td>
-                    <td class="border-2 p-1  shadow-md ">Baja Ringan 65</td>
-                    <td class="border-2 p-1  shadow-md ">Tebal : 0,65 Panjang : 6M</td>
-                    <td class="border-2 p-1  shadow-md ">90.000</td>
-                    <td class="border-2 p-1  shadow-md ">100</td>
-                    <td class="border-2 p-1  shadow-md ">105.000</td>
+                    <td class="border-2 p-1 shadow-md">Sholeh</td>
+                    <td class="border-2 p-1  shadow-md ">2023-3-24 16:03:45 0</td>
+                    <td class="border-2 p-1  shadow-md ">Lunas</td>
                     <td class="border-2 p-1 text-white flex shadow-md">
                         <a class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             href="<?php echo site_url('product/get_edit/');?>">Update</a>
-                        <a class="bg-red-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-red-700"
-                            href="<?php echo site_url('product/get_delete/');?>">Delete</a>
+                        <a class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
+                            href="<?php echo site_url('product/details/');?>">Details</a>
                     </td>
                 </tr>
             </tbody>
