@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Product extends CI_Controller
+class Purcase extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Purcase_model');
         $this->load->model('Product_model');
     }
 
@@ -44,8 +45,8 @@ class Product extends CI_Controller
 
         // Pagination Configuration
         // All record count
-        $config['total_rows'] = $this->Product_model->get_product_count($searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
-        $config['base_url'] = base_url() . 'product/index';
+        $config['total_rows'] = $this->Purcase_model->get_purcase_count($searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $config['base_url'] = base_url() . 'purcase/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
 
@@ -55,7 +56,7 @@ class Product extends CI_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         // Get record
-        $data['product'] = $this->Product_model->get_stock_product_limit($row_no, $row_per_page, $searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $data['purcase'] = $this->Purcase_model->get_purcase($row_no, $row_per_page, $searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
 
         $data['row'] = $row_no;
 
@@ -64,32 +65,40 @@ class Product extends CI_Controller
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
 
-
-
-        $this->load->view('product/product_view.php', $data);
+        $this->load->view('purcase/purcasing_view.php', $data);
         // $this->load->view('purcase/purcase_view', $data);
     }
 
-
-    public function add_product()
+    public function insertDataPesan()
     {
-        // $data['product'] = $this->Product_model->get_product();
-        $this->load->view('product/add_product_view.php');
+        $this->load->view('entryJual.php');
     }
 
-    public function save_product()
+    public function createOrder()
+    {
+        $this->load->view('entryJual.php');
+    }
+
+    public function add_purcase()
+    {
+        $data['product'] = $this->Product_model->get_product();
+        $this->load->view('purcase/add_purcasing_view.php', $data);
+    }
+
+    public function save_purcase()
     {
         var_dump($this->input->post());
 
         $SKU = $this->input->post('SKU');
-        $productName = $this->input->post('productName');
-        $productDescription = $this->input->post('productDescription');
-        $sellingPrice = $this->input->post('sellingPrice');
-        $this->Product_model->save_product($SKU, $productName, $productDescription, $sellingPrice);
+        $buyingPrice = $this->input->post('buyingPrice');
+        $qtyPurcase = $this->input->post('qtyPurcase');
+        $priceAmount = $buyingPrice * $qtyPurcase;
+        $purcaseTimestamp = $this->input->post('purcaseTimestamp');
+        $this->Purcase_model->save_purcase($SKU, $buyingPrice, $qtyPurcase, $priceAmount, $purcaseTimestamp);
 
         // $data['product'] = $this->Product_model->get_product();
         // $this->load->view('purcase/add_purcasing_view.php', $data);
 
-        redirect('Product');
+        redirect('Purcase');
     }
 }
