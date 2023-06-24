@@ -26,7 +26,7 @@
             <div class="sm:flex  ">
                 <ul class="sm:flex  sm:border-none sm:rounded-none sm:shadow-none border rounded-md shadow-md hidden  ml-2 mr-2 mb-2;"
                     id="hilang" nama="hilang">
-                    <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white" href="#">HOME</a>
+                    <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white" href="Home">HOME</a>
                     </li>
                     <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
                             href="<?php echo site_url('product');?>">PRODUK</a>
@@ -41,25 +41,24 @@
     </nav>
     <!-- navbar end -->
     <!-- tabel penjualan -->
-    <div class="mt-10">
+    <div class="mt-5">
 
         <h1 class="text-center sm:text-3xl text-xl font-bold bg-bg2 py-3 ml-3 mr-3">
             BARANG LIST
         </h1>
-        <br>
 
-        <br>
-    </div>
-    <div class="h-auto w-auto overflow-x-auto  sm:ml-5 sm:mr-5 rounded-md shadow-sm  ">
-        <div class="flex mt-3">
+        <div class="flex sm:mt-4 mt-3">
             <div>
                 <a class="bg-blue-500 text-white  text-[11px] ml-3 sm:ml-32 sm:text-xl hover:bg-blue-700 px-3 py-2 rounded-md"
                     href="<?= site_url('Product/add_product'); ?>">TAMBAH BARANG</a>
             </div>
         </div>
-        <table class="w-auto mx-auto mb-10 mt-10  shadow-2xl border-2 sm:text-xl text-[11px]">
+    </div>
+    <div class="h-auto w-auto overflow-x-auto  sm:ml-5 sm:mr-5 rounded-md shadow-sm  ">
+
+        <table class="w-auto mx-auto mb-10 mt-5  shadow-2xl border-2 sm:text-2xl text-[11px]">
             <thead>
-                <tr class="cursor-pointer duration-300">
+                <tr class="cursor-pointer w-full duration-300">
                     <th class="p-1 border shadow-md bg-bg ">No</th>
                     <th class="kolom">SKU</th>
                     <th class="kolom">NAMA BARANG</th>

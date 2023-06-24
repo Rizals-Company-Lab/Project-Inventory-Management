@@ -38,7 +38,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="p-6 ">
                     <h5
                         class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                        <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
                         <i class="fa fa-table w-10" aria-hidden="true"></i>
                         MENU BARANG
                     </h5>
@@ -65,7 +64,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <h5
                         class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
                         <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
-
                         MENU PENJUALAN
                     </h5>
                     <p
@@ -89,7 +87,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="p-6 ">
                     <h5
                         class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                        <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
                         <i class="fa fa-list w-10" aria-hidden="true"></i>
                         MENU KOLAKAN
                     </h5>
@@ -100,7 +97,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
                 <div class="p-6 pt-0">
                     <a href="<?= base_url() ?>purcase">
-
                         <button
                             class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                             type="button" data-ripple-light="true">
