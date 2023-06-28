@@ -30,3 +30,6 @@
 .kolom {
 	@apply sm:px-7 px-7  border shadow-md bg-bg;
 }
+.colom {
+	@apply sm:px-1 px-7  border shadow-md bg-bg;
+}
