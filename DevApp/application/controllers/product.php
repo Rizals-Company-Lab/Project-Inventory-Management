@@ -131,5 +131,7 @@ class Product extends CI_Controller
         // $this->load->view('purcase/add_purcasing_view.php', $data);
 
         redirect('Product');
+
+        
     }
 }
