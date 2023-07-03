@@ -132,6 +132,18 @@ class Product_model extends CI_Model
         return $result;
     }
 
+    public function get_product_ByID($SKU)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_product');
+
+        $this->db->where('SKU', $SKU);
+
+        $result = $this->db->get()->row();
+
+        return $result;
+    }
+
     public function save_product($SKU, $productName, $productDescription, $sellingPrice)
     {
 
@@ -143,6 +155,27 @@ class Product_model extends CI_Model
         );
 
         $this->db->insert('tbl_product', $data_tbl_product);
+    }
+
+    public function update_product($SKU, $productName, $productDescription, $sellingPrice)
+    {
+
+        $data_tbl_product = array(
+            'productName' => $productName,
+            'productDescription' => $productDescription,
+            'sellingPrice' => $sellingPrice
+        );
+
+        $this->db->where('SKU', $SKU);
+        $this->db->update('tbl_product', $data_tbl_product);
+    }
+
+    public function delete_product($SKU)
+    {
+
+        $this->db->where('SKU', $SKU);
+        $this->db->delete('tbl_product');
+
     }
 
 
