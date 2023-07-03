@@ -76,7 +76,6 @@ class Product extends CI_Controller
         // $data['product'] = $this->Product_model->get_product();
         $this->load->view('product/add_product_view.php');
     }
-    
 
     public function save_product()
     {
@@ -92,46 +91,5 @@ class Product extends CI_Controller
         // $this->load->view('purcase/add_purcasing_view.php', $data);
 
         redirect('Product');
-    }
-    
-    public function get_update()
-    {
-        
-        $data['product'] = $this->Product_model->get_product_ByID("BJR-TBL055-PNJ6");
-        $this->load->view('product/update_product_view.php', $data);
-    }
-
-
-
-    public function update_product()
-    {
-        var_dump($this->input->post());
-
-        $SKU = $this->input->post('SKU');
-        $productName = $this->input->post('productName');
-        $productDescription = $this->input->post('productDescription');
-        $sellingPrice = $this->input->post('sellingPrice');
-        $this->Product_model->update_product($SKU, $productName, $productDescription, $sellingPrice);
-
-        // $data['product'] = $this->Product_model->get_product();
-        // $this->load->view('purcase/add_purcasing_view.php', $data);
-
-        redirect('Product');
-    }
-
-
-    public function delete_product()
-    {
-        // var_dump($this->input->post());
-        // die;
-        $SKU = $this->input->post('SKU');
-        $this->Product_model->delete_product($SKU);
-
-        // $data['product'] = $this->Product_model->get_product();
-        // $this->load->view('purcase/add_purcasing_view.php', $data);
-
-        redirect('Product');
-
-        
     }
 }
