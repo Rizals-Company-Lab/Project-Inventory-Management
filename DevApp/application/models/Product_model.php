@@ -132,6 +132,7 @@ class Product_model extends CI_Model
         return $result;
     }
 
+ 
     public function get_product_ByID($SKU)
     {
         $this->db->select('*');

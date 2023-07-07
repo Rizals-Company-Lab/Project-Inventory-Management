@@ -85,12 +85,17 @@
                             onclick="insertDataPesan(<?= $singleView->SKU ?>)">Update</button>
                         <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             onclick="insertDataPesan(<?= $singleView->SKU ?>)">Update</button> -->
-                        <a href="<?= site_url('Product/get_update'); ?>"
-                            class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Update</a>
+                        <!-- <a href="<?= site_url('Product/get_update'); ?>"
+                            class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Update</a> -->
 
+                        <form action="<?= site_url('product/get_update'); ?>" method="post">
+                            <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
+                                class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Update</button>
+                        </form>
                         <form action="<?= site_url('product/delete_product'); ?>" method="post">
                             <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
-                                onclick="return confirm('Anda yakin ingin delete <?= $singleView->SKU ?>')">Delete</button>
+                                onclick="return confirm('Anda yakin ingin delete <?= $singleView->SKU ?>')"
+                                class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Delete</button>
                         </form>
                         <!-- <a href="<?= site_url('Product/delete'); ?>"
                             class="bg-red-700 rounded-md px-3 py-1 shadow-md hover:bg-green-700"

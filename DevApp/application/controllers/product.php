@@ -96,8 +96,10 @@ class Product extends CI_Controller
     
     public function get_update()
     {
-        
-        $data['product'] = $this->Product_model->get_product_ByID("BJR-TBL055-PNJ6");
+        var_dump($this->input->post());
+
+        $SKU = $this->input->post('SKU');
+        $data['product'] = $this->Product_model->get_product_ByID($SKU);
         $this->load->view('product/update_product_view.php', $data);
     }
 

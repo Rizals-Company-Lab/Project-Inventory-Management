@@ -62,10 +62,13 @@
                     </td>
                     <td class="border px-3 py-2 shadow-sm">
                         <?php
-                            $isSKUExist = in_array($singleView->SKU, array_column($checkout->result(), 'SKU'));
+                
+                    
+                    $isSKUExist = in_array($singleView->SKU, array_column($checkout->result(), 'SKU'));
+                
                             ?>
                         <button class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
-                            <?= $isSKUExist ? 'disabled' : '' ?> type="button"
+                            <?= $isSKUExist &&  $singleView->sisa_stock > 0 ? 'disabled' : '' ?> type="button"
                             onclick="insertDataPesan('<?= $singleView->SKU ?>')">Pesan</button>
                     </td>
                 </tr>
@@ -80,6 +83,7 @@
                         <th class="colom ">Nama Barang</th>
                         <th class="colom">Deskripsi Barang</th>
                         <th class="colom">Jumlah</th>
+                        <th class="colom">Delete</th>
                     </tr>
                     <?php foreach ($checkout->result() as $row): ?>
                     <tr>
@@ -108,6 +112,12 @@
                                       }
                                   endforeach; ?>">
                         </td>
+                        <td class="border px-3 py-2 shadow-sm">
+
+                            <button class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
+                                type="button" onclick="deleteDataPesan('<?= $row->SKU ?>')">-</button>
+                        </td>
+
                     </tr>
                     <?php endforeach; ?>
                 </table>
@@ -123,6 +133,29 @@
 function insertDataPesan(SKU) {
     $.ajax({
         url: "<?= base_url('transaction/insert_checkout') ?>",
+        type: "post",
+        data: {
+            SKU: SKU
+        },
+        success: function(response) {
+            console.log(response);
+            $("#allContent").html(response);
+            // $.ajax({
+            //     type: "GET",
+            //     url: "dist/ajax/ajaxEntry.php",
+            //     data: "",
+            //     success: function (data) {
+            //         $("#allContent").html(data);
+            //         operasi();
+            //     }
+            // });
+        }
+    });
+}
+
+function deleteDataPesan(SKU) {
+    $.ajax({
+        url: "<?= base_url('transaction/delete_checkout') ?>",
         type: "post",
         data: {
             SKU: SKU

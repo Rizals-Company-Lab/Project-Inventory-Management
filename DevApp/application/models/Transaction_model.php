@@ -104,6 +104,23 @@ class Transaction_model extends CI_Model
         return true;
     }
 
+
+
+    public function get_order_detail($idOrder)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_order TOR');
+        $this->db->join('tbl_checkout TCK', 'TOR.idOrder = TCK.idOrder');
+        $this->db->join('tbl_product TPD', 'TCK.SKU = TPD.SKU');
+        $this->db->where('TOR.idOrder', $idOrder);
+        
+        $result = $this->db->get();
+       
+
+        return $result;
+    }
+
+
     public function get_checkout()
     {
         $this->db->select('*');
@@ -224,16 +241,12 @@ class Transaction_model extends CI_Model
     //     // $result = $this->db->limit($rowperpage, $rowno)->get();
     //     return $result;
     // }
-    public function delete_checkout()
+    public function delete_checkout($SKU)
     {
-        $this->db->where('PURCHID', NULL);
-        $result = $this->db->delete('purchline');
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
-
+        $this->db->where('idOrder', NULL);
+        $this->db->where('SKU', $SKU);
+        $this->db->delete('tbl_checkout');
+        return true;
     }
 
     public function update_checkout($data_post, $PURCHID)
@@ -426,6 +439,19 @@ class Transaction_model extends CI_Model
             return false;
         }
 
+    }
+    
+    public function update_order($idOrder, $buyerName, $bankAccountNumber, $paymentStatus)
+    {
+
+        $data_tbl_order = array(
+            'buyerName' => $buyerName,
+            'bankAccountNumber' => $bankAccountNumber,
+            'paymentStatus' => $paymentStatus
+        );
+
+        $this->db->where('idOrder', $idOrder);
+        $this->db->update('tbl_order', $data_tbl_order);
     }
 
     public function update_purcase($INVENTTRANSID, $PURCHID, $ACCOUNTNUM, $ITEMID, $LINENUM, $QTYORDERED, $PURCHRECEIVEDNOW, $PURCHPRICE, $LINEAMOUNT, $DELIVERYDATE, $PURCHSTATUS)
