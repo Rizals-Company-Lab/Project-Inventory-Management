@@ -69,20 +69,41 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($product->result() as $singleView): ?>
+                <?php
+                $count = $row +1;
+                 foreach ($product->result() as $singleView): ?>
+
                 <tr class="cursor-pointer hover:bg-slate-100 duration-300">
-                    <td class="border-2 p-2">1</td>
+                    <td class="border-2 p-2"><?= $count ?></td>
                     <td class="border-2 p-1 shadow-md"><?= $singleView->SKU ?></td>
                     <td class="border-2 p-1  shadow-md "><?= $singleView->productName ?></td>
                     <td class="border-2 p-1  shadow-md "><?= $singleView->productDescription ?></td>
                     <td class="border-2 p-1  shadow-md "><?= $singleView->sisa_stock ?></td>
                     <td class="border-2 p-1  shadow-md "> <?= $singleView->sellingPrice ?></td>
                     <td class="border-2 p-1 text-white flex shadow-md">
-                        <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
+                        <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             onclick="insertDataPesan(<?= $singleView->SKU ?>)">Update</button>
+                        <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
+                            onclick="insertDataPesan(<?= $singleView->SKU ?>)">Update</button> -->
+                        <!-- <a href="<?= site_url('Product/get_update'); ?>"
+                            class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Update</a> -->
+
+                        <form action="<?= site_url('product/get_update'); ?>" method="post">
+                            <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
+                                class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Update</button>
+                        </form>
+                        <form action="<?= site_url('product/delete_product'); ?>" method="post">
+                            <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
+                                onclick="return confirm('Anda yakin ingin delete <?= $singleView->SKU ?>')"
+                                class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Delete</button>
+                        </form>
+                        <!-- <a href="<?= site_url('Product/delete'); ?>"
+                            class="bg-red-700 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
+                            onclick="return confirm('Anda yakin ingin delete <?= $singleView->SKU ?>?')">Delete</a> -->
                     </td>
                 </tr>
-                <?php endforeach; ?>
+                <?php $count++;  endforeach;
+                ?>
             </tbody>
         </table>
         <div><?= $pagination ?></div>

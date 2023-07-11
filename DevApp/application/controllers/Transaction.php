@@ -78,6 +78,18 @@ class Transaction extends CI_Controller
         $this->load->view('ajax/CheckoutList.php', $data);
     }
 
+    public function delete_checkout()
+    {
+
+        $SKU = $this->input->post('SKU');
+        
+        $this->Transaction_model->delete_checkout($SKU);
+        $data['product'] = $this->Transaction_model->get_product();
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        // var_dump($this->Transaction_model->get_checkout()->result());
+        $this->load->view('ajax/CheckoutList.php', $data);
+    }
+
     public function add_new_transaction()
     {
         $data['product'] = $this->Transaction_model->get_product();
@@ -101,6 +113,31 @@ class Transaction extends CI_Controller
         var_dump($this->input->post());
         // $idOrder = $this->Transaction_model->get_new_idOrder();
         $this->Transaction_model->save_transaction($this->input->post());
+
+        redirect('Transaction');
+    }
+
+    public function order_detail()
+    {
+        // var_dump($this->input->post('idOrder'));
+        $idOrder = $this->input->post('idOrder');
+        $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
+
+        $this->load->view('transaction/detail_transaction_view.php', $data);
+    }
+
+    public function update_order()
+    {
+        var_dump($this->input->post());
+
+        $idOrder = $this->input->post('idOrder');
+        $buyerName = $this->input->post('buyerName');
+        $bankAccountNumber = $this->input->post('bankAccountNumber');
+        $paymentStatus = $this->input->post('paymentStatus');
+        $this->Transaction_model->update_order($idOrder, $buyerName, $bankAccountNumber, $paymentStatus);
+
+        // $data['product'] = $this->Product_model->get_product();
+        // $this->load->view('purcase/add_purcasing_view.php', $data);
 
         redirect('Transaction');
     }

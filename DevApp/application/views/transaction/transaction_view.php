@@ -40,6 +40,7 @@
         </div>
     </nav>
     <!-- navbar end -->
+
     <!-- tabel penjualan -->
     <div class="mt-10">
 
@@ -73,13 +74,31 @@
                     <td class="border-2 p-2">1</td>
                     <td class="border-2 p-1 shadow-md"><?= $singleView->buyerName ?></td>
                     <td class="border-2 p-1  shadow-md "><?= $singleView->orderTimestamp ?></td>
-                    <td class="border-2 p-1  shadow-md "><?= $singleView->paymentStatus ?></td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= ($singleView->paymentStatus == 1) ? 'Done' : 'Pending' ?>
+                    </td>
                     <td class="border-2 p-1 text-white flex shadow-md">
-                        <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
+
+
+
+                        <form action="<?= site_url('transaction/order_detail'); ?>" method="post">
+                            <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Details</button>
+                        </form>
+                        <form action="<?= site_url('transaction/get_update'); ?>" method="post">
+                            <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Update</button>
+                        </form>
+                        <form action="<?= site_url('transaction/delete_order'); ?>" method="post">
+                            <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                onclick="return confirm('Anda yakin ingin delete <?= $singleView->idOrder ?>')"
+                                class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Delete</button>
+                        </form>
+                        <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             onclick="insertDataPesan(<?= $singleView->idOrder ?>)">Update</button>
 
                         <button class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
-                            onclick="insertDataPesan(<?= $singleView->idOrder ?>)">Details</button>
+                            onclick="insertDataPesan(<?= $singleView->idOrder ?>)">Details</button> -->
                     </td>
                 </tr>
                 <?php endforeach; ?>
