@@ -82,12 +82,21 @@ class Transaction extends CI_Controller
     {
 
         $SKU = $this->input->post('SKU');
-        
+
         $this->Transaction_model->delete_checkout($SKU);
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
         $this->load->view('ajax/CheckoutList.php', $data);
+    }
+
+    public function delete_order()
+    {
+
+        $idOrder = $this->input->post('idOrder');
+
+        $this->Transaction_model->delete_order($idOrder);
+        redirect('Transaction');
     }
 
     public function add_new_transaction()
@@ -124,6 +133,15 @@ class Transaction extends CI_Controller
         $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
 
         $this->load->view('transaction/detail_transaction_view.php', $data);
+    }
+
+    public function get_update()
+    {
+        // var_dump($this->input->post('idOrder'));
+        $idOrder = $this->input->post('idOrder');
+        $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
+
+        $this->load->view('transaction/update_transaction_view.php', $data);
     }
 
     public function update_order()

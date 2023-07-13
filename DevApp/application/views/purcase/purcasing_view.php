@@ -29,7 +29,7 @@
                     <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white" href="Home">HOME</a>
                     </li>
                     <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                            href="<?php echo site_url('product');?>">PRODUK</a>
+                            href="<?php echo site_url('product'); ?>">PRODUK</a>
                     </li>
                     <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
                             href="">TRANSAKSI</a></li>
@@ -53,7 +53,7 @@
         <div class="flex mt-3">
             <div>
                 <a class="bg-blue-500 text-white sm:ml-5 ml-3 hover:bg-blue-700 px-3 py-2 rounded-md"
-                    href="<?php echo site_url('purcase/add_purcase');?>">TAMBAH TRANSAKSI</a>
+                    href="<?php echo site_url('purcase/add_purcase'); ?>">TAMBAH TRANSAKSI</a>
             </div>
             <div>
 
@@ -73,22 +73,40 @@
                 </tr>
             </thead>
             <?php foreach ($purcase->result() as $singleView): ?>
-            <tbody>
-                <tr class="cursor-pointer hover:bg-slate-100 duration-300">
-                    <td class="border-2 p-2">1</td>
-                    <td class="border-2 p-1 shadow-md"><?= $singleView->SKU ?></td>
-                    <td class="border-2 p-1  shadow-md "><?= $singleView->productName ?></td>
-                    <td class="border-2 p-1  shadow-md "> <?= $singleView->buyingPrice ?></td>
-                    <td class="border-2 p-1  shadow-md "> <?= $singleView->qtyPurcase ?></td>
-                    <td class="border-2 p-1  shadow-md "><?= $singleView->priceAmount ?></td>
-                    <td class="border-2 p-1  shadow-md "><?= $singleView->purcaseTimestamp ?></td>
-                    <td class="border-2 p-1 text-white flex shadow-md">
-                        <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
-                            onclick="insertDataPesan(<?= $singleView->idPurcase ?>)">Update</button>
-                        <button class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
-                            onclick="insertDataPesan(<?= $singleView->idPurcase ?>)">Details</button>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr class="cursor-pointer hover:bg-slate-100 duration-300">
+                        <td class="border-2 p-2">1</td>
+                        <td class="border-2 p-1 shadow-md">
+                            <?= $singleView->SKU ?>
+                        </td>
+                        <td class="border-2 p-1  shadow-md ">
+                            <?= $singleView->productName ?>
+                        </td>
+                        <td class="border-2 p-1  shadow-md ">
+                            <?= $singleView->buyingPrice ?>
+                        </td>
+                        <td class="border-2 p-1  shadow-md ">
+                            <?= $singleView->qtyPurcase ?>
+                        </td>
+                        <td class="border-2 p-1  shadow-md ">
+                            <?= $singleView->priceAmount ?>
+                        </td>
+                        <td class="border-2 p-1  shadow-md ">
+                            <?= $singleView->purcaseTimestamp ?>
+                        </td>
+                        <td class="border-2 p-1 text-white flex shadow-md">
+                            <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
+                                onclick="insertDataPesan(<?= $singleView->idPurcase ?>)">Update</button> -->
+                            <!-- <button class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
+                            onclick="insertDataPesan(<?= $singleView->idPurcase ?>)">Details</button> -->
+                            <form action="<?= site_url('purcase/get_update'); ?>" method="post">
+                                <button type="submit" value="<?= $singleView->idPurcase ?>" name="idPurcase" id="idPurcase"
+                                    class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700">Update</button>
+                            </form>
+
+
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

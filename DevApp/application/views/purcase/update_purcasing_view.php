@@ -13,9 +13,9 @@
 <body class="bg-primary">
     <form
         class="sm:mx-auto overflow-hidde bg-white sm:mt-5 relative  w-auto mt-6 h-[90%] sm:w-[700px] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm shadow-white rounded-md group"
-        action="<?= site_url('purcase/save_purcase'); ?>" method="post">
-        <h1 class="sm:text-xl font-bold text-center mb-3 py-3 bg-bg2">TAMBAH BARANG BARU</h1>
-        <label class="font-bold text-lg " for="">SKU</label>
+        action="<?= site_url('purcase/update_purcase'); ?>" method="post">
+        <h1 class="sm:text-xl font-bold text-center mb-3 py-3 bg-bg2">UPDATE BARANG </h1>
+
         <div>
             <select
                 class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -23,7 +23,7 @@
                 <?php foreach ($product->result() as $singleView): ?>
                     <option
                         class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        value="<?= $singleView->SKU ?>">
+                        value="<?= $singleView->SKU ?>" <?php echo ($singleView->SKU == $purcase->SKU) ? 'selected' : ''; ?>>
                         <?= $singleView->SKU ?>
                     </option>
                 <?php endforeach; ?>
@@ -37,40 +37,28 @@
                 <?php foreach ($product->result() as $singleView): ?>
                     <option
                         class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        value="<?= $singleView->SKU ?>">
+                        value="<?= $singleView->SKU ?>" <?php echo ($singleView->SKU == $purcase->SKU) ? 'selected' : ''; ?>>
                         <?= $singleView->productName ?>
                     </option>
                 <?php endforeach; ?>
             </select>
         </div>
-        <div>
-            <label class="font-bold text-lg" for=""> Harga Beli</label>
-            <input
-                class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                type="number" min="1000" name="buyingPrice" id="buyingPrice" value="1000">
-        </div>
-        <div class="flex ">
-            <div>
-                <label class="font-bold text-lg" for=""> Jumlah Beli</label>
+        <label class="font-bold text-lg " for="">buyingPrice</label>
+        <input type="text" name="buyingPrice" id="buyingPrice" value="<?= $purcase->buyingPrice ?>">
+        <br>
+        <label class="font-bold text-lg " for="">qtyPurcase</label>
+        <input type="text" name="qtyPurcase" id="qtyPurcase" value="<?= $purcase->qtyPurcase ?>">
+        <br>
+        <!-- <label class="font-bold text-lg " for="">priceAmount</label>
+        <input type="text" name="priceAmount" id="priceAmount" value="<?= $purcase->priceAmount ?>" disabled>
+        <br> -->
+        <label class="font-bold text-lg " for="">purcaseTimestamp</label>
+        <input type="text" name="purcaseTimestamp" id="purcaseTimestamp" value="<?= $purcase->purcaseTimestamp ?>"
+            disabled>
+        <br>
 
-                <input
-                    class="mt-2 appearance-none  w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    type="number" min="1" name="qtyPurcase" id="qtyPurcase" value="1">
-            </div>
-            <div class="ml-5">
-                <label class="font-bold text-lg" for="">Total</label>
-                <br>
-                <br>
-                <span class=" bg-gray-200 rounded py-2 px-5  leading-tight focus:outline-none focus:bg-white"
-                    id="total"></span>
-            </div>
-        </div>
-        <div>
-            <label class="font-bold text-lg" for=""> Tanggal Beli</label>
-            <input
-                class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                type="date" name="purcaseTimestamp" id="purcaseTimestamp">
-        </div>
+
+        <input type="hidden" name="idPurcase" id="idPurcase" value="<?= $purcase->idPurcase ?>">
 
 
         <button class="text-lg font-bold px-[50px] text-white py-2 w-full rounded-sm bg-blue-700 hover:bg-primary"
@@ -118,5 +106,6 @@
         $("#productNameSelect").val(selectedValue);
     });
 </script>
+
 
 </html>
