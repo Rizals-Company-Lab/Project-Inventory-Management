@@ -113,9 +113,9 @@ class Transaction_model extends CI_Model
         $this->db->join('tbl_checkout TCK', 'TOR.idOrder = TCK.idOrder');
         $this->db->join('tbl_product TPD', 'TCK.SKU = TPD.SKU');
         $this->db->where('TOR.idOrder', $idOrder);
-        
+
         $result = $this->db->get();
-       
+
 
         return $result;
     }
@@ -440,7 +440,7 @@ class Transaction_model extends CI_Model
         }
 
     }
-    
+
     public function update_order($idOrder, $buyerName, $bankAccountNumber, $paymentStatus)
     {
 
@@ -591,4 +591,12 @@ class Transaction_model extends CI_Model
 
         return $result;
     }
+
+    public function delete_order($idOrder)
+    {
+        $this->db->where('idOrder', $idOrder);
+        $this->db->delete('tbl_order');
+        return true;
+    }
+
 }
