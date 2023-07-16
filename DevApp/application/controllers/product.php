@@ -66,6 +66,7 @@ class Product extends CI_Controller
 
 
 
+        $this->load->view('nav/navbar.php', $data);
         $this->load->view('product/product_view.php', $data);
         // $this->load->view('purcase/purcase_view', $data);
     }
@@ -74,6 +75,7 @@ class Product extends CI_Controller
     public function add_product()
     {
         // $data['product'] = $this->Product_model->get_product();
+        $this->load->view('nav/navbar.php');
         $this->load->view('product/add_product_view.php');
     }
 
@@ -99,6 +101,7 @@ class Product extends CI_Controller
 
         $SKU = $this->input->post('SKU');
         $data['product'] = $this->Product_model->get_product_ByID($SKU);
+        $this->load->view('nav/navbar.php');
         $this->load->view('product/update_product_view.php', $data);
     }
 

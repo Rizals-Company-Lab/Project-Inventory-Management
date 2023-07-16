@@ -33,3 +33,6 @@
 .colom {
 	@apply sm:px-1 px-7  border shadow-md bg-bg;
 }
+.kolomhover {
+	@apply py-3 group-hover:text-white w-auto;
+}

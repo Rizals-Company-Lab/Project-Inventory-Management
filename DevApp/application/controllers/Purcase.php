@@ -65,6 +65,7 @@ class Purcase extends CI_Controller
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
 
+        $this->load->view('nav/navbar.php', $data);
         $this->load->view('purcase/purcasing_view.php', $data);
         // $this->load->view('purcase/purcase_view', $data);
     }
@@ -82,6 +83,7 @@ class Purcase extends CI_Controller
     public function add_purcase()
     {
         $data['product'] = $this->Product_model->get_product();
+        $this->load->view('nav/navbar.php');
         $this->load->view('purcase/add_purcasing_view.php', $data);
     }
 
@@ -91,7 +93,7 @@ class Purcase extends CI_Controller
         $data['product'] = $this->Product_model->get_product();
         $data['purcase'] = $this->Purcase_model->get_purcase_by_id($idPurcase);
 
-
+        $this->load->view('nav/navbar.php');
         $this->load->view('purcase/update_purcasing_view.php', $data);
     }
 

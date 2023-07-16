@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="<?= base_url() ?>/dist/css/output.css" rel="stylesheet">
-
-    <title>Add Purcasing</title>
-</head>
-
 <body>
-    <div class=" w-auto mx-auto bg-blue-400 mt-3 ml-1 mr-1 h-[600px] border rounded-md shadow-md ">
+    <div class=" w-full mx-auto bg-blue-200 mt-3 ml-1 mr-1 h-[650px] border rounded-md shadow-md ">
         <form
             class="sm:mx-auto overflow-hidde bg-white sm:mt-10 relative  w-auto mt-6 h-[90%] sm:w-[700px] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm shadow-white rounded-md group"
             action="<?= site_url('product/save_product'); ?>" method="post">
