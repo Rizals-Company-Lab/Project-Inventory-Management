@@ -41,10 +41,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <i class="fa fa-table w-10" aria-hidden="true"></i>
                         MENU BARANG
                     </h5>
-                    <p
-                        class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
-                        The place is close to Barceloneta Beach....
-                    </p>
+
                 </div>
                 <div class="p-6 pt-0">
                     <a href="<?= base_url() ?>product">
@@ -66,10 +63,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
                         MENU PENJUALAN
                     </h5>
-                    <p
-                        class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
-                        The place is close to Barceloneta Beach....
-                    </p>
+
                 </div>
                 <div class="p-6 pt-0">
                     <a href="<?= base_url() ?>transaction">
@@ -90,10 +84,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <i class="fa fa-list w-10" aria-hidden="true"></i>
                         MENU KOLAKAN
                     </h5>
-                    <p
-                        class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
-                        The place is close to Barceloneta Beach....
-                    </p>
+
                 </div>
                 <div class="p-6 pt-0">
                     <a href="<?= base_url() ?>purcase">

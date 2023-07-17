@@ -23,10 +23,10 @@
                 <div class="h-[400px]">
                     <ul class="  sm:border-none sm:rounded-none sm:shadow-none border rounded-md shadow-md h-auto  ml-2 mr-2"
                         id="hilang" nama="hilang">
-                        <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
+                        <li class="text-center sm:p-4 p-1 hover:bg-primary "><a class="hover:text-white"
                                 href="<?= base_url('Home') ?>">HOME</a>
                         </li>
-                        <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
+                        <li class="text-center sm:p-4 p-1 hover:bg-primary "><a class="hover:text-white "
                                 href="<?php echo site_url('product');?>">PRODUK</a>
                         </li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
@@ -34,7 +34,7 @@
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
                                 href="<?php echo site_url('Purcase');?>">KOLAKAN</a></li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('Purcase');?>">KONTAK</a>
+                                href="<?php echo site_url('');?>">KONTAK</a>
                         </li>
                     </ul>
                 </div>

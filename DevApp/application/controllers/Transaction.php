@@ -76,7 +76,6 @@ class Transaction extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('nav/navbar.php');
         $this->load->view('ajax/CheckoutList.php', $data);
     }
 
@@ -106,11 +105,13 @@ class Transaction extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
 
         $data['checkout'] = $this->Transaction_model->get_checkout();
+        $this->load->view('nav/navbar.php');
         $this->load->view('transaction/entryOrder_view.php', $data);
     }
 
     public function entryOrder()
     {
+        $this->load->view('nav/navbar.php');
         $this->load->view('entryJual.php');
     }
 
