@@ -1,79 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page-Riwayat-pembelian</title>
-    <link href="<?= base_url() ?>/dist/css/output.css" rel="stylesheet">
-
-</head>
-
 <body>
-    <!-- <?= var_dump($detailOrder[0]->buyerName) ?> -->
+    <div class="w-full">
+        <!-- <?= var_dump($detailOrder[0]->buyerName) ?> -->
+        <h1 class="bg-yellow-400 font-bold text-3xl text-center py-3 mt-5">DETAILS RIWAYAT PEMBELIAN</h1>
+        <form class="bg-white font-semibold py-3" action="<?= site_url('Transaction/update_order'); ?>" method="post">
+            <div class="ml-2">
+                <input type="hidden" name="idOrder" id="idOrder" value="<?= $detailOrder[0]->idOrder ?>">
+                <div class="ml-10">
+                    <div class="flex w-full mt-3">
+                        <div>
+                            <label>NAMA PEMBELI</label>
+                            <input
+                                class="mt-2 appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                disabled type="text" name="buyerName" id="buyerName"
+                                value="<?= $detailOrder[0]->buyerName ?>">
+                        </div>
+                        <div class="ml-[100px]">
+                            <label> NO. REKENING</label>
+                            <input
+                                class="mt-2 appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                disabled type="text" name="bankAccountNumber" id="bankAccountNumber"
+                                value="<?= $detailOrder[0]->bankAccountNumber ?>">
+                        </div>
+                    </div>
+                    <div class="flex w-full mt-3">
+                        <div>
 
-    <form action="<?= site_url('Transaction/update_order'); ?>" method="post">
+                            <label>WAKTU ORDER</label>
+                            <input
+                                class="mt-2 appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="text" name="orderTimestamp" id="orderTimestamp"
+                                value="<?= $detailOrder[0]->orderTimestamp ?>" disabled>
+                        </div>
 
-        <input disabled type="hidden" name="idOrder" id="idOrder" value="<?= $detailOrder[0]->idOrder ?>">
+                        <div class="ml-[100px]">
 
-        <label>Nama Pembeli</label>
-        <input disabled type="text" name="buyerName" id="buyerName" value="<?= $detailOrder[0]->buyerName ?>">
-
-
-        <label> rekening</label>
-        <input disabled type="text" name="bankAccountNumber" id="bankAccountNumber"
-            value="<?= $detailOrder[0]->bankAccountNumber ?>">
-
-
-        <label>orderTimestamp</label>
-        <input type="text" name="orderTimestamp" id="orderTimestamp" value="<?= $detailOrder[0]->orderTimestamp ?>"
-            disabled>
-
-        <label>paymentStatus</label>
-        <select name="paymentStatus" id="paymentStatus" disabled>
-            <option value="0" <?= ($detailOrder[0]->paymentStatus == 0) ? 'selected' : '' ?>>Pending</option>
-            <option value="1" <?= ($detailOrder[0]->paymentStatus == 1) ? 'selected' : '' ?>>Done</option>
-        </select>
-
-
-        <table>
-            <tr>
-                <th class="colom">SKU</th>
-                <th class="colom ">Nama Barang</th>
-                <th class="colom">Product Price</th>
-                <th class="colom">Jumlah</th>
-                <th class="colom">Subtotal</th>
-            </tr>
-            <?php
-        $total = 0;
-        foreach ($detailOrder as $row): ?>
-            <tr>
-                <td>
+                            <label>STATUS PEMBAYARAN</label>
+                            <select
+                                class="mt-2 appearance-none w-full bg-gray-200 text-gray-700 border   rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                disabled name="paymentStatus" id="paymentStatus">
+                                <option value="0" <?= ($detailOrder[0]->paymentStatus == 0) ? 'selected' : '' ?>>Pending
+                                </option>
+                                <option value="1" <?= ($detailOrder[0]->paymentStatus == 1) ? 'selected' : '' ?>>Done
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
 
-                    <?= $row->SKU ?>
-                </td>
-                <td>
-                    <?= $row->productName ?>
-                </td>
-                <td>
-                    <?= $row->productPrice ?>
-                </td>
-                <td>
-                    <?= $row->qtyOrder ?>
-                </td>
-                <td>
-                    <?= $row->priceAmount ?>
-                </td>
-            </tr>
-            <?php $total += $row->priceAmount; endforeach; ?>
-        </table>
-        <h1>Total = <?= $total ?></h1>
+                <table class="w-full mt-5">
+                    <div class="p-3 bg-dark">
+                        <thead class="bg-blue-400">
+                            <tr>
+                                <th class="py-3">SKU</th>
+                                <th class="py-3 ">Nama Barang</th>
+                                <th class="py-3">Product Price</th>
+                                <th class="py-3">Jumlah</th>
+                                <th class="py-3">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            <?php
+                            $total = 0;
+                            foreach ($detailOrder as $row): ?>
+                            <tr class=" bg-white py-2 text-center hover:bg-slate-100">
+                                <td class="kolomhover">
+                                    <?= $row->SKU ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->productName ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->productPrice ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->qtyOrder ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->priceAmount ?>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <?php $total += $row->priceAmount; endforeach; ?>
+                    </div>
+                </table>
+                <h1 class="font-bold text-center text-lg py-2 bg-yellow-400">TOTAL PEMBELIAN = <?= $total ?></h1>
 
-        <br>
-        <!-- <button type="submit" name="save" id="save" value="save">Simpan</button> -->
+                <br>
+            </div>
 
-    </form>
+
+        </form>
+    </div>
     <script src="<?= base_url() ?>/dist/js/script.js"></script>
 </body>
 

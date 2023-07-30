@@ -62,7 +62,7 @@ class Transaction extends CI_Controller
         $data['searchNAME'] = $searchNAME;
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
-
+        $this->load->view('nav/navbar.php');
         $this->load->view('transaction/transaction_view.php', $data);
         // $this->load->view('transaction/transaction_view', $data);
     }
@@ -104,6 +104,7 @@ class Transaction extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
 
         $data['checkout'] = $this->Transaction_model->get_checkout();
+        $this->load->view('nav/navbar.php');
         $this->load->view('transaction/entryOrder_view.php', $data);
     }
 
@@ -131,7 +132,7 @@ class Transaction extends CI_Controller
         // var_dump($this->input->post('idOrder'));
         $idOrder = $this->input->post('idOrder');
         $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
-
+        $this->load->view('nav/navbar.php');
         $this->load->view('transaction/detail_transaction_view.php', $data);
     }
 
@@ -139,8 +140,9 @@ class Transaction extends CI_Controller
     {
         // var_dump($this->input->post('idOrder'));
         $idOrder = $this->input->post('idOrder');
-        $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
 
+        $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
+        $this->load->view('nav/navbar.php');
         $this->load->view('transaction/update_transaction_view.php', $data);
     }
 
