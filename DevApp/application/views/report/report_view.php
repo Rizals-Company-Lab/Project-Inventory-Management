@@ -91,38 +91,38 @@
                 </tr>
             </thead>
             <?php foreach ($report->result() as $singleView): ?>
-                <tbody>
-                    <tr class="cursor-pointer hover:bg-slate-100 duration-300">
-                        <td class="border-2 p-2">1</td>
-                        <td class="border-2 p-1 shadow-md">
-                            <?= $singleView->SKU ?>
-                        </td>
-                        <td class="border-2 p-1  shadow-md ">
-                            <?= $singleView->productName ?>
-                        </td>
-                        <td class="border-2 p-1  shadow-md ">
-                            <?= $singleView->sellingPrice ?>
-                        </td>
-                        <td class="border-2 p-1  shadow-md ">
-                            <?= $singleView->buyingAmount ?>
-                        </td>
-                        <td class="border-2 p-1  shadow-md ">
-                            <?= $singleView->sellingAmount ?>
-                        </td>
-                        <td class="border-2 p-1  shadow-md ">
-                            <?= $singleView->selisih ?>
-                        </td>
-                        <td class="border-2 p-1  shadow-md ">
-                            <?= $singleView->stock ?>
-                        </td>
-                        <td class="border-2 p-1  shadow-md ">
-                            <?= $singleView->aset ?>
-                        </td>
-                        <td class="border-2 p-1  shadow-md ">
-                            <?= $singleView->profitEstimation ?>
-                        </td>
+            <tbody>
+                <tr class="cursor-pointer hover:bg-slate-100 duration-300">
+                    <td class="border-2 p-2">1</td>
+                    <td class="border-2 p-1 shadow-md">
+                        <?= $singleView->SKU ?>
+                    </td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= $singleView->productName ?>
+                    </td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= $singleView->sellingPrice ?>
+                    </td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= $singleView->buyingAmount ?>
+                    </td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= $singleView->sellingAmount ?>
+                    </td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= $singleView->selisih ?>
+                    </td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= $singleView->stock ?>
+                    </td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= $singleView->aset ?>
+                    </td>
+                    <td class="border-2 p-1  shadow-md ">
+                        <?= $singleView->profitEstimation ?>
+                    </td>
 
-                    </tr>
+                </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
