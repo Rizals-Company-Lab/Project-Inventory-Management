@@ -21,7 +21,7 @@
                     </select>
                 </div>
                 <div>
-                    <label class="font-bold text-lg" for="">NAMA BARANG</label>
+                    <label class="font-bold sm:text-lg text-base" for="">NAMA BARANG</label>
                     <select
                         class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         name="productName" id="productNameSelect">
@@ -35,18 +35,18 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <label class="font-bold text-lg " for="">HARGA PEMBELIAN</label>
+                <label class="font-bold sm:text-lg text-base " for="">HARGA PEMBELIAN</label>
                 <input
                     class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="text" name="buyingPrice" id="buyingPrice" value="<?= $purcase->buyingPrice ?>">
-                <label class="font-bold text-lg " for="">JUMLAH PEMBELIAN</label>
+                <label class="font-bold sm:text-lg text-base " for="">JUMLAH PEMBELIAN</label>
                 <input
                     class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="text" name="qtyPurcase" id="qtyPurcase" value="<?= $purcase->qtyPurcase ?>">
-                <!-- <label class="font-bold text-lg " for="">priceAmount</label>
+                <!-- <label class="font-bold sm:text-lg text-base " for="">priceAmount</label>
                 <input type="text" name="priceAmount" id="priceAmount" value="<?= $purcase->priceAmount ?>" disabled>
                 <br> -->
-                <label class="font-bold text-lg " for="">WAKTU PEMBELIAN</label>
+                <label class="font-bold sm:text-lg text-base " for="">WAKTU PEMBELIAN</label>
                 <input
                     class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="text" name="purcaseTimestamp" id="purcaseTimestamp" value="<?= $purcase->purcaseTimestamp ?>"
@@ -58,8 +58,12 @@
 
 
                 <button
-                    class="text-lg font-bold px-[50px] text-white py-2 w-full rounded-sm bg-blue-700 hover:bg-primary"
+                    class="sm:text-lg text-base mb-3 font-bold px-[50px] text-white py-2 w-full rounded-sm bg-blue-700 hover:bg-primary"
                     type="submit">Submit</button>
+                <button
+                    class="sm:sm:text-lg text-base w-full text-sm font-bold px-[100px] text-white py-2 rounded-sm bg-red-700 hover:bg-primary">
+                    <a href="<?= base_url() ?>purcase">kembali</a>
+                </button>
             </div>
         </form>
     </div>
@@ -105,6 +109,7 @@ $("#skuSelect").change(function() {
     $("#productNameSelect").val(selectedValue);
 });
 </script>
+<script src="<?= base_url() ?>/dist/js/script.js"></script>
 
 
 </html>
