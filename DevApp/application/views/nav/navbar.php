@@ -16,12 +16,19 @@
     <!-- Navbar star -->
     <div class="sm:flex">
         <nav class="mt-4 ml-4 mr-4 w-auto">
-            <div class=" justify-around border rounded-md shadow-md  bg-dark text-white">
-                <div class=" justify-between">
-                    <img class="w-[300px]" src="<?= base_url() ?>/dist/img/abk3.png" alt="">
+            <div class=" justify-around border rounded-md shadow-md bg-dark text-white">
+                <div class="flex justify-between">
+                    <img class="sm:w-[300px] w-[80px]" src="<?= base_url() ?>/dist/img/abk3.png" alt="">
+                    <div class="flex items-center relative px-4 sm:hidden">
+                        <button class="" id="tombolMenu" name="tombolMenu" type="button">
+                            <span class="tombol-line transition duration-300 ease-in-out origin-top-left"></span>
+                            <span class="tombol-line"></span>
+                            <span class="tombol-line transition duration-300 ease-in-out origin-bottom-left"></span>
+                        </button>
+                    </div>
                 </div>
-                <div class="h-[400px]">
-                    <ul class="  sm:border-none sm:rounded-none sm:shadow-none border rounded-md shadow-md h-auto  ml-2 mr-2"
+                <div class="sm:h-[400px]">
+                    <ul class=" sm:flex flex-col hidden sm:border-none sm:rounded-none sm:shadow-none rounded-md shadow-md h-auto  ml-2 mr-2"
                         id="hilang" nama="hilang">
                         <li class="text-center sm:p-4 p-1 hover:bg-primary "><a class="hover:text-white"
                                 href="<?= base_url('Home') ?>">HOME</a>
@@ -34,7 +41,7 @@
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
                                 href="<?php echo site_url('Purcase');?>">KOLAKAN</a></li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('');?>">KONTAK</a>
+                                href="<?php echo site_url('report');?>">KEUNTUNGAN</a>
                         </li>
                     </ul>
                 </div>
