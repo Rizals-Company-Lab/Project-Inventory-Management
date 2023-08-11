@@ -9,6 +9,12 @@ class Report extends CI_Controller
         parent::__construct();
         $this->load->model('Report_model');
         $this->load->model('Product_model');
+
+        if ($this->session->userdata('login_id') != 'admin') {
+
+            redirect('Home');
+        }
+
     }
 
     public function index($row_no = 0)

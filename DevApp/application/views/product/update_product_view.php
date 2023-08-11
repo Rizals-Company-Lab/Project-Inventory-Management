@@ -34,14 +34,14 @@
                                 href="<?= base_url('Home') ?>">HOME</a>
                         </li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary "><a class="hover:text-white "
-                                href="<?php echo site_url('product');?>">PRODUK</a>
+                                href="<?php echo site_url('product'); ?>">PRODUK</a>
                         </li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('Transaction');?>">TRANSAKSI</a></li>
+                                href="<?php echo site_url('Transaction'); ?>">TRANSAKSI</a></li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('Purcase');?>">KOLAKAN</a></li>
+                                href="<?php echo site_url('Purcase'); ?>">KOLAKAN</a></li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('report');?>">KEUNTUNGAN</a>
+                                href="<?php echo site_url('report'); ?>">KEUNTUNGAN</a>
                         </li>
                     </ul>
                 </div>
@@ -69,11 +69,21 @@
                             type="text" name="productDescription" id="productDescription"
                             value="<?= $product->productDescription ?>">
 
-                        <label for="sellingPrice">HARGA</label>
+                        <label for="sellingPrice">HARGA JUAL UMUM</label>
                         <input
                             class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             type="number" name="sellingPrice" id="sellingPrice" min="1"
                             value="<?= $product->sellingPrice ?>">
+                        <label for="distributorPrice">HARGA JUAL DISTRIBUTOR</label>
+                        <input
+                            class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="number" name="distributorPrice" id="distributorPrice" min="1"
+                            value="<?= $product->distributorPrice ?>">
+                        <label for="materialPrice">HARGA JUAL MATERIAL</label>
+                        <input
+                            class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="number" name="materialPrice" id="materialPrice" min="1"
+                            value="<?= $product->materialPrice ?>">
 
                         <button
                             class="sm:text-lg mb-3 text-base font-bold px-[50px] text-white py-2 w-full rounded-sm bg-blue-700 hover:bg-primary"

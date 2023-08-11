@@ -32,17 +32,21 @@
                         </div>
 
                         <div class="sm:ml-[100px]">
-
                             <label>STATUS PEMBAYARAN</label>
-                            <select
-                                class="mt-2 appearance-none w-full bg-gray-200 text-gray-700 border border-green-500  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                name="paymentStatus" id="paymentStatus">
-                                <option value="0" <?= ($detailOrder[0]->paymentStatus == 0) ? 'selected' : '' ?>>Pending
-                                </option>
-                                <option value="1" <?= ($detailOrder[0]->paymentStatus == 1) ? 'selected' : '' ?>>Done
-                                </option>
-                            </select>
+                            <div class="mt-2">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" class="form-radio text-green-500" name="paymentStatus" value="0"
+                                        <?= ($detailOrder[0]->paymentStatus == 0) ? 'checked' : '' ?>>
+                                    <span class="ml-2">Pending</span>
+                                </label>
+                                <label class="inline-flex items-center ml-6">
+                                    <input type="radio" class="form-radio text-green-500" name="paymentStatus" value="1"
+                                        <?= ($detailOrder[0]->paymentStatus == 1) ? 'checked' : '' ?>>
+                                    <span class="ml-2">Done</span>
+                                </label>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -61,31 +65,33 @@
                             </thead>
                             <tbody class="">
                                 <?php
-                            $total = 0;
-                            foreach ($detailOrder as $row): ?>
-                                <tr class=" bg-white py-2 text-[12px] sm:text-xl text-center hover:bg-slate-100">
-                                    <td class="kolomhover">
-                                        <?= $row->SKU ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->productName ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->productPrice ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->qtyOrder ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->priceAmount ?>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <?php $total += $row->priceAmount; endforeach; ?>
+                                $total = 0;
+                                foreach ($detailOrder as $row): ?>
+                                    <tr class=" bg-white py-2 text-[12px] sm:text-xl text-center hover:bg-slate-100">
+                                        <td class="kolomhover">
+                                            <?= $row->SKU ?>
+                                        </td>
+                                        <td class="kolomhover">
+                                            <?= $row->productName ?>
+                                        </td>
+                                        <td class="kolomhover">
+                                            <?= $row->productPrice ?>
+                                        </td>
+                                        <td class="kolomhover">
+                                            <?= $row->qtyOrder ?>
+                                        </td>
+                                        <td class="kolomhover">
+                                            <?= $row->priceAmount ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <?php $total += $row->priceAmount; endforeach; ?>
                         </div>
                     </table>
                 </div>
-                <h1 class="font-bold text-center text-lg py-2 bg-yellow-400">TOTAL PEMBELIAN = <?= $total ?></h1>
+                <h1 class="font-bold text-center text-lg py-2 bg-yellow-400">TOTAL PEMBELIAN =
+                    <?= $total ?>
+                </h1>
 
                 <br>
                 <button class="bg-blue-700 w-full rounded-md text-white px-5 py-2 shadow-md hover:bg-blue-900"
