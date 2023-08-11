@@ -83,6 +83,36 @@ class Transaction extends CI_Controller
         // var_dump($this->Transaction_model->get_checkout()->result());
         $this->load->view('ajax/CheckoutList.php', $data);
     }
+    public function insert_checkout_umum()
+    {
+
+        $SKU = $this->input->post('SKU');
+        $this->Transaction_model->insert_checkout($SKU);
+        $data['product'] = $this->Transaction_model->get_product();
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        // var_dump($this->Transaction_model->get_checkout()->result());
+        $this->load->view('ajax/CheckoutList_umum.php', $data);
+    }
+    public function insert_checkout_distributor()
+    {
+
+        $SKU = $this->input->post('SKU');
+        $this->Transaction_model->insert_checkout($SKU);
+        $data['product'] = $this->Transaction_model->get_product();
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        // var_dump($this->Transaction_model->get_checkout()->result());
+        $this->load->view('ajax/CheckoutList_distributor.php', $data);
+    }
+    public function insert_checkout_material()
+    {
+
+        $SKU = $this->input->post('SKU');
+        $this->Transaction_model->insert_checkout($SKU);
+        $data['product'] = $this->Transaction_model->get_product();
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        // var_dump($this->Transaction_model->get_checkout()->result());
+        $this->load->view('ajax/CheckoutList_material.php', $data);
+    }
 
     public function delete_checkout()
     {
@@ -94,6 +124,39 @@ class Transaction extends CI_Controller
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
         $this->load->view('ajax/CheckoutList.php', $data);
+    }
+    public function delete_checkout_umum()
+    {
+
+        $SKU = $this->input->post('SKU');
+
+        $this->Transaction_model->delete_checkout($SKU);
+        $data['product'] = $this->Transaction_model->get_product();
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        // var_dump($this->Transaction_model->get_checkout()->result());
+        $this->load->view('ajax/CheckoutList_umum.php', $data);
+    }
+    public function delete_checkout_distributor()
+    {
+
+        $SKU = $this->input->post('SKU');
+
+        $this->Transaction_model->delete_checkout($SKU);
+        $data['product'] = $this->Transaction_model->get_product();
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        // var_dump($this->Transaction_model->get_checkout()->result());
+        $this->load->view('ajax/CheckoutList_distributor.php', $data);
+    }
+    public function delete_checkout_material()
+    {
+
+        $SKU = $this->input->post('SKU');
+
+        $this->Transaction_model->delete_checkout($SKU);
+        $data['product'] = $this->Transaction_model->get_product();
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        // var_dump($this->Transaction_model->get_checkout()->result());
+        $this->load->view('ajax/CheckoutList_material.php', $data);
     }
 
     public function delete_order()
@@ -118,6 +181,48 @@ class Transaction extends CI_Controller
 
         }
         $this->load->view('transaction/entryOrder_view.php', $data);
+    }
+    public function add_new_transaction_umum()
+    {
+        $data['product'] = $this->Transaction_model->get_product();
+
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        if ($this->session->userdata('login_id') == 'admin') {
+
+            $this->load->view('nav/navbar.php');
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
+
+        }
+        $this->load->view('transaction/entryOrder_view_umum.php', $data);
+    }
+    public function add_new_transaction_distributor()
+    {
+        $data['product'] = $this->Transaction_model->get_product();
+
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        if ($this->session->userdata('login_id') == 'admin') {
+
+            $this->load->view('nav/navbar.php');
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
+
+        }
+        $this->load->view('transaction/entryOrder_view_distributor.php', $data);
+    }
+    public function add_new_transaction_material()
+    {
+        $data['product'] = $this->Transaction_model->get_product();
+
+        $data['checkout'] = $this->Transaction_model->get_checkout();
+        if ($this->session->userdata('login_id') == 'admin') {
+
+            $this->load->view('nav/navbar.php');
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
+
+        }
+        $this->load->view('transaction/entryOrder_view_material.php', $data);
     }
 
     public function entryOrder()
