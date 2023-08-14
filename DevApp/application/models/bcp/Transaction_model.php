@@ -33,9 +33,11 @@ class Transaction_model extends CI_Model
         // $this->db->like('ITEMNAME', $ITEMNAME);
 
 
-        // $this->db->order_by('INVENTTRANSID', 'DESC');
-        $result = $this->db->limit($rowperpage, $rowno)->get();
-        return $result;
+        $this->db->order_by('TO.orderTimestamp', 'ASC');
+        $this->db->limit($rowperpage, $rowno);
+
+        $query = $this->db->get();
+        return $query;
     }
 
     public function get_product()
