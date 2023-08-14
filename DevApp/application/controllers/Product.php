@@ -8,6 +8,9 @@ class Product extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Product_model');
+        if (!$this->session->userdata('login_id')) {
+            redirect('Auth/login');
+        }
     }
 
     public function index($row_no = 0)
@@ -85,7 +88,9 @@ class Product extends CI_Controller
         $productName = $this->input->post('productName');
         $productDescription = $this->input->post('productDescription');
         $sellingPrice = $this->input->post('sellingPrice');
-        $this->Product_model->save_product($SKU, $productName, $productDescription, $sellingPrice);
+        $distributorPrice = $this->input->post('distributorPrice');
+        $materialPrice = $this->input->post('materialPrice');
+        $this->Product_model->save_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice);
 
         // $data['product'] = $this->Product_model->get_product();
         // $this->load->view('purcase/add_purcasing_view.php', $data);
@@ -93,7 +98,7 @@ class Product extends CI_Controller
         redirect('Product');
     }
 
-	 public function get_update()
+    public function get_update()
     {
         var_dump($this->input->post());
 
@@ -112,7 +117,9 @@ class Product extends CI_Controller
         $productName = $this->input->post('productName');
         $productDescription = $this->input->post('productDescription');
         $sellingPrice = $this->input->post('sellingPrice');
-        $this->Product_model->update_product($SKU, $productName, $productDescription, $sellingPrice);
+        $distributorPrice = $this->input->post('distributorPrice');
+        $materialPrice = $this->input->post('materialPrice');
+        $this->Product_model->update_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice);
 
         // $data['product'] = $this->Product_model->get_product();
         // $this->load->view('purcase/add_purcasing_view.php', $data);
@@ -133,6 +140,6 @@ class Product extends CI_Controller
 
         redirect('Product');
 
-        
+
     }
 }
