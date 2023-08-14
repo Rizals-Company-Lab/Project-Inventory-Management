@@ -9,6 +9,9 @@ class Purcase extends CI_Controller
         parent::__construct();
         $this->load->model('Purcase_model');
         $this->load->model('Product_model');
+        if (!$this->session->userdata('login_id')) {
+            redirect('Auth/login');
+        }
     }
 
     public function index($row_no = 0)

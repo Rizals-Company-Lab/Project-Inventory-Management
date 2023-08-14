@@ -10,6 +10,10 @@ class Auth extends CI_Controller
     }
 
 
+    public function index()
+    {
+        redirect('auth/login');
+    }
     public function login()
     {
         if ($this->session->userdata('login_id')) {

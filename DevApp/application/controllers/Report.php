@@ -9,10 +9,12 @@ class Report extends CI_Controller
         parent::__construct();
         $this->load->model('Report_model');
         $this->load->model('Product_model');
-
-        if ($this->session->userdata('login_id') != 'admin') {
-
-            redirect('Home');
+        if (!$this->session->userdata('login_id')) {
+            redirect('Auth/login');
+        } else {
+            if ($this->session->userdata('login_id') != 'admin') {
+                redirect('Home');
+            }
         }
 
     }

@@ -8,6 +8,9 @@ class Transaction extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Transaction_model');
+        if (!$this->session->userdata('login_id')) {
+            redirect('Auth/login');
+        }
     }
 
     public function index($row_no = 0)
