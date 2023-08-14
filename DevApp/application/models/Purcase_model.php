@@ -38,6 +38,9 @@ class Purcase_model extends CI_Model
 
 
         // $this->db->order_by('INVENTTRANSID', 'DESC');
+
+
+        $this->db->order_by('purcaseTimestamp', 'DESC');
         $result = $this->db->limit($rowperpage, $rowno)->get();
         return $result;
     }

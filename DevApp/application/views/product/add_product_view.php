@@ -34,14 +34,14 @@
                                 href="<?= base_url('Home') ?>">HOME</a>
                         </li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary "><a class="hover:text-white "
-                                href="<?php echo site_url('product');?>">PRODUK</a>
+                                href="<?php echo site_url('product'); ?>">PRODUK</a>
                         </li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('Transaction');?>">TRANSAKSI</a></li>
+                                href="<?php echo site_url('Transaction'); ?>">TRANSAKSI</a></li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('Purcase');?>">KOLAKAN</a></li>
+                                href="<?php echo site_url('Purcase'); ?>">KOLAKAN</a></li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('report');?>">KEUNTUNGAN</a>
+                                href="<?php echo site_url('report'); ?>">KEUNTUNGAN</a>
                         </li>
                     </ul>
                 </div>
@@ -80,11 +80,18 @@
                                 placeholder="Baja Ringan lebar 65 panjang 70">
                         </div>
                         <div>
-                            <label class="font-bold sm:text-lg text-sm" for="sellingPrice">HARGA JUAL</label>
-                            <br>
+                            <label for="sellingPrice">HARGA JUAL UMUM</label>
                             <input
-                                class="mt-2 sm:text-lg text-sm appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                type="number" name="sellingPrice" id="sellingPrice" value="1000" min="1000">
+                                class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="number" name="sellingPrice" id="sellingPrice" min="1" value="">
+                            <label for="distributorPrice">HARGA JUAL DISTRIBUTOR</label>
+                            <input
+                                class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="number" name="distributorPrice" id="distributorPrice" min="1" value="">
+                            <label for="materialPrice">HARGA JUAL MATERIAL</label>
+                            <input
+                                class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="number" name="materialPrice" id="materialPrice" min="1" value="">
                         </div>
                         <br>
                     </div>

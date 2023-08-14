@@ -10,7 +10,7 @@ class Product_model extends CI_Model
         // $this->db->join('tbl_product AS TPD', 'TPC.SKU = TPD.SKU');
         // $this->db->group_by('TPC.SKU');
 
-        // $this->db->select('s.SKU, productName, productDescription, sellingPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock');
+        // $this->db->select('s.SKU, productName, productDescription,  sellingPrice, distributorPrice, materialPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock');
         // $this->db->from('tbl_purcase');
         // $this->db->join('(SELECT SKU, SUM(qtyPurcase) AS stock FROM tbl_purcase GROUP BY SKU) s', 's.SKU = tbl_purcase.SKU');
         // $this->db->join('(SELECT SKU, SUM(qtyOrder) AS terjual FROM tbl_checkout WHERE idOrder IS NOT NULL GROUP BY SKU) t', 't.SKU = s.SKU', 'left');
@@ -27,7 +27,7 @@ class Product_model extends CI_Model
             ->group_by('SKU')
             ->get_compiled_select();
 
-        $this->db->select('p.SKU, productName, productDescription, sellingPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
+        $this->db->select('p.SKU, productName, productDescription, sellingPrice, distributorPrice, materialPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
             ->from("($subquery_s) s")
             ->join("($subquery_t) t", 's.SKU = t.SKU', 'left')
             ->join('tbl_product p', 's.SKU = p.SKU', 'right');
@@ -60,7 +60,7 @@ class Product_model extends CI_Model
         // $this->db->join('tbl_product AS TPD', 'TPC.SKU = TPD.SKU');
         // $this->db->group_by('TPC.SKU');
 
-        // $this->db->select('s.SKU, productName, productDescription, sellingPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock');
+        // $this->db->select('s.SKU, productName, productDescription,  sellingPrice, distributorPrice, materialPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock');
         // $this->db->from('tbl_purcase');
         // $this->db->join('(SELECT SKU, SUM(qtyPurcase) AS stock FROM tbl_purcase GROUP BY SKU) s', 's.SKU = tbl_purcase.SKU');
         // $this->db->join('(SELECT SKU, SUM(qtyOrder) AS terjual FROM tbl_checkout WHERE idOrder IS NOT NULL GROUP BY SKU) t', 't.SKU = s.SKU', 'left');
@@ -77,7 +77,7 @@ class Product_model extends CI_Model
             ->group_by('SKU')
             ->get_compiled_select();
 
-        $this->db->select('p.SKU, productName, productDescription, sellingPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
+        $this->db->select('p.SKU, productName, productDescription,  sellingPrice, distributorPrice, materialPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
             ->from("($subquery_s) s")
             ->join("($subquery_t) t", 's.SKU = t.SKU', 'left')
             ->join('tbl_product p', 's.SKU = p.SKU', 'right');
@@ -132,7 +132,7 @@ class Product_model extends CI_Model
         return $result;
     }
 
- 
+
     public function get_product_ByID($SKU)
     {
         $this->db->select('*');
@@ -145,7 +145,7 @@ class Product_model extends CI_Model
         return $result;
     }
 
-    public function save_product($SKU, $productName, $productDescription, $sellingPrice)
+    public function save_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice)
     {
 
         $data_tbl_product = array(
@@ -158,13 +158,15 @@ class Product_model extends CI_Model
         $this->db->insert('tbl_product', $data_tbl_product);
     }
 
-    public function update_product($SKU, $productName, $productDescription, $sellingPrice)
+    public function update_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice)
     {
 
         $data_tbl_product = array(
             'productName' => $productName,
             'productDescription' => $productDescription,
-            'sellingPrice' => $sellingPrice
+            'sellingPrice' => $sellingPrice,
+            'distributorPrice' => $distributorPrice,
+            'materialPrice' => $materialPrice
         );
 
         $this->db->where('SKU', $SKU);

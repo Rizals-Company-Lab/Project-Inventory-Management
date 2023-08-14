@@ -9,6 +9,9 @@ class Purcase extends CI_Controller
         parent::__construct();
         $this->load->model('Purcase_model');
         $this->load->model('Product_model');
+        if (!$this->session->userdata('login_id')) {
+            redirect('Auth/login');
+        }
     }
 
     public function index($row_no = 0)
@@ -64,8 +67,15 @@ class Purcase extends CI_Controller
         $data['searchNAME'] = $searchNAME;
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
-        $this->load->view('nav/navbar.php');
-        $this->load->view('purcase/purcasing_view.php', $data);
+        if ($this->session->userdata('login_id') == 'admin') {
+
+            $this->load->view('nav/navbar.php');
+            $this->load->view('purcase/purcasing_view.php', $data);
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
+            $this->load->view('purcase/purcasing_view_kasir.php', $data);
+
+        }
         // $this->load->view('purcase/purcase_view', $data);
     }
 
@@ -82,7 +92,13 @@ class Purcase extends CI_Controller
     public function add_purcase()
     {
         $data['product'] = $this->Product_model->get_product();
-        $this->load->view('nav/navbar.php');
+        if ($this->session->userdata('login_id') == 'admin') {
+
+            $this->load->view('nav/navbar.php');
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
+
+        }
         $this->load->view('purcase/add_purcasing_view.php', $data);
     }
 
@@ -92,7 +108,13 @@ class Purcase extends CI_Controller
         $data['product'] = $this->Product_model->get_product();
         $data['purcase'] = $this->Purcase_model->get_purcase_by_id($idPurcase);
 
-        $this->load->view('nav/navbar.php');
+        if ($this->session->userdata('login_id') == 'admin') {
+
+            $this->load->view('nav/navbar.php');
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
+
+        }
         $this->load->view('purcase/update_purcasing_view.php', $data);
     }
 
