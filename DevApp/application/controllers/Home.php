@@ -6,6 +6,15 @@ class Home extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('home_view');
+		if ($this->session->userdata('login_id')) {
+			if ($this->session->userdata('login_id') == 'admin') {
+				$this->load->view('home_view');
+			} else {
+				$this->load->view('home_view_kasir');
+			}
+		} else {
+			redirect('Auth/login');
+		}
+
 	}
 }

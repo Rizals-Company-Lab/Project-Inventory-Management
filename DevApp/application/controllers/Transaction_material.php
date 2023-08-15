@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Transaction extends CI_Controller
+class transaction_material extends CI_Controller
 {
 
     public function __construct()
@@ -72,8 +72,8 @@ class Transaction extends CI_Controller
             $this->load->view('nav/navbar_kasir.php');
 
         }
-        $this->load->view('transaction/transaction_view.php', $data);
-        // $this->load->view('transaction/transaction_view', $data);
+        $this->load->view('transaction_material/transaction_view.php', $data);
+        // $this->load->view('transaction_material/transaction_view', $data);
     }
 
     public function insert_checkout()
@@ -84,7 +84,7 @@ class Transaction extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('ajax/CheckoutList.php', $data);
+        $this->load->view('ajax/CheckoutList_material.php', $data);
     }
 
     public function delete_checkout()
@@ -96,7 +96,7 @@ class Transaction extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('ajax/CheckoutList.php', $data);
+        $this->load->view('ajax/CheckoutList_material.php', $data);
     }
 
     public function delete_order()
@@ -105,7 +105,7 @@ class Transaction extends CI_Controller
         $idOrder = $this->input->post('idOrder');
 
         $this->Transaction_model->delete_order($idOrder);
-        redirect('Transaction');
+        redirect('Transaction_material');
     }
 
     public function add_new_transaction()
@@ -120,7 +120,7 @@ class Transaction extends CI_Controller
             $this->load->view('nav/navbar_kasir.php');
 
         }
-        $this->load->view('transaction/entryOrder_view.php', $data);
+        $this->load->view('transaction_material/entryOrder_view.php', $data);
     }
 
     public function entryOrder()
@@ -135,11 +135,12 @@ class Transaction extends CI_Controller
 
     public function save_transaction()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
+        // die;
         // $idOrder = $this->Transaction_model->get_new_idOrder();
-        $this->Transaction_model->save_transaction($this->input->post(), 'sellingPrice');
+        $this->Transaction_model->save_transaction($this->input->post(), 'materialPrice');
 
-        redirect('Transaction');
+        redirect('Transaction_material');
     }
 
     public function order_detail()
@@ -154,7 +155,7 @@ class Transaction extends CI_Controller
             $this->load->view('nav/navbar_kasir.php');
 
         }
-        $this->load->view('transaction/detail_transaction_view.php', $data);
+        $this->load->view('transaction_material/detail_transaction_view.php', $data);
     }
 
     public function get_update()
@@ -170,7 +171,7 @@ class Transaction extends CI_Controller
             $this->load->view('nav/navbar_kasir.php');
 
         }
-        $this->load->view('transaction/update_transaction_view.php', $data);
+        $this->load->view('transaction_material/update_transaction_view.php', $data);
     }
 
     public function update_order()
@@ -186,6 +187,6 @@ class Transaction extends CI_Controller
         // $data['product'] = $this->Product_model->get_product();
         // $this->load->view('purcase/add_purcasing_view.php', $data);
 
-        redirect('Transaction');
+        redirect('Transaction_material');
     }
 }

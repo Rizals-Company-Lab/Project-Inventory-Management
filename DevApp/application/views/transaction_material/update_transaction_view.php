@@ -2,7 +2,8 @@
     <div class="w-full">
         <!-- <?= var_dump($detailOrder[0]->buyerName) ?> -->
         <h1 class="bg-yellow-400 font-bold sm:text-3xl text-base text-center py-3 mt-5">UPDATE RIWAYAT PEMBELIAN</h1>
-        <form class="bg-white font-semibold py-3" action="<?= site_url('Transaction/update_order'); ?>" method="post">
+        <form class="bg-white font-semibold py-3" action="<?= site_url('Transaction_material/update_order'); ?>"
+            method="post">
             <div class="sm:ml-2 ml-2 mr-2">
                 <input type="hidden" name="idOrder" id="idOrder" value="<?= $detailOrder[0]->idOrder ?>">
                 <div class="sm:ml-10 sm:text-base text-sm">

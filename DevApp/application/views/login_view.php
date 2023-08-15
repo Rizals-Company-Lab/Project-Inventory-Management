@@ -13,7 +13,7 @@
     <div class=" w-auto bg-dark mx-auto mt-3 ml-1 mr-1 h-[600px] border rounded-md shadow-md">
         <form
             class="sm:mx-auto overflow-hidden sm:mt-10 relative bg-white/25   backdrop-blur-lg w-auto mt-6 h-[500px] sm:w-[500px] sm:h-[500px] p-3 ml-3 mr-3  shadow-sm shadow-white rounded-md group"
-            action="<?php echo site_url('login/save');?>" method="post">
+            action="<?php echo site_url('Auth/login'); ?>" method="post">
             <div
                 class="duration-300 ease-in-out absolute ml-[50px] group-hover:-mt-[200px] -mt-[350px] -z-10 w-[500px] h-[500px] rounded-full bg-dark">
             </div>
@@ -22,17 +22,17 @@
                 <div class="p-2 ">
                     <label>Username</label><br>
                     <input class="mt-2 mb-4 w-full h-[40px] border rounded-md shadow-md" type="text" id="username"
-                        name="login_username" placeholder="   username">
+                        name="username" placeholder="   username">
                 </div>
                 <div class="p-2 ">
                     <label>password</label><br>
                     <input class="mt-2 mb-4 w-full  h-[40px] border rounded-md shadow-md" type="text" id="password"
-                        name="login_password" placeholder="   password">
+                        name="password" placeholder="   password">
                 </div>
                 <div class="grid items-center mt-10">
-                    <button class=" px-[50px] py-1  rounded-sm bg-blue-700 hover:bg-primary" id="login"
-                        type="submit">Login</button><br>
-                    <button class="" type="checkbox">RememberMe</button>
+                    <button class=" px-[50px] py-1  rounded-sm bg-blue-700 hover:bg-primary" name="login" id="login"
+                        value="true" type="submit">Login</button><br>
+                    <!-- <button class="" type="checkbox">RememberMe</button> -->
                 </div>
             </div>
             <div
