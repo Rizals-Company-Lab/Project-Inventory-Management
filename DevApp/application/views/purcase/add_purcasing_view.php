@@ -65,10 +65,7 @@
             <button
                 class="sm:text-lg mb-3 text-base font-bold px-[50px] text-white py-2 w-full rounded-sm bg-blue-700 hover:bg-primary"
                 type="submit">Submit</button>
-            <button
-                class="sm:text-lg w-full text-sm font-bold px-[100px] text-white py-2 rounded-sm bg-red-700 hover:bg-primary">
-                <a href="<?= base_url() ?>purcase">kembali</a>
-            </button>
+
             <br>
         </form>
     </div>

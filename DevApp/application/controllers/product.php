@@ -67,8 +67,13 @@ class Product extends CI_Controller
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
 
+        if ($this->session->userdata('login_id') == 'admin') {
 
+            $this->load->view('nav/navbar.php');
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
 
+        }
         $this->load->view('product/product_view.php', $data);
         // $this->load->view('purcase/purcase_view', $data);
     }
@@ -77,6 +82,13 @@ class Product extends CI_Controller
     public function add_product()
     {
         // $data['product'] = $this->Product_model->get_product();
+        if ($this->session->userdata('login_id') == 'admin') {
+
+            $this->load->view('nav/navbar.php');
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
+
+        }
         $this->load->view('product/add_product_view.php');
     }
 
@@ -104,6 +116,13 @@ class Product extends CI_Controller
 
         $SKU = $this->input->post('SKU');
         $data['product'] = $this->Product_model->get_product_ByID($SKU);
+        if ($this->session->userdata('login_id') == 'admin') {
+
+            $this->load->view('nav/navbar.php');
+        } else {
+            $this->load->view('nav/navbar_kasir.php');
+
+        }
         $this->load->view('product/update_product_view.php', $data);
     }
 
