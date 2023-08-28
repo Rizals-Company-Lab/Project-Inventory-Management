@@ -65,25 +65,25 @@
                                 <?php
                                 $total = 0;
                                 foreach ($detailOrder as $row): ?>
-                                    <tr class=" bg-white py-2 text-[12px] sm:text-xl text-center hover:bg-slate-100">
-                                        <td class="kolomhover">
-                                            <?= $row->SKU ?>
-                                        </td>
-                                        <td class="kolomhover">
-                                            <?= $row->productName ?>
-                                        </td>
-                                        <td class="kolomhover">
-                                            <?= $row->productPrice ?>
-                                        </td>
-                                        <td class="kolomhover">
-                                            <?= $row->qtyOrder ?>
-                                        </td>
-                                        <td class="kolomhover">
-                                            <?= $row->priceAmount ?>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <?php $total += $row->priceAmount; endforeach; ?>
+                                <tr class=" bg-white py-2 text-[12px] sm:text-xl text-center hover:bg-slate-100">
+                                    <td class="kolomhover">
+                                        <?= $row->SKU ?>
+                                    </td>
+                                    <td class="kolomhover">
+                                        <?= $row->productName ?>
+                                    </td>
+                                    <td class="kolomhover">
+                                        <?= $row->productPrice ?>
+                                    </td>
+                                    <td class="kolomhover">
+                                        <?= $row->qtyOrder ?>
+                                    </td>
+                                    <td class="kolomhover">
+                                        <?= $row->priceAmount ?>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <?php $total += $row->priceAmount; endforeach; ?>
                         </div>
                     </table>
 

@@ -135,10 +135,7 @@
         <button
             class="sm:text-lg text-sm mb-3 sm:font-bold font-semibold mt-3 px-[50px] text-white py-2 w-full rounded-sm bg-blue-500 hover:bg-lime-500"
             type="submit">PESAN SEKARANG</button>
-        <button
-            class="sm:text-lg w-full text-sm font-bold px-[100px] text-white py-2 rounded-sm bg-red-700 hover:bg-primary">
-            <a href="<?= base_url() ?>transaction">kembali</a>
-        </button>
+
     </form>
 </body>
 <script src="<?= base_url() ?>/dist/js/script.js"></script>

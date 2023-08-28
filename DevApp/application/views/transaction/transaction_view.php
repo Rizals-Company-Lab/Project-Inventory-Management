@@ -2,7 +2,7 @@
 
 <!-- tabel penjualan -->
 <div class="h-auto w-full overflow-x-auto  sm:ml-5 sm:mr-5 rounded-md shadow-sm  ">
-    <div class="mt-10">
+    <div class="sm:mt-10 mt-2">
 
         <h1 class="text-center sm:text-3xl text-xl font-bold  bg-bg2 py-3 ml-3 mr-3">
             RIWAYAT PEMBELIAN LIST
@@ -11,16 +11,28 @@
 
         <br>
     </div>
-    <div class="flex mt-3">
-        <div>
-            <a class="bg-dark text-white ml-3 sm:text-xl text-sm hover:bg-slate-600 px-3 py-2 rounded-md"
-                href="<?php echo site_url('transaction/add_new_transaction');?>"><i
-                    class="fa-sharp fa-solid fa-cart-plus"></i> TAMBAH TRANSAKSI PENJUALAN</a>
+    <div class="text-center sm:flex">
+        <div class="sm:flex mt-10">
+            <a class="bg-dark text-white ml-3 sm:text-xl text-sm   hover:bg-slate-600 sm:px-5 px-9 sm:py-5 py-5 rounded-md"
+                href="<?php echo site_url('Transaction_umum');?>"><i class="fa-sharp fa-solid fa-cart-plus"></i> TAMBAH
+                TRANSAKSI UMUM</a>
+        </div>
+        <div class="sm:flex mt-10">
+            <a class="bg-dark text-white ml-3 sm:text-xl text-sm   hover:bg-slate-600 px-8 sm:py-5 py-5 rounded-md"
+                href="<?php echo site_url('Transaction_material');?>"><i class="fa-sharp fa-solid fa-cart-plus"></i>
+                TAMBAH
+                TRANSAKSI MATERIAL</a>
+        </div>
+        <div class="sm:flex mt-10">
+            <a class="bg-dark text-white ml-3 sm:text-xl text-sm  hover:bg-slate-600 px-5 sm:py-5 py-5 rounded-md"
+                href="<?php echo site_url('Transaction_distributor');?>"><i class="fa-sharp fa-solid fa-cart-plus"></i>
+                TAMBAH
+                TRANSAKSI DISTRIBUTOR</a>
         </div>
     </div>
     <div class="overflow-x-scroll">
         <table class=" w-[600px]  sm:w-full sm:mt-5">
-            <div class="p-3 w-full sm:bg-dark">
+            <div class="p-3 w-full ">
                 <thead class="bg-blue-400">
                     <tr class="text-[12px] sm:text-lg">
                         <th class="py-3 ">No</th>

@@ -20,6 +20,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 class="absolute overflow-hidden flex sm:w-[99%] sm:bg-dark  h-[10px] sm:h-[350px] rounded-md border-white shadow-md">
             </div>
 
+
+            <div>
+                <button class="absolute ml-[950px] mt-3 text-white bg-yellow-300 px-5 py-2"><a
+                        href="<?= base_url() ?>Auth/logout">LOGOUT</a></button>
+            </div>
             <img class="w-[100px] sm:w-[300px] mr-3 -mt-5 sm:h-[300px] h-[100px] sm:absolute z-10 sm:ml-[1000px] sm:-mt-14 "
                 src="<?= base_url() ?>/dist/img/abk3.png" alt="">
             <img class="sm:flex hidden gambar sm:ml-[30px] sm:w-[500px] w-[100px] h-[100px] sm:h-[500px]"
