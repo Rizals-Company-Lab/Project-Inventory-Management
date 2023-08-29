@@ -20,7 +20,7 @@ class Auth extends CI_Controller
 
             redirect('Home');
         }
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
         $data['error'] = '';
 
 

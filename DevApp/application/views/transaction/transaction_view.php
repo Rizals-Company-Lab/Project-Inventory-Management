@@ -14,18 +14,21 @@
     <div class="text-center sm:flex">
         <div class="sm:flex mt-10">
             <a class="bg-dark text-white ml-3 sm:text-xl text-sm   hover:bg-slate-600 sm:px-5 px-9 sm:py-5 py-5 rounded-md"
-                href="<?php echo site_url('Transaction_umum');?>"><i class="fa-sharp fa-solid fa-cart-plus"></i> TAMBAH
+                href="<?php echo site_url('Transaction_umum/add_new_transaction'); ?>"><i
+                    class="fa-sharp fa-solid fa-cart-plus"></i> TAMBAH
                 TRANSAKSI UMUM</a>
         </div>
         <div class="sm:flex mt-10">
             <a class="bg-dark text-white ml-3 sm:text-xl text-sm   hover:bg-slate-600 px-8 sm:py-5 py-5 rounded-md"
-                href="<?php echo site_url('Transaction_material');?>"><i class="fa-sharp fa-solid fa-cart-plus"></i>
+                href="<?php echo site_url('Transaction_material/add_new_transaction'); ?>"><i
+                    class="fa-sharp fa-solid fa-cart-plus"></i>
                 TAMBAH
                 TRANSAKSI MATERIAL</a>
         </div>
         <div class="sm:flex mt-10">
             <a class="bg-dark text-white ml-3 sm:text-xl text-sm  hover:bg-slate-600 px-5 sm:py-5 py-5 rounded-md"
-                href="<?php echo site_url('Transaction_distributor');?>"><i class="fa-sharp fa-solid fa-cart-plus"></i>
+                href="<?php echo site_url('Transaction_distributor/add_new_transaction'); ?>"><i
+                    class="fa-sharp fa-solid fa-cart-plus"></i>
                 TAMBAH
                 TRANSAKSI DISTRIBUTOR</a>
         </div>
@@ -43,45 +46,51 @@
                     </tr>
                 </thead>
                 <?php
-            $count = $row + 1;
-            foreach ($transaction->result() as $singleView): 
-             ?>
-                <tbody class="">
-                    <tr
-                        class="cursor-pointer text-[12px] sm:text-lg text-center bg-white py-2 group-hover:text-white hover:bg-slate-400 duration-300 group">
-                        <th class="kolomhover"><?= $count; ?></th>
-                        <td class="kolomhover "><?= $singleView->buyerName ?></td>
-                        <td class="kolomhover  "><?= $singleView->orderTimestamp ?></td>
-                        <td class="kolomhover ">
-                            <?= ($singleView->paymentStatus == 1) ? 'Done' : 'Pending' ?>
-                        </td>
-                        <td class=" p-1 text-white flex justify-evenly mt-1">
+                $count = $row + 1;
+                foreach ($transaction->result() as $singleView):
+                    ?>
+                    <tbody class="">
+                        <tr
+                            class="cursor-pointer text-[12px] sm:text-lg text-center bg-white py-2 group-hover:text-white hover:bg-slate-400 duration-300 group">
+                            <th class="kolomhover">
+                                <?= $count; ?>
+                            </th>
+                            <td class="kolomhover ">
+                                <?= $singleView->buyerName ?>
+                            </td>
+                            <td class="kolomhover  ">
+                                <?= $singleView->orderTimestamp ?>
+                            </td>
+                            <td class="kolomhover ">
+                                <?= ($singleView->paymentStatus == 1) ? 'Done' : 'Pending' ?>
+                            </td>
+                            <td class=" p-1 text-white flex justify-evenly mt-1">
 
-                            <form action="<?= site_url('transaction/order_detail'); ?>" method="post">
-                                <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
-                                    class="bg-blue-600 rounded-md px-3 py-1 shadow-md hover:bg-blue-900"><i
-                                        class="fa-solid fa-circle-info"></i> Details</button>
-                            </form>
-                            <form action="<?= site_url('transaction/get_update'); ?>" method="post">
-                                <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
-                                    class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"><i
-                                        class="fa-regular fa-pen-to-square"></i> Update</button>
-                            </form>
-                            <form action="<?= site_url('transaction/delete_order'); ?>" method="post">
-                                <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
-                                    onclick="return confirm('Anda yakin ingin delete <?= $singleView->idOrder ?>')"
-                                    class="bg-red-700 rounded-md px-3 py-1 shadow-md hover:bg-red-900"><i
-                                        class="fa-solid fa-trash-can"></i> Delete</button>
-                            </form>
-                            <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
+                                <form action="<?= site_url('transaction/order_detail'); ?>" method="post">
+                                    <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                        class="bg-blue-600 rounded-md px-3 py-1 shadow-md hover:bg-blue-900"><i
+                                            class="fa-solid fa-circle-info"></i> Details</button>
+                                </form>
+                                <form action="<?= site_url('transaction/get_update'); ?>" method="post">
+                                    <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                        class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"><i
+                                            class="fa-regular fa-pen-to-square"></i> Update</button>
+                                </form>
+                                <form action="<?= site_url('transaction/delete_order'); ?>" method="post">
+                                    <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                        onclick="return confirm('Anda yakin ingin delete <?= $singleView->idOrder ?>')"
+                                        class="bg-red-700 rounded-md px-3 py-1 shadow-md hover:bg-red-900"><i
+                                            class="fa-solid fa-trash-can"></i> Delete</button>
+                                </form>
+                                <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             onclick="insertDataPesan(<?= $singleView->idOrder ?>)">Update</button>
 
                         <button class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
                             onclick="insertDataPesan(<?= $singleView->idOrder ?>)">Details</button> -->
-                        </td>
-                    </tr>
-                    <?php 
-                $count++;
+                            </td>
+                        </tr>
+                        <?php
+                        $count++;
                 endforeach; ?>
                 </tbody>
             </div>

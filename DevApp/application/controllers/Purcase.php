@@ -120,7 +120,7 @@ class Purcase extends CI_Controller
 
     public function update_purcase()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
 
         $idPurcase = $this->input->post('idPurcase');
         $SKU = $this->input->post('SKU');
@@ -138,7 +138,7 @@ class Purcase extends CI_Controller
 
     public function save_purcase()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
 
         $SKU = $this->input->post('SKU');
         $buyingPrice = $this->input->post('buyingPrice');

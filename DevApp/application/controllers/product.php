@@ -94,7 +94,7 @@ class Product extends CI_Controller
 
     public function save_product()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
 
         $SKU = $this->input->post('SKU');
         $productName = $this->input->post('productName');
@@ -112,7 +112,7 @@ class Product extends CI_Controller
 
     public function get_update()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
 
         $SKU = $this->input->post('SKU');
         $data['product'] = $this->Product_model->get_product_ByID($SKU);
@@ -130,7 +130,7 @@ class Product extends CI_Controller
 
     public function update_product()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
 
         $SKU = $this->input->post('SKU');
         $productName = $this->input->post('productName');
