@@ -109,11 +109,9 @@ class Purcase extends CI_Controller
         $data['purcase'] = $this->Purcase_model->get_purcase_by_id($idPurcase);
 
         if ($this->session->userdata('login_id') == 'admin') {
-
             $this->load->view('nav/navbar.php');
         } else {
             $this->load->view('nav/navbar_kasir.php');
-
         }
         $this->load->view('purcase/update_purcasing_view.php', $data);
     }

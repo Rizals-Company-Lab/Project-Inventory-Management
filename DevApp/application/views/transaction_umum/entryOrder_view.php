@@ -20,10 +20,15 @@
                     type="text" name="bankAccountNumber" id="bankAccountNumber">
             </div>
         </div>
+        <div class="mb-3">
+            <label for="productSearch" class="font-bold sm:text-lg text-base">Cari Produk:</label>
+            <input type="text" id="productSearch"
+                class="w-full bg-gray-200 text-gray-700 border border-blue-500 rounded sm:py-3 py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+        </div>
 
         <div id="allContent">
             <div class="overflow-x-scroll">
-                <table class=" w-[500px] sm:w-full mt-5">
+                <table id="productTable" class=" w-[500px] sm:w-full mt-5">
                     <div class="p-3 w-full sm:bg-dark">
                         <thead class="bg-blue-400">
                             <tr class="text-[12px] sm:text-xl">
@@ -38,39 +43,42 @@
                         <tbody>
 
                             <?php foreach ($product->result() as $singleView): ?>
-                            <tr
-                                class="cursor-pointer text-[10px] sm:text-xl bg-white py-2  hover:bg-slate-200 duration-300">
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->SKU ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->productName ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->productDescription ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->sellingPrice ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->sisa_stock ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?php
+                                <tr
+                                    class="cursor-pointer text-[10px] sm:text-xl bg-white py-2  hover:bg-slate-200 duration-300">
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->SKU ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->productName ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->productDescription ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->sellingPrice ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->sisa_stock ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?php
 
 
                                         $isSKUExist = in_array($singleView->SKU, array_column($checkout->result(), 'SKU'));
 
                                         ?>
-                                    <button
-                                        class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
-                                        <?= $isSKUExist && $singleView->sisa_stock > 0 ? 'disabled' : '' ?>
-                                        type="button"
-                                        onclick="insertDataPesan('<?= $singleView->SKU ?>')">Pesan</button>
-                                </td>
-                            </tr>
+                                        <button
+                                            class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
+                                            <?= $isSKUExist && $singleView->sisa_stock > 0 ? 'disabled' : '' ?> type="button"
+                                            onclick="insertDataPesan('<?= $singleView->SKU ?>')">Pesan</button>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
+
                         </tbody>
+                        <div id="pagination" class="mt-3">
+                            <!-- ... konten paginasi ... -->
+                        </div>
                     </div>
                 </table>
             </div>
@@ -92,39 +100,39 @@
                             <tbody>
 
                                 <?php foreach ($checkout->result() as $row): ?>
-                                <tr>
+                                    <tr>
 
-                                    <input type="hidden" name="SKU<?= $row->idCheckout ?>"
-                                        id="SKU<?= $row->idCheckout ?>" value="<?= $row->idCheckout ?>">
+                                        <input type="hidden" name="SKU<?= $row->idCheckout ?>"
+                                            id="SKU<?= $row->idCheckout ?>" value="<?= $row->idCheckout ?>">
 
-                                    <input type="hidden" name="sellingPrice<?= $row->idCheckout ?>"
-                                        id="sellingPrice<?= $row->idCheckout ?>" value="<?= $row->sellingPrice ?>">
-                                    <!-- <?= $row->sellingPrice ?> -->
-                                    <td class="border px-3 py-2 shadow-sm">
-                                        <!-- <input type="hidden" name="productName<?= $row->productName ?>"
+                                        <input type="hidden" name="sellingPrice<?= $row->idCheckout ?>"
+                                            id="sellingPrice<?= $row->idCheckout ?>" value="<?= $row->sellingPrice ?>">
+                                        <!-- <?= $row->sellingPrice ?> -->
+                                        <td class="border px-3 py-2 shadow-sm">
+                                            <!-- <input type="hidden" name="productName<?= $row->productName ?>"
                                         id="productName<?= $row->productName ?>" value="<?= $row->productName ?>"> -->
-                                        <?= $row->productName ?>
-                                    </td>
-                                    <td class="border px-3 py-2 shadow-sm">
-                                        <?= $row->productDescription ?>
-                                    </td>
-                                    <td class="border px-3 py-2 shadow-sm">
+                                            <?= $row->productName ?>
+                                        </td>
+                                        <td class="border px-3 py-2 shadow-sm">
+                                            <?= $row->productDescription ?>
+                                        </td>
+                                        <td class="border px-3 py-2 shadow-sm">
 
-                                        <input type="number" name="qtyOrder<?= $row->idCheckout ?>" value="1" min="1"
-                                            max="<?php foreach ($product->result() as $singleView):
+                                            <input type="number" name="qtyOrder<?= $row->idCheckout ?>" value="1" min="1"
+                                                max="<?php foreach ($product->result() as $singleView):
                                                     if ($row->SKU == $singleView->SKU) {
                                                         echo $singleView->sisa_stock;
                                                     }
                                                 endforeach; ?>">
-                                    </td>
-                                    <td class="border px-3 py-2 shadow-sm">
+                                        </td>
+                                        <td class="border px-3 py-2 shadow-sm">
 
-                                        <button
-                                            class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
-                                            type="button" onclick="deleteDataPesan('<?= $row->SKU ?>')">-</button>
-                                    </td>
+                                            <button
+                                                class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
+                                                type="button" onclick="deleteDataPesan('<?= $row->SKU ?>')">-</button>
+                                        </td>
 
-                                </tr>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </div>
@@ -142,51 +150,116 @@
 
 <script src="<?= base_url() ?>dist/js/jquery.min.js"></script>
 <script type="text/javascript">
-function insertDataPesan(SKU) {
-    $.ajax({
-        url: "<?= base_url('transaction_umum/insert_checkout') ?>",
-        type: "post",
-        data: {
-            SKU: SKU
-        },
-        success: function(response) {
-            console.log(response);
-            $("#allContent").html(response);
-            // $.ajax({
-            //     type: "GET",
-            //     url: "dist/ajax/ajaxEntry.php",
-            //     data: "",
-            //     success: function (data) {
-            //         $("#allContent").html(data);
-            //         operasi();
-            //     }
-            // });
-        }
-    });
-}
+    $(document).ready(function () {
+        var products = <?= json_encode($product->result()); ?>;
+        var itemsPerPage = 5;
+        var currentPage = 1;
 
-function deleteDataPesan(SKU) {
-    $.ajax({
-        url: "<?= base_url('transaction_umum/delete_checkout') ?>",
-        type: "post",
-        data: {
-            SKU: SKU
-        },
-        success: function(response) {
-            console.log(response);
-            $("#allContent").html(response);
-            // $.ajax({
-            //     type: "GET",
-            //     url: "dist/ajax/ajaxEntry.php",
-            //     data: "",
-            //     success: function (data) {
-            //         $("#allContent").html(data);
-            //         operasi();
-            //     }
-            // });
+        renderTable();
+
+        $('#productSearch').on('input', function () {
+            var searchTerm = $(this).val().toLowerCase();
+            filterProducts(searchTerm);
+            renderPagination();
+        });
+
+        function filterProducts(searchTerm) {
+            var filteredProducts = products.filter(function (product) {
+                return (
+                    product.productName.toLowerCase().includes(searchTerm) ||
+                    product.productDescription.toLowerCase().includes(searchTerm)
+                );
+            });
+            renderTable(filteredProducts);
+        }
+
+        function renderTable(productsToRender) {
+            var table = $('#productTable tbody');
+            table.empty();
+
+            var startIdx = (currentPage - 1) * itemsPerPage;
+            var endIdx = startIdx + itemsPerPage;
+
+            var productsToDisplay = productsToRender || products.slice(startIdx, endIdx);
+
+            for (var i = 0; i < productsToDisplay.length; i++) {
+                var product = productsToDisplay[i];
+                var row = '<tr>' +
+                    '<td>' + product.productName + '</td>' +
+                    '<td>' + product.productDescription + '</td>' +
+                    '<td>' + product.sellingPrice + '</td>' +
+                    '<td>' + product.sisa_stock + '</td>' +
+                    '<td><button class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900" onclick="insertDataPesan(\'' + product.SKU + '\')">Pesan</button></td>' +
+                    '</tr>';
+                table.append(row);
+            }
+        }
+
+        function renderPagination() {
+            var totalPages = Math.ceil(products.length / itemsPerPage);
+            var pagination = $('#pagination');
+            pagination.empty();
+
+            for (var i = 1; i <= totalPages; i++) {
+                var pageBtn = $('<button class="mr-2 bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-700">' + i + '</button>');
+                pageBtn.click(function () {
+                    currentPage = parseInt($(this).text());
+                    renderTable();
+                    renderPagination();
+                });
+                pagination.append(pageBtn);
+            }
         }
     });
-}
+</script>
+
+
+<script type="text/javascript">
+    function insertDataPesan(SKU) {
+        $.ajax({
+            url: "<?= base_url('transaction_umum/insert_checkout') ?>",
+            type: "post",
+            data: {
+                SKU: SKU
+            },
+            success: function (response) {
+                console.log(response);
+                $("#allContent").html(response);
+                // $.ajax({
+                //     type: "GET",
+                //     url: "dist/ajax/ajaxEntry.php",
+                //     data: "",
+                //     success: function (data) {
+                //         $("#allContent").html(data);
+                //         operasi();
+                //     }
+                // });
+            }
+        });
+    }
+
+    function deleteDataPesan(SKU) {
+        $.ajax({
+            url: "<?= base_url('transaction_umum/delete_checkout') ?>",
+            type: "post",
+            data: {
+                SKU: SKU
+            },
+            success: function (response) {
+                console.log(response);
+                $("#allContent").html(response);
+                // $.ajax({
+                //     type: "GET",
+                //     url: "dist/ajax/ajaxEntry.php",
+                //     data: "",
+                //     success: function (data) {
+                //         $("#allContent").html(data);
+                //         operasi();
+                //     }
+                // });
+            }
+        });
+    }
 </script>
 
 </html>
