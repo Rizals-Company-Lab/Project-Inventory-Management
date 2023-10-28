@@ -16,6 +16,8 @@ class Product_model extends CI_Model
         // $this->db->join('(SELECT SKU, SUM(qtyOrder) AS terjual FROM tbl_checkout WHERE idOrder IS NOT NULL GROUP BY SKU) t', 't.SKU = s.SKU', 'left');
         // $this->db->join('tbl_product p', 's.SKU = p.SKU', 'left');
 
+
+
         $subquery_s = $this->db->select('SKU, SUM(qtyPurcase) AS stock')
             ->from('tbl_purcase')
             ->group_by('SKU')
@@ -53,7 +55,7 @@ class Product_model extends CI_Model
         return $result;
     }
 
-    public function get_stock_product_limit($rowno, $rowperpage, $searchINVENTTRANSID, $searchNAME, $searchITEMNAME)
+    public function get_stock_product_limit($rowno, $rowperpage, $searchSKU, $searchProduct, $searchITEMNAME)
     {
         // $this->db->select('TPC.SKU, productName, productDescription, sellingPrice, SUM(qtyPurcase) AS QTY');
         // $this->db->from('tbl_purcase AS TPC');
@@ -66,6 +68,8 @@ class Product_model extends CI_Model
         // $this->db->join('(SELECT SKU, SUM(qtyOrder) AS terjual FROM tbl_checkout WHERE idOrder IS NOT NULL GROUP BY SKU) t', 't.SKU = s.SKU', 'left');
         // $this->db->join('tbl_product p', 's.SKU = p.SKU', 'left');
 
+
+        // die;
         $subquery_s = $this->db->select('SKU, SUM(qtyPurcase) AS stock')
             ->from('tbl_purcase')
             ->group_by('SKU')
@@ -87,7 +91,13 @@ class Product_model extends CI_Model
 
         // $query = $this->db->get();
 
+        if ($searchSKU) {
+            $this->db->like('p.SKU', $searchSKU);
+        }
 
+        if ($searchProduct) {
+            $this->db->like('p.productName', $searchProduct);
+        }
 
 
         // $this->db->join('vendtable AS V', 'PT.INVOICEACCOUNT = V.ACCOUNTNUM');
@@ -104,7 +114,7 @@ class Product_model extends CI_Model
     }
 
 
-    public function get_product_count($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
+    public function get_product_count($searchSKU = "", $searchProduct = "", $ITEMNAME = "")
     {
         $this->db->select('*');
         $this->db->from('tbl_product');
@@ -112,6 +122,13 @@ class Product_model extends CI_Model
         // $this->db->like('INVENTTRANSID', $INVENTTRANSID);
         // $this->db->like('NAME', $NAME);
         // $this->db->like('ITEMNAME', $ITEMNAME);
+        if ($searchSKU) {
+            $this->db->like('SKU', $searchSKU);
+        }
+
+        if ($searchProduct) {
+            $this->db->like('productName', $searchProduct);
+        }
 
         $result = $this->db->count_all_results();
 

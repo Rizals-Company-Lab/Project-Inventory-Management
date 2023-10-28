@@ -17,22 +17,23 @@ class Product extends CI_Controller
     {
         $testVar = "";
         //search text
-        $searchINVENTTRANSID = "";
-        $searchNAME = "";
+        $searchSKU = "";
+        $searchProduct = "";
         $searchITEMNAME = "";
+        var_dump($this->input->post());
         if ($this->input->post('search') != '') {
-            $searchINVENTTRANSID = $this->input->post('searchINVENTTRANSID');
-            $searchNAME = $this->input->post('searchNAME');
+            $searchSKU = $this->input->post('searchSKU');
+            $searchProduct = $this->input->post('searchProduct');
             $searchITEMNAME = $this->input->post('searchITEMNAME');
-            $this->session->set_userdata("searchINVENTTRANSID", $searchINVENTTRANSID);
-            $this->session->set_userdata("searchNAME", $searchNAME);
+            $this->session->set_userdata("searchSKU", $searchSKU);
+            $this->session->set_userdata("searchProduct", $searchProduct);
             $this->session->set_userdata("searchITEMNAME", $searchITEMNAME);
         } else {
-            if ($this->session->userdata('searchINVENTTRANSID') != "") {
-                $searchINVENTTRANSID = $this->session->userdata('searchINVENTTRANSID');
+            if ($this->session->userdata('searchSKU') != "") {
+                $searchSKU = $this->session->userdata('searchSKU');
             }
-            if ($this->session->userdata('searchNAME') != "") {
-                $searchNAME = $this->session->userdata('searchNAME');
+            if ($this->session->userdata('searchProduct') != "") {
+                $searchProduct = $this->session->userdata('searchProduct');
             }
             if ($this->session->userdata('searchITEMNAME') != "") {
                 $searchITEMNAME = $this->session->userdata('searchITEMNAME');
@@ -48,7 +49,7 @@ class Product extends CI_Controller
 
         // Pagination Configuration
         // All record count
-        $config['total_rows'] = $this->Product_model->get_product_count($searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $config['total_rows'] = $this->Product_model->get_product_count($searchSKU, $searchProduct, $searchITEMNAME);
         $config['base_url'] = base_url() . 'product/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
@@ -59,12 +60,12 @@ class Product extends CI_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         // Get record
-        $data['product'] = $this->Product_model->get_stock_product_limit($row_no, $row_per_page, $searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $data['product'] = $this->Product_model->get_stock_product_limit($row_no, $row_per_page, $searchSKU, $searchProduct, $searchITEMNAME);
 
         $data['row'] = $row_no;
 
-        $data['searchINVENTTRANSID'] = $searchINVENTTRANSID;
-        $data['searchNAME'] = $searchNAME;
+        $data['searchSKU'] = $searchSKU;
+        $data['searchProduct'] = $searchProduct;
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
 
