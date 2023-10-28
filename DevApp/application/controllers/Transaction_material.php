@@ -72,7 +72,7 @@ class transaction_material extends CI_Controller
             $this->load->view('nav/navbar_kasir.php');
 
         }
-        $this->load->view('transaction_material/transaction_view.php', $data);
+        $this->load->view('transaction/transaction_view.php', $data);
         // $this->load->view('transaction_material/transaction_view', $data);
     }
 
@@ -176,7 +176,7 @@ class transaction_material extends CI_Controller
 
     public function update_order()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
 
         $idOrder = $this->input->post('idOrder');
         $buyerName = $this->input->post('buyerName');

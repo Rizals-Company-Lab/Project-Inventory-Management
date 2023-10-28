@@ -135,7 +135,7 @@ class Transaction extends CI_Controller
 
     public function save_transaction()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
         // $idOrder = $this->Transaction_model->get_new_idOrder();
         $this->Transaction_model->save_transaction($this->input->post(), 'sellingPrice');
 
@@ -175,7 +175,7 @@ class Transaction extends CI_Controller
 
     public function update_order()
     {
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
 
         $idOrder = $this->input->post('idOrder');
         $buyerName = $this->input->post('buyerName');
