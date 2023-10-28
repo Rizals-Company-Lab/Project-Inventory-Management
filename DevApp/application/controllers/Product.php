@@ -15,6 +15,7 @@ class Product extends CI_Controller
 
     public function index($row_no = 0)
     {
+        $testVar = "";
         //search text
         $searchINVENTTRANSID = "";
         $searchNAME = "";
