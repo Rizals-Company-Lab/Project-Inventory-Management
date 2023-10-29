@@ -33,6 +33,34 @@
                 TRANSAKSI DISTRIBUTOR</a>
         </div>
     </div>
+    <form action="<?= base_url('Transaction/index') ?>" method="post">
+        <label for="default-search">Pembeli</label>
+        <div>
+
+            <input type="search" id="searchBuyer" name="searchBuyer" placeholder="Cari Buyer"
+                value="<?= (isset($searchBuyer)) ? $searchBuyer : '' ?>">
+        </div>
+        <label for="default-search">Tanggal</label>
+        <div>
+
+            <input type="date" id="searchDate" name="searchDate" placeholder="Cari Tanggal"
+                value="<?= (isset($searchDate)) ? $searchDate : '' ?>">
+        </div>
+        <label for="default-search">Status Pembayaran</label>
+        <div>
+            <select id="searchStatus" name="searchStatus">
+                <option value="" <?php echo (isset($searchStatus) && $searchStatus == '') ? 'selected' : ''; ?>>Semua
+                </option>
+                <option value="0" <?php echo (isset($searchStatus) && $searchStatus == '0') ? 'selected' : ''; ?>>Pending
+                </option>
+                <option value="1" <?php echo (isset($searchStatus) && $searchStatus == '1') ? 'selected' : ''; ?>>
+                    Done</option>
+            </select>
+        </div>
+
+        <button type="submit" value="search" id="search" name="search"
+            class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    </form>
     <div class="overflow-x-scroll">
         <table class=" w-[600px]  sm:w-full sm:mt-5">
             <div class="p-3 w-full ">
@@ -94,7 +122,13 @@
                 endforeach; ?>
                 </tbody>
             </div>
+
         </table>
+        <div>
+            <p>Total Transaksi =
+                <?= $totalRow ?>
+            </p>
+        </div>
     </div>
     <div class="flex justify-center mt-4">
         <!-- Pagination -->
