@@ -19,6 +19,29 @@
 
         </div>
     </div>
+    <form action="<?= base_url('Purcase/index') ?>" method="post">
+        <label for="default-search">SKU</label>
+        <div>
+
+            <input type="text" id="searchSKU" name="searchSKU" placeholder="Cari SKU"
+                value="<?= (isset($searchSKU)) ? $searchSKU : '' ?>">
+        </div>
+        <label for="default-search">Barang</label>
+        <div>
+
+            <input type="text" id="searchProduct" name="searchProduct" placeholder="Cari Barang"
+                value="<?= (isset($searchProduct)) ? $searchProduct : '' ?>">
+        </div>
+        <label for="default-search">Tanggal</label>
+        <div>
+
+            <input type="date" id="searchDate" name="searchDate" placeholder="Cari Tanggal"
+                value="<?= (isset($searchDate)) ? $searchDate : '' ?>">
+        </div>
+
+        <button type="submit" value="search" id="search" name="search"
+            class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    </form>
     <div class="overflow-x-scroll">
         <table class=" w-[600px]  sm:w-full sm:mt-5">
             <div class="p-3 w-full sm:bg-dark">
