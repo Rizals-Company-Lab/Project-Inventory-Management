@@ -37,7 +37,7 @@
         <label for="default-search">Pembeli</label>
         <div>
 
-            <input type="search" id="searchBuyer" name="searchBuyer" placeholder="Cari Buyer"
+            <input type="text" id="searchBuyer" name="searchBuyer" placeholder="Cari Buyer"
                 value="<?= (isset($searchBuyer)) ? $searchBuyer : '' ?>">
         </div>
         <label for="default-search">Tanggal</label>
