@@ -1,7 +1,7 @@
 <body>
     <div class=" w-full mx-auto  bg-blue-200 mt-3 ml-1 mr-1 h-full border rounded-md shadow-md ">
         <form
-            class="sm:mx-auto overflow-hidde  bg-white sm:mt-10 relative  w-auto mt-6 h-[90%] sm:w-[700px] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm shadow-white rounded-md group"
+            class="sm:mx-auto overflow-hidde  bg-white sm:mt-5 relative  w-auto mt-6 h-[90%] sm:w-[700px] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm shadow-white rounded-md group"
             action="<?= site_url('product/save_product'); ?>" method="post">
             <h1 class="sm:text-xl text-base font-bold text-center py-3 bg-bg2">TAMBAH BARANG BARU</h1>
             <br>
