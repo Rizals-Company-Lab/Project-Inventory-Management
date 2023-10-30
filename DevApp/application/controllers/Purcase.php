@@ -147,7 +147,7 @@ class Purcase extends CI_Controller
         $qtyPurcase = $this->input->post('qtyPurcase');
         $priceAmount = $buyingPrice * $qtyPurcase;
         // $purcaseTimestamp = $this->input->post('purcaseTimestamp');
-        $purcaseTimestamp = $currentDateTime;
+        $purcaseTimestamp = NULL;
         $this->Purcase_model->save_purcase($SKU, $buyingPrice, $qtyPurcase, $priceAmount, $purcaseTimestamp);
 
         // $data['product'] = $this->Product_model->get_product();
