@@ -138,4 +138,111 @@ class Report_model extends CI_Model
     }
 
 
+    public function get_report_details_byProduct($rowno, $rowperpage, $dateStart = "", $dateEnd = "", $ITEMNAME = "")
+    {
+        // SELECT tbl_product.productName, tbl_checkout.SKU, SUM(qtyOrder) grandTotalQtyAmount, SUM(priceAmount) grandTotalSellingAmount FROM `tbl_order` JOIN tbl_checkout ON tbl_order.idOrder = tbl_checkout.idOrder JOIN tbl_product ON tbl_product.SKU = tbl_checkout.SKU GROUP BY tbl_checkout.SKU
+
+        $this->db->select('TPD.productName, TC.SKU, SUM(qtyOrder) AS grandTotalQtyAmount, SUM(priceAmount) AS grandTotalSellingAmount ');
+        $this->db->from('tbl_order AS TO');
+        $this->db->join('tbl_checkout AS TC', 'TO.idOrder = TC.idOrder');
+        $this->db->join('tbl_product AS TPD', 'TPD.SKU = TC.SKU');
+        if ($dateStart != "" && $dateEnd != "") {
+            $formattedStartDate = date('Y-m-d', strtotime($dateStart));
+            $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
+            $startDate = $formattedStartDate . ' 00:00:00';
+            $endDate = $formattedEndDate . ' 23:59:59';
+            $this->db->where("orderTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
+        }
+        $this->db->group_by('SKU');
+        $result = $this->db->get();
+
+
+
+
+        // $this->db->like('INVENTTRANSID', $INVENTTRANSID);
+        // $this->db->like('NAME', $NAME);
+        // $this->db->like('ITEMNAME', $ITEMNAME);
+
+
+        // $this->db->order_by('INVENTTRANSID', 'DESC');
+        return $result;
+    }
+
+    public function get_report_count_details_byProduct($dateStart = "", $dateEnd = "", $ITEMNAME = "")
+    {
+        // $this->db->select('*');
+        // $this->db->from('tbl_purcase');
+
+        // // $this->db->like('INVENTTRANSID', $INVENTTRANSID);
+        // // $this->db->like('NAME', $NAME);
+        // // $this->db->like('ITEMNAME', $ITEMNAME);
+
+        // $result = $this->db->count_all_results();
+
+
+        $this->db->select('TPD.productName, TC.SKU, SUM(qtyOrder) AS grandTotalQtyAmount, SUM(priceAmount) AS grandTotalSellingAmount ');
+        $this->db->from('tbl_order AS TO');
+        $this->db->join('tbl_checkout AS TC', 'TO.idOrder = TC.idOrder');
+        $this->db->join('tbl_product AS TPD', 'TPD.SKU = TC.SKU');
+        if ($dateStart != "" && $dateEnd != "") {
+            $formattedStartDate = date('Y-m-d', strtotime($dateStart));
+            $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
+            $startDate = $formattedStartDate . ' 00:00:00';
+            $endDate = $formattedEndDate . ' 23:59:59';
+            $this->db->where("orderTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
+        }
+        $this->db->group_by('SKU');
+        $result = $this->db->count_all_results();
+
+        return $result;
+    }
+
+
+    public function get_purcasing_details($dateStart = "", $dateEnd = "", $ITEMNAME = "")
+    {
+        // SELECT SUM(qtyPurcase) AS grandTotalQtyPurcase, SUM(priceAmount) AS grandTotalPriceAmount FROM `tbl_purcase`;
+        $this->db->select('SUM(qtyPurcase) AS grandTotalQtyPurcase, SUM(priceAmount) AS grandTotalPricePurcaseAmount');
+
+
+
+        if ($dateStart != "" && $dateEnd != "") {
+            $formattedStartDate = date('Y-m-d', strtotime($dateStart));
+            $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
+            $startDate = $formattedStartDate . ' 00:00:00';
+            $endDate = $formattedEndDate . ' 23:59:59';
+            $this->db->where("purcaseTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
+        }
+
+
+
+        $result = $this->db->get('tbl_purcase');
+
+        return $result;
+    }
+
+
+
+    public function get_order_details($dateStart = "", $dateEnd = "", $ITEMNAME = "")
+    {
+        // SELECT SUM(qtyOrder) AS grandTotalQtyOrder, SUM(priceAmount) AS grandTotalPriceOrderAmount FROM `tbl_order` JOIN tbl_checkout ON tbl_order.idOrder = tbl_checkout.idOrder;
+        $this->db->select('SUM(qtyOrder) AS grandTotalQtyOrder, SUM(priceAmount) AS grandTotalPriceOrderAmount');
+        $this->db->from('tbl_order AS TO');
+        $this->db->join('tbl_checkout AS TC', 'TO.idOrder = TC.idOrder');
+
+        if ($dateStart != "" && $dateEnd != "") {
+            $formattedStartDate = date('Y-m-d', strtotime($dateStart));
+            $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
+            $startDate = $formattedStartDate . ' 00:00:00';
+            $endDate = $formattedEndDate . ' 23:59:59';
+            $this->db->where("orderTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
+        }
+
+
+
+        $result = $this->db->get();
+
+        return $result;
+    }
+
+
 }
