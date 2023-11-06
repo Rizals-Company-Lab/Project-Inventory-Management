@@ -38,8 +38,11 @@
 
                                 ?>
                                 <button class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
-                                    <?= $isSKUExist && $singleView->sisa_stock > 0 ? 'disabled' : '' ?> type="button"
-                                    onclick="insertDataPesan('<?= $singleView->SKU ?>')">Pesan</button>
+                                    <?= $isSKUExist ? 'disabled' : ($singleView->sisa_stock > 0 ? '' : 'disabled') ?>
+                                    type="button" onclick="insertDataPesan('<?= $singleView->SKU ?>')">
+
+                                    <?= $isSKUExist ? 'Sudah dipesan' : ($singleView->sisa_stock > 0 ? 'Pesan' : 'Stock Kosong') ?>
+                                </button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
