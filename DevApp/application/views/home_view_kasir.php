@@ -97,7 +97,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
             <!-- card3 -->
-            <div
+            <!-- <div
                 class="sm:ml-3 flex sm:w-96 hover:-mt-3 w-auto flex-col rounded-xl mx-auto mb-3 hover:backdrop-blur-sm hover:bg-white/95  bg-white bg-clip-border text-gray-700 shadow-md group">
                 <div class="p-6 ">
                     <h5
@@ -119,7 +119,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </button>
                     </a>
                 </div>
-            </div>
+            </div> -->
             <!-- card 4 -->
 
         </div>

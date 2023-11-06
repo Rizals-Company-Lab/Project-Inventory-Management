@@ -11,6 +11,10 @@ class Purcase extends CI_Controller
         $this->load->model('Product_model');
         if (!$this->session->userdata('login_id')) {
             redirect('Auth/login');
+        } else {
+            if ($this->session->userdata('login_id') != 'admin') {
+                redirect('Home');
+            }
         }
     }
 
