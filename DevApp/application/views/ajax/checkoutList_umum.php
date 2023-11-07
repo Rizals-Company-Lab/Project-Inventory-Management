@@ -69,15 +69,15 @@
 
                         </li>
                         <span id="prevPrevCurrent"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"></span>
                         <span id="prevCurrent"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"></span>
                         <span id="currentPage"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-blue-600 bg-blue-100 divide-x-2">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-blue-600 bg-blue-100 divide-x-2"></span>
                         <span id="nextCurrent"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"></span>
                         <span id="nextNextCurrent"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"></span>
                         <li id="nextPage"
                             class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">
                             &raquo;
@@ -91,6 +91,7 @@
                 <button id="nextPage">Next</button> -->
             </div>
             <br>
+
             <div>
                 <h1 class="font-bold sm:text-2xl text-base py-3 bg-bg2 text-center">PEMESANAN</h1>
                 <div class="overflow-x-scroll">
@@ -150,9 +151,8 @@
 
                 </div>
             </div>
-            
-            
+
+
+
 
         </div>
-
-        

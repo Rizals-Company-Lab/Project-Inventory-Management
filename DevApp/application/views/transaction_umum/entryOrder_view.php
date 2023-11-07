@@ -210,246 +210,237 @@
 
 
         </div>
-        <script src="<?= base_url() ?>/dist/js/script.js"></script>
 
-        <script src="<?= base_url() ?>dist/js/jquery.min.js"></script>
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-
-
-
-                // Initialize the display
-
-
-
-
-            });
-
-
-            function test() {
-
-                var currentPage = sessionStorage.getItem('currentPage') || 1;
-
-                console.log("currentPage" + currentPage);
-                var itemsPerPage = 3; // Set the number of items per page
-                // Menghitung jumlah elemen <tr> dalam tabel
-                var jumlahTr = $('#dataProduct tr').length;
-
-                var maxPages = Math.ceil(jumlahTr / itemsPerPage);
-
-                // Menampilkan jumlah <tr> dalam console (bisa diubah sesuai kebutuhan)
-                console.log("Jumlah <tr> dalam tabel: " + maxPages);
-                // Function to update the displayed items based on the current page
-
-
-                function updateDisplay() {
-
-
-                    if (sessionStorage.getItem('searchText')) {
-                        searchProduct()
-                    } else {
-                        console.log("currentPage" + currentPage);
-                        sessionStorage.setItem('currentPage', currentPage);
-                        var startIndex = (currentPage - 1) * itemsPerPage;
-                        var endIndex = startIndex + itemsPerPage;
-
-                        $('#dataProduct tr').hide(); // Hide all rows
-                        $('#dataProduct tr').slice(startIndex, endIndex).show(); // Show the current page items
-                        $('#prevPrevCurrent').text(parseInt(currentPage) - 2); // Update the current page indicator
-                        $('#prevCurrent').text(parseInt(currentPage) - 1); // Update the current page indicator
-                        $('#currentPage').text(parseInt(currentPage)); // Update the current page indicator
-                        $('#nextCurrent').text(parseInt(currentPage) + 1); // Update the current page indicator
-                        $('#nextNextCurrent').text(parseInt(currentPage) + 2); // Update the current page indicator
-
-                        if (currentPage < maxPages) {
-                            $('#nextPage').show()
-
-                        } else {
-                            $('#nextPage').hide()
-                        }
-                        if (currentPage < maxPages - 1) {
-                            $('#nextNextCurrent').show()
-                        } else {
-                            $('#nextNextCurrent').hide()
-                        }
-                        if (currentPage < maxPages) {
-                            $('#nextCurrent').show()
-                        } else {
-                            $('#nextCurrent').hide()
-                        }
-                        if (currentPage > 1) {
-                            $('#prevCurrent').show()
-                        } else {
-                            $('#prevCurrent').hide()
-                        }
-                        if (currentPage > 2) {
-                            $('#prevPrevCurrent').show()
-                        } else {
-                            $('#prevPrevCurrent').hide()
-                        }
-                        if (currentPage > 1) {
-                            $('#prevPage').show()
-                        } else {
-                            $('#prevPage').hide()
-                        }
-                    }
-
-                }
-
-
-                updateDisplay();
-
-                // Pagination - Next Page
-                $('#nextNextCurrent').click(function () {
-                    currentPage = currentPage + 2;
-                    updateDisplay();
-                });
-
-                // Pagination - Previous Page
-                $('#prevPrevCurrent').click(function () {
-                    if (currentPage > 1) {
-                        currentPage = currentPage - 2;
-                        updateDisplay();
-                    }
-                });
-
-                // Pagination - Next Page
-                $('#nextCurrent').click(function () {
-                    currentPage++;
-                    updateDisplay();
-                });
-
-                // Pagination - Previous Page
-                $('#prevCurrent').click(function () {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        updateDisplay();
-                    }
-                });
-
-                // Pagination - Next Page
-                $('#nextPage').click(function () {
-                    currentPage++;
-                    updateDisplay();
-                });
-
-                // Pagination - Previous Page
-                $('#prevPage').click(function () {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        updateDisplay();
-                    }
-                });
-
-
-                $('#search').on('keyup', function (e) {
-                    var searchText = $(this).val().toLowerCase();
-                    var characterCount = searchText.length;
-
-
-
-                    console.log("SDFG tertekan" + characterCount);
-                    if (characterCount <= 0) {
-                        // Remove a specific item from session storage
-                        sessionStorage.removeItem('searchText');
-
-                        console.log("Backspace koso" + characterCount);
-                        $('#pagination').show()
-                        updateDisplay();
-                    } else {
-                        sessionStorage.setItem('searchText', searchText);
-                        searchProduct()
-                    }
-
-                });
-                function searchProduct() {
-
-                    var searchText = sessionStorage.getItem('searchText');
-
-
-
-                    $('#search').val(searchText);
-                    $('#dataProduct tr').hide(); // Hide all rows
-                    $('#pagination').hide()
-                    // Show rows that match the search text
-                    $('#dataProduct tr').filter(function () {
-                        return $(this).text().toLowerCase().includes(searchText);
-                    }).show();
-                }
-            }
-
-            test()
-            $('#loading-container').hide();
-
-            function insertDataPesan(SKU) {
-                $('#loading-container').show();
-                console.log("loadinggggggg");
-                $.ajax({
-                    url: "<?= base_url('transaction_umum/insert_checkout') ?>",
-                    type: "post",
-                    data: {
-                        SKU: SKU
-                    },
-                    success: function (response) {
-                        // console.log(response);
-                        $("#allContent").html(response);
-                        // $.ajax({
-                        //     type: "GET",
-                        //     url: "dist/ajax/ajaxEntry.php",
-                        //     data: "",
-                        //     success: function (data) {
-                        //         $("#allContent").html(data);
-                        //         operasi();
-                        //     }
-                        // });
-                        test();
-                        $('#loading-container').hide();
-                        console.log("loadingg ilabnggg");
-                        // location.reload()
-                    }
-                });
-
-
-                console.log("UPdaterrrt");
-            }
-
-            function deleteDataPesan(SKU) {
-                $('#loading-container').show();
-                console.log("loadinggggggg");
-                $.ajax({
-                    url: "<?= base_url('transaction_umum/delete_checkout') ?>",
-                    type: "post",
-                    data: {
-                        SKU: SKU
-                    },
-                    success: function (response) {
-                        // console.log(response);
-                        $("#allContent").html(response);
-                        // $.ajax({
-                        //     type: "GET",
-                        //     url: "dist/ajax/ajaxEntry.php",
-                        //     data: "",
-                        //     success: function (data) {
-                        //         $("#allContent").html(data);
-                        //         operasi();
-                        //     }
-                        // });
-                        test();
-                        $('#loading-container').hide();
-                        console.log("loadingg ilabnggg");
-                        // location.reload()
-                    }
-                });
-            }
-        </script>
         <button
             class="sm:text-lg text-sm mb-3 sm:font-bold font-semibold mt-3 px-[50px] text-white py-2 w-full rounded-sm bg-blue-500 hover:bg-lime-500"
             type="submit">PESAN SEKARANG</button>
 
     </form>
 </body>
+<script src="<?= base_url() ?>/dist/js/script.js"></script>
 
+<script src="<?= base_url() ?>dist/js/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+
+
+    function test() {
+
+        var currentPage = sessionStorage.getItem('currentPage') || 1;
+
+        console.log("currentPage" + currentPage);
+        var itemsPerPage = 5; // Set the number of items per page
+        // Menghitung jumlah elemen <tr> dalam tabel
+        var jumlahTr = $('#dataProduct tr').length;
+
+        var maxPages = Math.ceil(jumlahTr / itemsPerPage);
+
+        // Menampilkan jumlah <tr> dalam console (bisa diubah sesuai kebutuhan)
+        console.log("Jumlah <tr> dalam tabel: " + maxPages);
+        // Function to update the displayed items based on the current page
+
+
+        function updateDisplay() {
+
+
+            if (sessionStorage.getItem('searchText')) {
+                searchProduct()
+            } else {
+                console.log("currentPage" + currentPage);
+                sessionStorage.setItem('currentPage', currentPage);
+                var startIndex = (currentPage - 1) * itemsPerPage;
+                var endIndex = startIndex + itemsPerPage;
+
+                $('#dataProduct tr').hide(); // Hide all rows
+                $('#dataProduct tr').slice(startIndex, endIndex).show(); // Show the current page items
+                $('#prevPrevCurrent').text(parseInt(currentPage) - 2); // Update the current page indicator
+                $('#prevCurrent').text(parseInt(currentPage) - 1); // Update the current page indicator
+                $('#currentPage').text(parseInt(currentPage)); // Update the current page indicator
+                $('#nextCurrent').text(parseInt(currentPage) + 1); // Update the current page indicator
+                $('#nextNextCurrent').text(parseInt(currentPage) + 2); // Update the current page indicator
+
+                if (currentPage < maxPages) {
+                    $('#nextPage').show()
+
+                } else {
+                    $('#nextPage').hide()
+                }
+                if (currentPage < maxPages - 1) {
+                    $('#nextNextCurrent').show()
+                } else {
+                    $('#nextNextCurrent').hide()
+                }
+                if (currentPage < maxPages) {
+                    $('#nextCurrent').show()
+                } else {
+                    $('#nextCurrent').hide()
+                }
+                if (currentPage > 1) {
+                    $('#prevCurrent').show()
+                } else {
+                    $('#prevCurrent').hide()
+                }
+                if (currentPage > 2) {
+                    $('#prevPrevCurrent').show()
+                } else {
+                    $('#prevPrevCurrent').hide()
+                }
+                if (currentPage > 1) {
+                    $('#prevPage').show()
+                } else {
+                    $('#prevPage').hide()
+                }
+            }
+
+        }
+
+
+        updateDisplay();
+
+        // Pagination - Next Page
+        $('#nextNextCurrent').click(function () {
+            currentPage = currentPage + 2;
+            updateDisplay();
+        });
+
+        // Pagination - Previous Page
+        $('#prevPrevCurrent').click(function () {
+            if (currentPage > 1) {
+                currentPage = currentPage - 2;
+                updateDisplay();
+            }
+        });
+
+        // Pagination - Next Page
+        $('#nextCurrent').click(function () {
+            currentPage++;
+            updateDisplay();
+        });
+
+        // Pagination - Previous Page
+        $('#prevCurrent').click(function () {
+            if (currentPage > 1) {
+                currentPage--;
+                updateDisplay();
+            }
+        });
+
+        // Pagination - Next Page
+        $('#nextPage').click(function () {
+            currentPage++;
+            updateDisplay();
+        });
+
+        // Pagination - Previous Page
+        $('#prevPage').click(function () {
+            if (currentPage > 1) {
+                currentPage--;
+                updateDisplay();
+            }
+        });
+
+
+        $('#search').on('keyup', function (e) {
+            var searchText = $(this).val().toLowerCase();
+            var characterCount = searchText.length;
+
+
+
+            console.log("SDFG tertekan" + characterCount);
+            if (characterCount <= 0) {
+                // Remove a specific item from session storage
+                sessionStorage.removeItem('searchText');
+
+                console.log("Backspace koso" + characterCount);
+                $('#pagination').show()
+                updateDisplay();
+            } else {
+                sessionStorage.setItem('searchText', searchText);
+                searchProduct()
+            }
+
+        });
+        function searchProduct() {
+
+            var searchText = sessionStorage.getItem('searchText');
+
+
+
+            $('#search').val(searchText);
+            $('#dataProduct tr').hide(); // Hide all rows
+            $('#pagination').hide()
+            // Show rows that match the search text
+            $('#dataProduct tr').filter(function () {
+                return $(this).text().toLowerCase().includes(searchText);
+            }).show();
+        }
+    }
+
+    test()
+    $('#loading-container').hide();
+
+    function insertDataPesan(SKU) {
+        $('#loading-container').show();
+        console.log("loadinggggggg");
+        $.ajax({
+            url: "<?= base_url('transaction_umum/insert_checkout') ?>",
+            type: "post",
+            data: {
+                SKU: SKU
+            },
+            success: function (response) {
+                // console.log(response);
+                $("#allContent").html(response);
+                // $.ajax({
+                //     type: "GET",
+                //     url: "dist/ajax/ajaxEntry.php",
+                //     data: "",
+                //     success: function (data) {
+                //         $("#allContent").html(data);
+                //         operasi();
+                //     }
+                // });
+                test();
+                $('#loading-container').hide();
+                console.log("loadingg ilabnggg");
+                // location.reload()
+            }
+        });
+
+
+        console.log("UPdaterrrt");
+    }
+
+    function deleteDataPesan(SKU) {
+        $('#loading-container').show();
+        console.log("loadinggggggg");
+        $.ajax({
+            url: "<?= base_url('transaction_umum/delete_checkout') ?>",
+            type: "post",
+            data: {
+                SKU: SKU
+            },
+            success: function (response) {
+                // console.log(response);
+                $("#allContent").html(response);
+                // $.ajax({
+                //     type: "GET",
+                //     url: "dist/ajax/ajaxEntry.php",
+                //     data: "",
+                //     success: function (data) {
+                //         $("#allContent").html(data);
+                //         operasi();
+                //     }
+                // });
+                test();
+                $('#loading-container').hide();
+                console.log("loadingg ilabnggg");
+                // location.reload()
+            }
+        });
+    }
+</script>
 <!-- <script>
     $(document).ready(function () {
         var itemsPerPage = 3; // Set the number of items per page
