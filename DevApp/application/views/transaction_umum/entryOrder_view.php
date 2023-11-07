@@ -1,4 +1,6 @@
 <body>
+
+
     <form
         class="sm:mx-auto  bg-white sm:mt-5 relative mb-5 w-auto mt-6 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
         action="<?= site_url('transaction_umum/save_transaction'); ?>" method="post">
@@ -20,7 +22,36 @@
                     type="text" name="bankAccountNumber" id="bankAccountNumber">
             </div>
         </div>
+        <style>
+            #loading-container {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
 
+            #loading-spinner {
+                border: 6px solid rgba(0, 0, 0, 0.3);
+                border-radius: 50%;
+                border-top: 6px solid #3498db;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+        <div id="loading-container">
+            <div id="loading-spinner"></div>
+        </div>
         <div id="allContent">
             <div class="mt-3">
                 <label for="search">Search:</label>
@@ -92,15 +123,15 @@
 
                         </li>
                         <span id="prevPrevCurrent"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"></span>
                         <span id="prevCurrent"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"></span>
                         <span id="currentPage"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-blue-600 bg-blue-100 divide-x-2">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-blue-600 bg-blue-100 divide-x-2"></span>
                         <span id="nextCurrent"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"></span>
                         <span id="nextNextCurrent"
-                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</span>
+                            class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"></span>
                         <li id="nextPage"
                             class="inline-flex -space-x-px px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">
                             &raquo;
@@ -114,6 +145,7 @@
                 <button id="nextPage">Next</button> -->
             </div>
             <br>
+
             <div>
                 <h1 class="font-bold sm:text-2xl text-base py-3 bg-bg2 text-center">PEMESANAN</h1>
                 <div class="overflow-x-scroll">
@@ -174,25 +206,33 @@
                 </div>
             </div>
 
-            <script src="<?= base_url() ?>/dist/js/script.js"></script>
-
-            <script src="<?= base_url() ?>dist/js/jquery.min.js"></script>
-
-            <script type="text/javascript">
-                $(document).ready(function () {
 
 
 
-                    // Initialize the display
+        </div>
+        <script src="<?= base_url() ?>/dist/js/script.js"></script>
+
+        <script src="<?= base_url() ?>dist/js/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+
+
+                // Initialize the display
 
 
 
 
-                });
+            });
 
 
+            function test() {
+
+                var currentPage = sessionStorage.getItem('currentPage') || 1;
+
+                console.log("currentPage" + currentPage);
                 var itemsPerPage = 3; // Set the number of items per page
-                var currentPage = 1;
                 // Menghitung jumlah elemen <tr> dalam tabel
                 var jumlahTr = $('#dataProduct tr').length;
 
@@ -204,49 +244,56 @@
 
 
                 function updateDisplay() {
-                    var startIndex = (currentPage - 1) * itemsPerPage;
-                    var endIndex = startIndex + itemsPerPage;
 
-                    $('#dataProduct tr').hide(); // Hide all rows
-                    $('#dataProduct tr').slice(startIndex, endIndex).show(); // Show the current page items
-                    $('#prevPrevCurrent').text(currentPage - 2); // Update the current page indicator
-                    $('#prevCurrent').text(currentPage - 1); // Update the current page indicator
-                    $('#currentPage').text(currentPage); // Update the current page indicator
-                    $('#nextCurrent').text(currentPage + 1); // Update the current page indicator
-                    $('#nextNextCurrent').text(currentPage + 2); // Update the current page indicator
 
-                    if (currentPage < maxPages) {
-                        $('#nextPage').show()
+                    if (sessionStorage.getItem('searchText')) {
+                        searchProduct()
+                    } else {
+                        console.log("currentPage" + currentPage);
+                        sessionStorage.setItem('currentPage', currentPage);
+                        var startIndex = (currentPage - 1) * itemsPerPage;
+                        var endIndex = startIndex + itemsPerPage;
 
-                    } else {
-                        $('#nextPage').hide()
-                    }
-                    if (currentPage < maxPages - 1) {
-                        $('#nextNextCurrent').show()
-                    } else {
-                        $('#nextNextCurrent').hide()
-                    }
-                    if (currentPage < maxPages) {
-                        $('#nextCurrent').show()
-                    } else {
-                        $('#nextCurrent').hide()
-                    }
-                    if (currentPage > 1) {
-                        $('#prevCurrent').show()
-                    } else {
-                        $('#prevCurrent').hide()
-                    }
-                    if (currentPage > 2) {
-                        $('#prevPrevCurrent').show()
-                    } else {
-                        $('#prevPrevCurrent').hide()
-                    }
-                    if (currentPage > 1) {
-                        $('#prevPage').show()
-                    } else {
-                        $('#prevPage').hide()
-                    }
+                        $('#dataProduct tr').hide(); // Hide all rows
+                        $('#dataProduct tr').slice(startIndex, endIndex).show(); // Show the current page items
+                        $('#prevPrevCurrent').text(parseInt(currentPage) - 2); // Update the current page indicator
+                        $('#prevCurrent').text(parseInt(currentPage) - 1); // Update the current page indicator
+                        $('#currentPage').text(parseInt(currentPage)); // Update the current page indicator
+                        $('#nextCurrent').text(parseInt(currentPage) + 1); // Update the current page indicator
+                        $('#nextNextCurrent').text(parseInt(currentPage) + 2); // Update the current page indicator
 
+                        if (currentPage < maxPages) {
+                            $('#nextPage').show()
+
+                        } else {
+                            $('#nextPage').hide()
+                        }
+                        if (currentPage < maxPages - 1) {
+                            $('#nextNextCurrent').show()
+                        } else {
+                            $('#nextNextCurrent').hide()
+                        }
+                        if (currentPage < maxPages) {
+                            $('#nextCurrent').show()
+                        } else {
+                            $('#nextCurrent').hide()
+                        }
+                        if (currentPage > 1) {
+                            $('#prevCurrent').show()
+                        } else {
+                            $('#prevCurrent').hide()
+                        }
+                        if (currentPage > 2) {
+                            $('#prevPrevCurrent').show()
+                        } else {
+                            $('#prevPrevCurrent').hide()
+                        }
+                        if (currentPage > 1) {
+                            $('#prevPage').show()
+                        } else {
+                            $('#prevPage').hide()
+                        }
+                    }
 
                 }
 
@@ -301,78 +348,101 @@
                     var characterCount = searchText.length;
 
 
+
                     console.log("SDFG tertekan" + characterCount);
                     if (characterCount <= 0) {
+                        // Remove a specific item from session storage
+                        sessionStorage.removeItem('searchText');
+
                         console.log("Backspace koso" + characterCount);
                         $('#pagination').show()
                         updateDisplay();
                     } else {
-                        $('#dataProduct tr').hide(); // Hide all rows
-                        $('#pagination').hide()
-                        // Show rows that match the search text
-                        $('#dataProduct tr').filter(function () {
-                            return $(this).text().toLowerCase().includes(searchText);
-                        }).show();
+                        sessionStorage.setItem('searchText', searchText);
+                        searchProduct()
                     }
 
                 });
+                function searchProduct() {
 
-                function insertDataPesan(SKU) {
-                    $.ajax({
-                        url: "<?= base_url('transaction_umum/insert_checkout') ?>",
-                        type: "post",
-                        data: {
-                            SKU: SKU
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            $("#allContent").html(response);
-                            // $.ajax({
-                            //     type: "GET",
-                            //     url: "dist/ajax/ajaxEntry.php",
-                            //     data: "",
-                            //     success: function (data) {
-                            //         $("#allContent").html(data);
-                            //         operasi();
-                            //     }
-                            // });
-                            updateDisplay();
-                            // location.reload()
-                        }
-                    });
+                    var searchText = sessionStorage.getItem('searchText');
 
 
-                    console.log("UPdaterrrt");
+
+                    $('#search').val(searchText);
+                    $('#dataProduct tr').hide(); // Hide all rows
+                    $('#pagination').hide()
+                    // Show rows that match the search text
+                    $('#dataProduct tr').filter(function () {
+                        return $(this).text().toLowerCase().includes(searchText);
+                    }).show();
                 }
+            }
 
-                function deleteDataPesan(SKU) {
-                    $.ajax({
-                        url: "<?= base_url('transaction_umum/delete_checkout') ?>",
-                        type: "post",
-                        data: {
-                            SKU: SKU
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            $("#allContent").html(response);
-                            // $.ajax({
-                            //     type: "GET",
-                            //     url: "dist/ajax/ajaxEntry.php",
-                            //     data: "",
-                            //     success: function (data) {
-                            //         $("#allContent").html(data);
-                            //         operasi();
-                            //     }
-                            // });
-                            updateDisplay();
-                            // location.reload()
-                        }
-                    });
-                }
-            </script>
+            test()
+            $('#loading-container').hide();
+
+            function insertDataPesan(SKU) {
+                $('#loading-container').show();
+                console.log("loadinggggggg");
+                $.ajax({
+                    url: "<?= base_url('transaction_umum/insert_checkout') ?>",
+                    type: "post",
+                    data: {
+                        SKU: SKU
+                    },
+                    success: function (response) {
+                        // console.log(response);
+                        $("#allContent").html(response);
+                        // $.ajax({
+                        //     type: "GET",
+                        //     url: "dist/ajax/ajaxEntry.php",
+                        //     data: "",
+                        //     success: function (data) {
+                        //         $("#allContent").html(data);
+                        //         operasi();
+                        //     }
+                        // });
+                        test();
+                        $('#loading-container').hide();
+                        console.log("loadingg ilabnggg");
+                        // location.reload()
+                    }
+                });
 
 
-        </div>
+                console.log("UPdaterrrt");
+            }
+
+            function deleteDataPesan(SKU) {
+                $('#loading-container').show();
+                console.log("loadinggggggg");
+                $.ajax({
+                    url: "<?= base_url('transaction_umum/delete_checkout') ?>",
+                    type: "post",
+                    data: {
+                        SKU: SKU
+                    },
+                    success: function (response) {
+                        // console.log(response);
+                        $("#allContent").html(response);
+                        // $.ajax({
+                        //     type: "GET",
+                        //     url: "dist/ajax/ajaxEntry.php",
+                        //     data: "",
+                        //     success: function (data) {
+                        //         $("#allContent").html(data);
+                        //         operasi();
+                        //     }
+                        // });
+                        test();
+                        $('#loading-container').hide();
+                        console.log("loadingg ilabnggg");
+                        // location.reload()
+                    }
+                });
+            }
+        </script>
         <button
             class="sm:text-lg text-sm mb-3 sm:font-bold font-semibold mt-3 px-[50px] text-white py-2 w-full rounded-sm bg-blue-500 hover:bg-lime-500"
             type="submit">PESAN SEKARANG</button>
