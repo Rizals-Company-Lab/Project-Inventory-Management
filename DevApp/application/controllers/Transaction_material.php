@@ -111,7 +111,6 @@ class transaction_material extends CI_Controller
     public function add_new_transaction()
     {
         $data['product'] = $this->Transaction_model->get_product();
-
         $data['checkout'] = $this->Transaction_model->get_checkout();
         if ($this->session->userdata('login_id') == 'admin') {
 

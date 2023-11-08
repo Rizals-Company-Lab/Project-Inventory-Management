@@ -71,6 +71,11 @@
                                         class="bg-blue-600 rounded-md px-3 py-1 shadow-md hover:bg-blue-900"><i
                                             class="fa-solid fa-circle-info"></i> Details</button>
                                 </form>
+                                <form action="<?= site_url('transaction/order_detail'); ?>" method="post">
+                                    <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                        class="bg-blue-600 rounded-md px-3 py-1 shadow-md hover:bg-blue-900"><i
+                                            class="fa-solid fa-circle-info"></i> Details</button>
+                                </form>
                                 <form action="<?= site_url('transaction/get_update'); ?>" method="post">
                                     <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
                                         class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"><i

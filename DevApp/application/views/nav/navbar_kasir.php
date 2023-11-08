@@ -30,6 +30,7 @@
                 <div class="sm:h-[400px]">
                     <ul class=" sm:flex flex-col hidden sm:border-none sm:rounded-none sm:shadow-none rounded-md shadow-md h-auto  ml-2 mr-2"
                         id="hilang" nama="hilang">
+
                         <a class="hover:text-white" href="<?= base_url('Home') ?>">
                             <li class="text-center sm:p-4 p-1 hover:bg-primary ">HOME
                             </li>

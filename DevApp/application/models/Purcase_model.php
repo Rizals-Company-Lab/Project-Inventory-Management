@@ -24,7 +24,7 @@ class Purcase_model extends CI_Model
 
 
 
-    public function get_purcase($rowno, $rowperpage, $INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
+    public function get_purcase($rowno, $rowperpage, $searchSKU = "", $searchProduct = "", $searchDate = "")
     {
         $this->db->select('*');
         $this->db->from('tbl_purcase AS TPC');
@@ -38,6 +38,18 @@ class Purcase_model extends CI_Model
 
 
         // $this->db->order_by('INVENTTRANSID', 'DESC');
+        if ($searchSKU) {
+            $this->db->like('TPD.SKU', $searchSKU);
+        }
+        if ($searchProduct) {
+            $this->db->like('TPD.productName', $searchProduct);
+        }
+
+
+        if ($searchDate) {
+            $formattedDate = date('Y-m-d', strtotime($searchDate));
+            $this->db->where("DATE(purcaseTimestamp) =", $formattedDate);
+        }
 
 
         $this->db->order_by('purcaseTimestamp', 'DESC');
@@ -48,15 +60,27 @@ class Purcase_model extends CI_Model
 
 
 
-    public function get_purcase_count($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
+    public function get_purcase_count($searchSKU = "", $searchProduct = "", $searchDate = "")
     {
         $this->db->select('*');
-        $this->db->from('tbl_purcase');
+        $this->db->from('tbl_purcase AS TPC');
+        $this->db->join('tbl_product AS TPD', 'TPC.SKU = TPD.SKU');
 
         // $this->db->like('INVENTTRANSID', $INVENTTRANSID);
         // $this->db->like('NAME', $NAME);
         // $this->db->like('ITEMNAME', $ITEMNAME);
+        if ($searchSKU) {
+            $this->db->like('TPD.SKU', $searchSKU);
+        }
+        if ($searchProduct) {
+            $this->db->like('TPD.productName', $searchProduct);
+        }
 
+
+        if ($searchDate) {
+            $formattedDate = date('Y-m-d', strtotime($searchDate));
+            $this->db->where("DATE(purcaseTimestamp) =", $formattedDate);
+        }
         $result = $this->db->count_all_results();
 
         return $result;

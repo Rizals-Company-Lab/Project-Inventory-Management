@@ -16,25 +16,26 @@ class Transaction extends CI_Controller
     public function index($row_no = 0)
     {
         //search text
-        $searchINVENTTRANSID = "";
-        $searchNAME = "";
-        $searchITEMNAME = "";
+        $searchBuyer = "";
+        $searchDate = "";
+        $searchStatus = "";
+        var_dump($this->input->post());
         if ($this->input->post('search') != '') {
-            $searchINVENTTRANSID = $this->input->post('searchINVENTTRANSID');
-            $searchNAME = $this->input->post('searchNAME');
-            $searchITEMNAME = $this->input->post('searchITEMNAME');
-            $this->session->set_userdata("searchINVENTTRANSID", $searchINVENTTRANSID);
-            $this->session->set_userdata("searchNAME", $searchNAME);
-            $this->session->set_userdata("searchITEMNAME", $searchITEMNAME);
+            $searchBuyer = $this->input->post('searchBuyer');
+            $searchDate = $this->input->post('searchDate');
+            $searchStatus = $this->input->post('searchStatus');
+            $this->session->set_userdata("searchBuyer", $searchBuyer);
+            $this->session->set_userdata("searchDate", $searchDate);
+            $this->session->set_userdata("searchStatus", $searchStatus);
         } else {
-            if ($this->session->userdata('searchINVENTTRANSID') != "") {
-                $searchINVENTTRANSID = $this->session->userdata('searchINVENTTRANSID');
+            if ($this->session->userdata('searchBuyer') != "") {
+                $searchBuyer = $this->session->userdata('searchBuyer');
             }
-            if ($this->session->userdata('searchNAME') != "") {
-                $searchNAME = $this->session->userdata('searchNAME');
+            if ($this->session->userdata('searchDate') != "") {
+                $searchDate = $this->session->userdata('searchDate');
             }
-            if ($this->session->userdata('searchITEMNAME') != "") {
-                $searchITEMNAME = $this->session->userdata('searchITEMNAME');
+            if ($this->session->userdata('searchStatus') != "") {
+                $searchStatus = $this->session->userdata('searchStatus');
             }
         }
 
@@ -46,7 +47,7 @@ class Transaction extends CI_Controller
         }
         // Pagination Configuration
         // All record count
-        $config['total_rows'] = $this->Transaction_model->get_transaction_count($searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $config['total_rows'] = $this->Transaction_model->get_transaction_count($searchBuyer, $searchDate, $searchStatus);
         $config['base_url'] = base_url() . 'transaction/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
@@ -57,13 +58,13 @@ class Transaction extends CI_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         // Get record
-        $data['transaction'] = $this->Transaction_model->get_transaction($row_no, $row_per_page, $searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $data['transaction'] = $this->Transaction_model->get_transaction($row_no, $row_per_page, $searchBuyer, $searchDate, $searchStatus);
 
         $data['row'] = $row_no;
 
-        $data['searchINVENTTRANSID'] = $searchINVENTTRANSID;
-        $data['searchNAME'] = $searchNAME;
-        $data['searchITEMNAME'] = $searchITEMNAME;
+        $data['searchBuyer'] = $searchBuyer;
+        $data['searchDate'] = $searchDate;
+        $data['searchStatus'] = $searchStatus;
         $data['totalRow'] = $config['total_rows'];
         if ($this->session->userdata('login_id') == 'admin') {
 

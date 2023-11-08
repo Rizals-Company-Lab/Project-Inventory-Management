@@ -20,7 +20,7 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_transaction($rowno, $rowperpage, $INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
+    public function get_transaction($rowno, $rowperpage, $searchBuyer = "", $searchDate = "", $searchStatus = "")
     {
         $this->db->select('*');
         $this->db->from('tbl_order AS TO');
@@ -32,7 +32,17 @@ class Transaction_model extends CI_Model
         // $this->db->like('NAME', $NAME);
         // $this->db->like('ITEMNAME', $ITEMNAME);
 
+        if ($searchBuyer) {
+            $this->db->like('buyerName', $searchBuyer);
+        }
 
+        if ($searchDate) {
+            $formattedDate = date('Y-m-d', strtotime($searchDate));
+            $this->db->where("DATE(orderTimestamp) =", $formattedDate);
+        }
+        if ($searchStatus != "") {
+            $this->db->where('paymentStatus', $searchStatus);
+        }
         $this->db->order_by('orderTimestamp', 'DESC');
         $result = $this->db->limit($rowperpage, $rowno)->get();
         return $result;
@@ -290,7 +300,8 @@ class Transaction_model extends CI_Model
     {
 
         $this->db->trans_start();
-
+        // var_dump($POSTDATA);
+        // die;
         try {
             $this->db->select('idOrder');
             $this->db->from('tbl_order');
@@ -307,7 +318,7 @@ class Transaction_model extends CI_Model
             );
 
             $this->db->insert('tbl_order', $data_tbl_order);
-
+            // var_dump($POSTDATA);
             foreach ($POSTDATA as $key => $value) {
                 if (strpos($key, 'qtyOrder') === 0) {
                     $idCheckout = substr($key, 8);
@@ -316,7 +327,7 @@ class Transaction_model extends CI_Model
                     $sellingPrice = $POSTDATA[$typeTrans . $idCheckout];
                     $priceAmount = $sellingPrice * $qtyOrder;
 
-                    // var_dump($key);
+                    // var_dump($sellingPrice);
                     // echo ($data_post['PRICEMID128']);
 
 
@@ -331,6 +342,7 @@ class Transaction_model extends CI_Model
             }
 
             $this->db->trans_commit();
+            // die;
             return true;
         } catch (Exception $e) {
             $this->db->trans_rollback();
@@ -554,7 +566,7 @@ class Transaction_model extends CI_Model
     }
 
     //count total record
-    public function get_transaction_count($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
+    public function get_transaction_count($searchBuyer = "", $searchDate = "", $searchStatus = "")
     {
         $this->db->select('*');
         $this->db->from('tbl_order AS TO');
@@ -562,7 +574,18 @@ class Transaction_model extends CI_Model
         // $this->db->like('INVENTTRANSID', $INVENTTRANSID);
         // $this->db->like('NAME', $NAME);
         // $this->db->like('ITEMNAME', $ITEMNAME);
+        if ($searchBuyer) {
+            $this->db->like('buyerName', $searchBuyer);
+        }
 
+        if ($searchDate) {
+            $formattedDate = date('Y-m-d', strtotime($searchDate));
+            $this->db->where("DATE(orderTimestamp) =", $formattedDate);
+        }
+
+        if ($searchStatus != "") {
+            $this->db->where('paymentStatus', $searchStatus);
+        }
         $result = $this->db->count_all_results();
 
         return $result;

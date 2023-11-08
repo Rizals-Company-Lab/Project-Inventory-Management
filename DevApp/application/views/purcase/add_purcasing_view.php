@@ -10,11 +10,11 @@
                     class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     name="SKU" id="skuSelect">
                     <?php foreach ($product->result() as $singleView): ?>
-                    <option
-                        class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        value="<?= $singleView->SKU ?>">
-                        <?= $singleView->SKU ?>
-                    </option>
+                        <option
+                            class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            value="<?= $singleView->SKU ?>">
+                            <?= $singleView->SKU ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -24,11 +24,11 @@
                     class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     name="productName" id="productNameSelect">
                     <?php foreach ($product->result() as $singleView): ?>
-                    <option
-                        class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        value="<?= $singleView->SKU ?>">
-                        <?= $singleView->productName ?>
-                    </option>
+                        <option
+                            class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            value="<?= $singleView->SKU ?>">
+                            <?= $singleView->productName ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -53,12 +53,12 @@
                     <span class=" bg-gray-200 rounded py-2 px-5  leading-tight focus:outline-none focus:bg-white"
                         id="total"></span>
                 </div>
-                <div class="sm:ml-[100px] mt-2">
+                <!-- <div class="sm:ml-[100px] mt-2">
                     <label class="font-bold sm:text-lg text-sm" for=""> TANGGAL PEMBELIAN</label>
                     <input
                         class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4  mb-3 leading-tight focus:outline-none focus:bg-white"
                         type="date" name="purcaseTimestamp" id="purcaseTimestamp">
-                </div>
+                </div> -->
             </div>
 
 
@@ -73,43 +73,43 @@
 <script src="<?= base_url() ?>/dist/js/script.js"></script>
 <script src="<?= base_url() ?>dist/js/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
-    calculateTotal();
-    // Membuat fungsi untuk menghitung total
-    function calculateTotal() {
-        var buyingPrice = parseInt($("#buyingPrice").val());
-        var qtyPurcase = parseInt($("#qtyPurcase").val());
-
-        // Menghitung total
-        var total = buyingPrice * qtyPurcase;
-
-        // Menampilkan total pada elemen dengan id "total"
-        $("#total").text(total);
-    }
-
-    // Memanggil fungsi calculateTotal saat nilai buyingPrice atau qtyPurcase berubah
-    $("#buyingPrice, #qtyPurcase").change(function() {
+    $(document).ready(function () {
         calculateTotal();
+        // Membuat fungsi untuk menghitung total
+        function calculateTotal() {
+            var buyingPrice = parseInt($("#buyingPrice").val());
+            var qtyPurcase = parseInt($("#qtyPurcase").val());
+
+            // Menghitung total
+            var total = buyingPrice * qtyPurcase;
+
+            // Menampilkan total pada elemen dengan id "total"
+            $("#total").text(total);
+        }
+
+        // Memanggil fungsi calculateTotal saat nilai buyingPrice atau qtyPurcase berubah
+        $("#buyingPrice, #qtyPurcase").change(function () {
+            calculateTotal();
+        });
     });
-});
 
-// Ketika nilai elemen select dengan id "productNameSelect" berubah
-$("#productNameSelect").change(function() {
-    // Mendapatkan nilai yang dipilih
-    var selectedValue = $(this).val();
+    // Ketika nilai elemen select dengan id "productNameSelect" berubah
+    $("#productNameSelect").change(function () {
+        // Mendapatkan nilai yang dipilih
+        var selectedValue = $(this).val();
 
-    // Mengatur nilai elemen select dengan id "skuSelect" sesuai dengan nilai yang dipilih
-    $("#skuSelect").val(selectedValue);
-});
+        // Mengatur nilai elemen select dengan id "skuSelect" sesuai dengan nilai yang dipilih
+        $("#skuSelect").val(selectedValue);
+    });
 
-// Ketika nilai elemen select dengan id "skuSelect" berubah
-$("#skuSelect").change(function() {
-    // Mendapatkan nilai yang dipilih
-    var selectedValue = $(this).val();
+    // Ketika nilai elemen select dengan id "skuSelect" berubah
+    $("#skuSelect").change(function () {
+        // Mendapatkan nilai yang dipilih
+        var selectedValue = $(this).val();
 
-    // Mengatur nilai elemen select dengan id "productNameSelect" sesuai dengan nilai yang dipilih
-    $("#productNameSelect").val(selectedValue);
-});
+        // Mengatur nilai elemen select dengan id "productNameSelect" sesuai dengan nilai yang dipilih
+        $("#productNameSelect").val(selectedValue);
+    });
 </script>
 
 </html>
