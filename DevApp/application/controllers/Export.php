@@ -10,58 +10,17 @@ class Export extends CI_Controller
         $this->load->model('Transaction_model');
     }
 
-    public function pdf()
+    public function index()
     {
-        $this->load->library('pdf');
-
-
-        // $idOrder = $this->input->post('idOrder');
         $idOrder = $this->input->post('idOrder');
-        $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
-        $idOrder = "15";
-        $Transaction = $this->Transaction_model->get_order_detail($idOrder);
-        var_dump($Transaction->result());
-        // $pdf = new Pdf();
-        // $pdf->SetTitle('Daftar Transaction');
-        // $pdf->AddPage();
-
-        // $pdf->SetFont('Arial', 'B', 16);
-        // $pdf->Cell(0, 20, 'Daftar Transaction', 0, 1, 'C');
-        // $pdf->SetFont('Arial', 'B', 12);
-        // $pdf->SetXY(16, 30);
-        // $pdf->Cell(10, 10, 'No.', 1, 0, 'C');
-        // $pdf->Cell(30, 10, 'Transaction Code', 1, 0, 'C');
-        // $pdf->Cell(70, 10, 'Transaction buyerName', 1, 0, 'C');
-        // $pdf->Cell(70, 10, 'Transaction Price', 1, 1, 'C');
-
-        // $pdf->SetFont('Arial', '', 10);
-        // $pdf->SetXY(16, 40);
-        // $count = 1;
-        // foreach ($Transaction->result() as $row) {
-        //     $pdf->Cell(10, 10, $count, 1, 0, 'C');
-        //     $pdf->Cell(30, 10, $row->idOrder, 1, 0, 'C');
-        //     $pdf->Cell(70, 10, $row->buyerbuyerName, 1, 0, 'C');
-        //     // $pdf->Cell(70, 10, "Rp " . number_format($row->Transaction_price, 0, ',', '.'), 1, 1, 'C');
-        //     $pdf->SetX(16);
-        //     $count++;
-        // }
-        // $totalTransactionInt = $count - 1;
-        // $totalTransactionString = 'Total Transaction = ' . $totalTransactionInt . '    ';
-        // $pdf->Cell(180, 10, $totalTransactionString, 1, 0, 'R');
-
-        // $pdf->Output('I', 'Daftar Transaction.pdf');
-    }
-
-    public function print()
-    {
-        $idOrder = "15";
+        ;
         $Transaction = $this->Transaction_model->get_order_detail($idOrder)->result();
 
 
         $this->load->library('pdf');
         $pdf = new Pdf();
 
-        $pdf->AddPage("P", array(210, 290));
+        $pdf->AddPage("L", array(210, 148));
 
         $pdf->Image(base_url('dist/img/abk3.png'), 0, 0, 50, 0);
         $pdf->SetFont('Arial', 'B', 14);
@@ -71,7 +30,7 @@ class Export extends CI_Controller
         $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(
             0,
-            5,
+            6,
             'Nomor Transaksi : ' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y')
             ,
             0,
@@ -85,7 +44,7 @@ class Export extends CI_Controller
         $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(
             0,
-            5,
+            6,
             'Tanggal               : ' . date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
             ,
             0,
@@ -97,7 +56,7 @@ class Export extends CI_Controller
         $pdf->Cell(85, 20, 'Jl. Mranggen Kota Semarang Jawa Tengah', 0, 0);
         $pdf->Cell(
             0,
-            5,
+            6,
             'Pembeli               : ' . $Transaction[0]->buyerName
             ,
             0,
@@ -108,7 +67,7 @@ class Export extends CI_Controller
         $pdf->Cell(120);
         $pdf->Cell(
             0,
-            5,
+            6,
             'Rekening             : ' . $Transaction[0]->bankAccountNumber
             ,
             0,

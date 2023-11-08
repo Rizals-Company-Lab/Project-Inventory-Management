@@ -300,7 +300,8 @@ class Transaction_model extends CI_Model
     {
 
         $this->db->trans_start();
-
+        // var_dump($POSTDATA);
+        // die;
         try {
             $this->db->select('idOrder');
             $this->db->from('tbl_order');
@@ -317,7 +318,7 @@ class Transaction_model extends CI_Model
             );
 
             $this->db->insert('tbl_order', $data_tbl_order);
-
+            // var_dump($POSTDATA);
             foreach ($POSTDATA as $key => $value) {
                 if (strpos($key, 'qtyOrder') === 0) {
                     $idCheckout = substr($key, 8);
@@ -326,7 +327,7 @@ class Transaction_model extends CI_Model
                     $sellingPrice = $POSTDATA[$typeTrans . $idCheckout];
                     $priceAmount = $sellingPrice * $qtyOrder;
 
-                    // var_dump($key);
+                    // var_dump($sellingPrice);
                     // echo ($data_post['PRICEMID128']);
 
 
@@ -341,6 +342,7 @@ class Transaction_model extends CI_Model
             }
 
             $this->db->trans_commit();
+            // die;
             return true;
         } catch (Exception $e) {
             $this->db->trans_rollback();

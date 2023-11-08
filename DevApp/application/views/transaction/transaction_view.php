@@ -94,6 +94,7 @@
                             </td>
                             <td class=" p-1 text-white flex justify-evenly mt-1">
 
+
                                 <form action="<?= site_url('transaction/order_detail'); ?>" method="post">
                                     <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
                                         class="bg-blue-600 rounded-md px-3 py-1 shadow-md hover:bg-blue-900"><i
@@ -109,6 +110,12 @@
                                         onclick="return confirm('Anda yakin ingin delete <?= $singleView->idOrder ?>')"
                                         class="bg-red-700 rounded-md px-3 py-1 shadow-md hover:bg-red-900"><i
                                             class="fa-solid fa-trash-can"></i> Delete</button>
+                                </form>
+                                <form action="<?= site_url('export'); ?>" method="post">
+                                    <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                        class="bg-blue-600 rounded-md px-3 py-1 shadow-md hover:bg-blue-900"><i
+                                            class="fa-solid fa-circle-info"></i>
+                                        Print</button>
                                 </form>
                                 <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             onclick="insertDataPesan(<?= $singleView->idOrder ?>)">Update</button>

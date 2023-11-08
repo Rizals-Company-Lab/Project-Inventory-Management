@@ -160,10 +160,8 @@
 
                                 <?php foreach ($checkout->result() as $row): ?>
                                     <tr>
-
                                         <input type="hidden" name="SKU<?= $row->idCheckout ?>"
                                             id="SKU<?= $row->idCheckout ?>" value="<?= $row->idCheckout ?>">
-
                                         <input type="hidden" name="materialPrice<?= $row->idCheckout ?>"
                                             id="materialPrice<?= $row->idCheckout ?>" value="<?= $row->materialPrice ?>">
                                         <!-- <?= $row->materialPrice ?> -->
@@ -176,7 +174,6 @@
                                             <?= $row->productDescription ?>
                                         </td>
                                         <td class="border px-3 py-2 shadow-sm">
-
                                             <input type="number" name="qtyOrder<?= $row->idCheckout ?>" value="1" min="1"
                                                 max="<?php foreach ($product->result() as $singleView):
                                                     if ($row->SKU == $singleView->SKU) {
@@ -185,12 +182,10 @@
                                                 endforeach; ?>">
                                         </td>
                                         <td class="border px-3 py-2 shadow-sm">
-
                                             <button
                                                 class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
                                                 type="button" onclick="deleteDataPesan('<?= $row->SKU ?>')">-</button>
                                         </td>
-
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -202,7 +197,6 @@
         <button
             class="sm:text-lg text-sm mb-3 sm:font-bold font-semibold mt-3 px-[50px] text-white py-2 w-full rounded-sm bg-blue-500 hover:bg-lime-500"
             type="submit">PESAN SEKARANG</button>
-
     </form>
 </body>
 <script src="<?= base_url() ?>/dist/js/script.js"></script>
@@ -372,7 +366,7 @@
         $('#loading-container').show();
         console.log("loadinggggggg");
         $.ajax({
-            url: "<?= base_url('transaction_umum/insert_checkout') ?>",
+            url: "<?= base_url('transaction_material/insert_checkout') ?>",
             type: "post",
             data: {
                 SKU: SKU
@@ -404,7 +398,7 @@
         $('#loading-container').show();
         console.log("loadinggggggg");
         $.ajax({
-            url: "<?= base_url('transaction_umum/delete_checkout') ?>",
+            url: "<?= base_url('transaction_material/delete_checkout') ?>",
             type: "post",
             data: {
                 SKU: SKU
