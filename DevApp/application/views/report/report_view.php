@@ -25,21 +25,28 @@
                     </div>
                 </div>
                 <div class="sm:h-[400px]">
-                    <ul class=" sm:flex flex-col hidden  sm:rounded-none sm:shadow-none rounded-md shadow-md h-auto  ml-2 mr-2"
+                    <ul class=" sm:flex flex-col hidden sm:border-none sm:rounded-none sm:shadow-none rounded-md shadow-md h-auto  ml-2 mr-2"
                         id="hilang" nama="hilang">
-                        <li class="text-center sm:p-4 p-1 hover:bg-primary "><a class="hover:text-white"
-                                href="<?= base_url('Home') ?>">HOME</a>
-                        </li>
-                        <li class="text-center sm:p-4 p-1 hover:bg-primary "><a class="hover:text-white "
-                                href="<?php echo site_url('product');?>">PRODUK</a>
-                        </li>
-                        <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('Transaction');?>">TRANSAKSI</a></li>
-                        <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('Purcase');?>">KOLAKAN</a></li>
-                        <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('report');?>">KEUNTUNGAN</a>
-                        </li>
+                        <a class="hover:text-white" href="<?= base_url('Home') ?>">
+                            <li class="text-center sm:p-4 p-1 hover:bg-primary ">HOME
+                            </li>
+                        </a>
+                        <a class="hover:text-white" href="<?= base_url('product') ?>">
+                            <li class="text-center sm:p-4 p-1 hover:bg-primary ">PRODUK
+                            </li>
+                        </a>
+                        <a class="hover:text-white" href="<?= base_url('Transaction') ?>">
+                            <li class="text-center sm:p-4 p-1 hover:bg-primary ">TRANSAKSI
+                            </li>
+                        </a>
+                        <a class="hover:text-white" href="<?= base_url('Purcase') ?>">
+                            <li class="text-center sm:p-4 p-1 hover:bg-primary ">KOLAKAN
+                            </li>
+                        </a>
+                        <a class="hover:text-white" href="<?= base_url('report') ?>">
+                            <li class="text-center sm:p-4 p-1 hover:bg-primary ">KEUNTUNGAN
+                            </li>
+                        </a>
                     </ul>
                 </div>
             </div>
@@ -60,7 +67,7 @@
 
                 <div class="">
                     <div class="sm:flex justify-evenly">
-                        <div class="rounded-md  ml-3 mr-3 bg-red-500 py-3 px-3">
+                        <div class="rounded-md sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-red-500">
                             <h1 class="">
                                 TOTAL BELI :
                                 <input
@@ -94,7 +101,7 @@
                             </h1>
                         </div>
                     </div>
-                    <div class="rounded-md sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-green-600">
+                    <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-green-600">
                         <h1 class=" text-center">
                             PROFIT ESTIMASI
                             <input

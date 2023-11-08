@@ -1,4 +1,5 @@
 <div id="allContent">
+
             <div class="mt-3">
                 <label for="search">Search:</label>
                 <input type="text" id="search" placeholder="Enter keywords...">

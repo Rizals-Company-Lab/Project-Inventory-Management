@@ -3,6 +3,7 @@
                 <label for="search">Search:</label>
                 <input type="text" id="search" placeholder="Enter keywords...">
             </div>
+
             <div class="overflow-x-scroll">
                 <table class=" w-[500px] sm:w-full mt-5">
                     <div class="p-3 w-full sm:bg-dark">
