@@ -38,8 +38,8 @@
                         </li>
                         <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
                                 href="<?php echo site_url('Transaction'); ?>">TRANSAKSI</a></li>
-                        <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
-                                href="<?php echo site_url('Purcase'); ?>">KOLAKAN</a></li>
+                        <!-- <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
+                                href="<?php echo site_url('Purcase'); ?>">KOLAKAN</a></li> -->
                         <!-- <li class="text-center sm:p-4 p-1 hover:bg-primary"><a class="hover:text-white"
                                 href="<?php echo site_url('report'); ?>">KEUNTUNGAN</a>
                         </li> -->

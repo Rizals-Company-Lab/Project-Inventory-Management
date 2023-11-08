@@ -11,31 +11,35 @@ class Purcase extends CI_Controller
         $this->load->model('Product_model');
         if (!$this->session->userdata('login_id')) {
             redirect('Auth/login');
+        } else {
+            if ($this->session->userdata('login_id') != 'admin') {
+                redirect('Home');
+            }
         }
     }
 
     public function index($row_no = 0)
     {
         //search text
-        $searchINVENTTRANSID = "";
-        $searchNAME = "";
-        $searchITEMNAME = "";
+        $searchSKU = "";
+        $searchProduct = "";
+        $searchDate = "";
         if ($this->input->post('search') != '') {
-            $searchINVENTTRANSID = $this->input->post('searchINVENTTRANSID');
-            $searchNAME = $this->input->post('searchNAME');
-            $searchITEMNAME = $this->input->post('searchITEMNAME');
-            $this->session->set_userdata("searchINVENTTRANSID", $searchINVENTTRANSID);
-            $this->session->set_userdata("searchNAME", $searchNAME);
-            $this->session->set_userdata("searchITEMNAME", $searchITEMNAME);
+            $searchSKU = $this->input->post('searchSKU');
+            $searchProduct = $this->input->post('searchProduct');
+            $searchDate = $this->input->post('searchDate');
+            $this->session->set_userdata("searchSKU", $searchSKU);
+            $this->session->set_userdata("searchProduct", $searchProduct);
+            $this->session->set_userdata("searchDate", $searchDate);
         } else {
-            if ($this->session->userdata('searchINVENTTRANSID') != "") {
-                $searchINVENTTRANSID = $this->session->userdata('searchINVENTTRANSID');
+            if ($this->session->userdata('searchSKU') != "") {
+                $searchSKU = $this->session->userdata('searchSKU');
             }
-            if ($this->session->userdata('searchNAME') != "") {
-                $searchNAME = $this->session->userdata('searchNAME');
+            if ($this->session->userdata('searchProduct') != "") {
+                $searchProduct = $this->session->userdata('searchProduct');
             }
-            if ($this->session->userdata('searchITEMNAME') != "") {
-                $searchITEMNAME = $this->session->userdata('searchITEMNAME');
+            if ($this->session->userdata('searchDate') != "") {
+                $searchDate = $this->session->userdata('searchDate');
             }
         }
 
@@ -48,7 +52,7 @@ class Purcase extends CI_Controller
 
         // Pagination Configuration
         // All record count
-        $config['total_rows'] = $this->Purcase_model->get_purcase_count($searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $config['total_rows'] = $this->Purcase_model->get_purcase_count($searchSKU, $searchProduct, $searchDate);
         $config['base_url'] = base_url() . 'purcase/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
@@ -59,13 +63,13 @@ class Purcase extends CI_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         // Get record
-        $data['purcase'] = $this->Purcase_model->get_purcase($row_no, $row_per_page, $searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
+        $data['purcase'] = $this->Purcase_model->get_purcase($row_no, $row_per_page, $searchSKU, $searchProduct, $searchDate);
 
         $data['row'] = $row_no;
 
-        $data['searchINVENTTRANSID'] = $searchINVENTTRANSID;
-        $data['searchNAME'] = $searchNAME;
-        $data['searchITEMNAME'] = $searchITEMNAME;
+        $data['searchSKU'] = $searchSKU;
+        $data['searchProduct'] = $searchProduct;
+        $data['searchDate'] = $searchDate;
         $data['totalRow'] = $config['total_rows'];
         if ($this->session->userdata('login_id') == 'admin') {
 
@@ -140,11 +144,14 @@ class Purcase extends CI_Controller
     {
         // var_dump($this->input->post());
 
+        $currentDateTime = date("Y-m-d H:i:s");
+
         $SKU = $this->input->post('SKU');
         $buyingPrice = $this->input->post('buyingPrice');
         $qtyPurcase = $this->input->post('qtyPurcase');
         $priceAmount = $buyingPrice * $qtyPurcase;
-        $purcaseTimestamp = $this->input->post('purcaseTimestamp');
+        // $purcaseTimestamp = $this->input->post('purcaseTimestamp');
+        $purcaseTimestamp = NULL;
         $this->Purcase_model->save_purcase($SKU, $buyingPrice, $qtyPurcase, $priceAmount, $purcaseTimestamp);
 
         // $data['product'] = $this->Product_model->get_product();
