@@ -19,16 +19,26 @@
             </div>
             <h1 class="mt-10 text-white text-center text-xl">LOGIN</h1>
             <div class="mt-10 px-6 text-white">
+                <?php if (isset($error)): ?>
+                    <div class="p-2">
+                        <p class="mt-2 text-sm text-red-500">
+                            <?= $error ?>
+                        </p>
+                    </div>
+
+                <?php endif; ?>
+
                 <div class="p-2 ">
                     <label>Username</label><br>
-                    <input class="mt-2 mb-4 w-full h-[40px] border text-black px-5  rounded-md shadow-md" type="text"
-                        id="username" name="username" placeholder="   username">
+                    <input required class="mt-2 mb-4 w-full h-[40px] border text-black px-5  rounded-md shadow-md"
+                        type="text" id="username" name="username" placeholder="   username">
                 </div>
                 <div class="p-2 ">
                     <label>password</label><br>
-                    <input class="mt-2 mb-4 w-full  h-[40px] border text-black px-5  rounded-md shadow-md" type="text"
-                        id="password" name="password" placeholder="   password">
+                    <input class="mt-2 mb-4 w-full  h-[40px] border text-black px-5  rounded-md shadow-md"
+                        type="password" id="password" name="password" placeholder="   password">
                 </div>
+
                 <div class="grid items-center mt-10">
                     <button class=" px-[50px] py-1  rounded-sm bg-blue-700 hover:bg-primary" name="login" id="login"
                         value="true" type="submit">Login</button><br>

@@ -154,7 +154,8 @@ class Report_model extends CI_Model
             $this->db->where("orderTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
         }
         $this->db->group_by('SKU');
-        $result = $this->db->get();
+        $result = $this->db->limit($rowperpage, $rowno)->get();
+        // $result = $this->db->get();
 
 
 

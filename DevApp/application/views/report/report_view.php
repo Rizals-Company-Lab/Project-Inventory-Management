@@ -136,45 +136,50 @@
                             </tr>
                         </thead>
                         <?php foreach ($report->result() as $singleView): ?>
-                        <tbody>
-                            <tr
-                                class="cursor-pointer bg-white sm:text-center text-[12px] sm:text-base hover:bg-slate-300 duration-300">
+                            <tbody>
+                                <tr
+                                    class="cursor-pointer bg-white sm:text-center text-[12px] sm:text-base hover:bg-slate-300 duration-300">
 
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->SKU ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->productName ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->sellingPrice ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->buyingAmount ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->sellingAmount ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->selisih ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->stock ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->aset ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->profitEstimation ?>
-                                </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->SKU ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->productName ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->sellingPrice ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->buyingAmount ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->sellingAmount ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->selisih ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->stock ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->aset ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->profitEstimation ?>
+                                    </td>
 
-                            </tr>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </div>
                 </table>
             </div>
-            <?= $pagination ?>
+            <div class="flex justify-center mt-4">
+                <!-- Pagination -->
+                <div class="pagination">
+                    <?= $pagination; ?>
+                </div>
+            </div>
         </div>
         <!-- akhir tabel Details -->
     </div>

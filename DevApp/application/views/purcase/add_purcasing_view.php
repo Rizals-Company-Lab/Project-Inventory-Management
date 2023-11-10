@@ -34,9 +34,9 @@
             </div>
             <div>
                 <label class="font-bold sm:text-lg text-sm" for=""> HARGA PEMBELIAN</label>
-                <input
+                <input required
                     class="mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    type="number" min="1000" name="buyingPrice" id="buyingPrice" value="1000">
+                    type="number" min="1000" name="buyingPrice" id="buyingPrice" value="">
             </div>
             <div class="sm:flex ">
                 <div>
@@ -81,7 +81,13 @@
             var qtyPurcase = parseInt($("#qtyPurcase").val());
 
             // Menghitung total
-            var total = buyingPrice * qtyPurcase;
+            if (buyingPrice > 0) {
+
+                var total = buyingPrice * qtyPurcase;
+            } else {
+
+                var total = 0;
+            }
 
             // Menampilkan total pada elemen dengan id "total"
             $("#total").text(total);

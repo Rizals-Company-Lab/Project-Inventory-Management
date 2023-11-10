@@ -19,7 +19,7 @@ class Transaction extends CI_Controller
         $searchBuyer = "";
         $searchDate = "";
         $searchStatus = "";
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
         if ($this->input->post('search') != '') {
             $searchBuyer = $this->input->post('searchBuyer');
             $searchDate = $this->input->post('searchDate');

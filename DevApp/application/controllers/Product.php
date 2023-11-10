@@ -20,7 +20,7 @@ class Product extends CI_Controller
         $searchSKU = "";
         $searchProduct = "";
         $searchITEMNAME = "";
-        var_dump($this->input->post());
+        // var_dump($this->input->post());
         if ($this->input->post('search') != '') {
             $searchSKU = $this->input->post('searchSKU');
             $searchProduct = $this->input->post('searchProduct');

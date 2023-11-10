@@ -43,8 +43,8 @@ class Auth extends CI_Controller
                 redirect('Home');
                 // var_dump($user);
             } else {
-                echo 'errror';
-                // $data['error'] = 'Username atau password salah';
+                // echo 'errror';
+                $data['error'] = 'Username atau password salah';
             }
         }
 

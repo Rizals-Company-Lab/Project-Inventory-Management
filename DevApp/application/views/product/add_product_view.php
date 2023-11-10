@@ -9,14 +9,14 @@
                 <div>
                     <label class="font-bold sm:text-lg text-sm" for="SKU">KODE BARANG</label>
                     <br>
-                    <input
+                    <input required
                         class="mt-2 sm:text-lg text-sm appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         type="text" name="SKU" id="SKU" placeholder="BJR-TBL055-PNJ6">
                 </div>
                 <div>
                     <label class="font-bold sm:text-lg text-sm" for="productName">NAMA BARANG</label>
                     <br>
-                    <input
+                    <input required
                         class="mt-2 sm:text-lg text-sm appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         type="text" name="productName" id="productName" placeholder="Baja Ringan 65">
                 </div>
@@ -24,7 +24,7 @@
                     <label class="font-bold sm:text-lg text-sm" for="productDescription">DESKRIPSI
                         BARANG</label>
                     <br>
-                    <input
+                    <input required
                         class="mt-2 sm:text-lg text-sm appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         type="text" name="productDescription" id="productDescription"
                         placeholder="Baja Ringan lebar 65 panjang 70">
@@ -32,19 +32,19 @@
                 <div class="sm:flex justify-between font-bold">
                     <div>
                         <label for="sellingPrice">HARGA JUAL UMUM</label>
-                        <input
+                        <input required
                             class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             type="number" name="sellingPrice" id="sellingPrice" min="1" value="">
                     </div>
                     <div class="sm:ml-5">
                         <label for="distributorPrice">HARGA JUAL DISTRIBUTOR</label>
-                        <input
+                        <input required
                             class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             type="number" name="distributorPrice" id="distributorPrice" min="1" value="">
                     </div>
                     <div class="sm:ml-5">
                         <label for="materialPrice">HARGA JUAL MATERIAL</label>
-                        <input
+                        <input required
                             class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             type="number" name="materialPrice" id="materialPrice" min="1" value="">
                     </div>

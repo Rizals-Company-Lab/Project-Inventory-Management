@@ -138,12 +138,12 @@ class Report extends CI_Controller
         $data['totalRow'] = $config['total_rows'];
 
 
-        var_dump($this->Report_model->get_report_details_byProduct($dateStart, $dateEnd, $searchITEMNAME)->result());
+        // var_dump($this->Report_model->get_report_details_byProduct($dateStart, $dateEnd, $searchITEMNAME)->result());
 
 
-        var_dump($this->Report_model->get_report_count_details_byProduct($dateStart, $dateEnd, $searchITEMNAME));
-        var_dump($this->Report_model->get_purcasing_details($dateStart, $dateEnd, $searchITEMNAME)->result());
-        var_dump($this->Report_model->get_order_details($dateStart, $dateEnd, $searchITEMNAME)->result());
+        // var_dump($this->Report_model->get_report_count_details_byProduct($dateStart, $dateEnd, $searchITEMNAME));
+        // var_dump($this->Report_model->get_purcasing_details($dateStart, $dateEnd, $searchITEMNAME)->result());
+        // var_dump($this->Report_model->get_order_details($dateStart, $dateEnd, $searchITEMNAME)->result());
 
         $this->load->view('report/report_detail_view.php', $data);
         // $this->load->view('report/report_view', $data);
