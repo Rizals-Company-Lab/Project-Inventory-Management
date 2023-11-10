@@ -1,42 +1,49 @@
 <!-- navbar end -->
 <!-- tabel penjualan -->
 <div class="h-auto w-full overflow-x-auto  sm:ml-5 sm:mr-5 rounded-md shadow-sm  ">
-    <div class="mt-5">
-
-        <h1 class="text-center sm:text-3xl text-xl font-bold bg-bg2 py-3 ">
-            LIST BARANG PENJUALAN
-        </h1>
-
-        <div class="flex sm:mt-4 mt-3">
-            <div>
-                <a class="bg-slate-900 text-white text-[12px] sm:text-xl px-3 py-2 ml-3 rounded-md"
-                    href="<?= site_url('Product/add_product'); ?>"><i class="fa-sharp fa-solid fa-cart-plus"></i>
-                    TAMBAH DAFTAR
-                    BARANG PENJUALAN</a>
+    <h1 class="text-center mt-3 sm:text-3xl ml-5 mr-5 text-xl font-bold bg-bg2 py-3 ">
+        LIST BARANG PENJUALAN
+    </h1>
+    <div class="sm:flex sm:flex-wrap">
+        <div class="sm:mt-5 mt-10">
+            <div class="flex sm:mt-6 mt-3">
+                <div>
+                    <a class="bg-slate-900 text-white text-[12px] sm:text-xl px-3 py-5 ml-3 rounded-md"
+                        href="<?= site_url('Product/add_product'); ?>"><i class="fa-sharp fa-solid fa-cart-plus"></i>
+                        TAMBAH BARANG PENJUALAN</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="">
-        <form class="mt-5" action="<?= base_url('Product/index') ?>" method="post">
-            <label for="default-search">SKU</label>
-            <div>
-                <input class="mt-2 mb-4 w-full h-[40px] border text-black px-5  rounded-md shadow-md" type="search"
-                    id="searchSKU" name="searchSKU" placeholder="Cari SKU"
-                    value="<?= (isset($searchSKU)) ? $searchSKU : '' ?>">
-            </div>
-            <label for="default-search">Cari Barang</label>
-            <div>
-
-                <input class="mt-2 mb-4 w-full h-[40px] border text-black px-5  rounded-md shadow-md" type="search"
-                    id="searchProduct" name="searchProduct" placeholder="Cari Barang"
-                    value="<?= (isset($searchProduct)) ? $searchProduct : '' ?>">
-            </div>
-            <button type="submit" value="search" id="search" name="search"
-                class="text-white right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-        </form>
+        <div class="ml-5 mr-5">
+            <form class="sm:mt-5 mt-5" action="<?= base_url('Product/index') ?>" method="post">
+                <div class="sm:flex">
+                    <div>
+                        <label for="default-search">SKU</label>
+                        <div>
+                            <input class="mt-2 mb-4 w-full h-[40px] border text-black px-5  rounded-md shadow-md"
+                                type="search" id="searchSKU" name="searchSKU" placeholder="Cari SKU"
+                                value="<?= (isset($searchSKU)) ? $searchSKU : '' ?>">
+                        </div>
+                    </div>
+                    <div class="sm:ml-5">
+                        <label for="default-search">Cari Barang</label>
+                        <div>
+                            <input class="mt-2 mb-4 w-full h-[40px] border text-black px-5  rounded-md shadow-md"
+                                type="search" id="searchProduct" name="searchProduct" placeholder="Cari Barang"
+                                value="<?= (isset($searchProduct)) ? $searchProduct : '' ?>">
+                        </div>
+                    </div>
+                    <div class="sm:ml-5 sm:mt-0 -mt-10">
+                        <br>
+                        <button type="submit" value="search" id="search" name="search"
+                            class="text-white mt-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="overflow-x-scroll">
-        <table class=" w-[600px] sm:text-sm  sm:w-full sm:mt-5">
+        <table class=" w-[600px] sm:text-sm -mt-5 sm:w-full sm:mt-5">
             <div class="p-3 w-full sm:bg-dark">
                 <thead class="bg-blue-400">
                     <tr class="text-[10px] sm:text-[14px]">
@@ -100,8 +107,6 @@
     </div>
 </div>
 
-</div>
-</div>
 <!-- akhir tabel penjualan -->
 <script src="<?= base_url() ?>/dist/js/script.js"></script>
 </body>
