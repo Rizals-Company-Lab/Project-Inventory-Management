@@ -29,19 +29,25 @@
                         type="text" name="productDescription" id="productDescription"
                         placeholder="Baja Ringan lebar 65 panjang 70">
                 </div>
-                <div>
-                    <label for="sellingPrice">HARGA JUAL UMUM</label>
-                    <input
-                        class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        type="number" name="sellingPrice" id="sellingPrice" min="1" value="">
-                    <label for="distributorPrice">HARGA JUAL DISTRIBUTOR</label>
-                    <input
-                        class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        type="number" name="distributorPrice" id="distributorPrice" min="1" value="">
-                    <label for="materialPrice">HARGA JUAL MATERIAL</label>
-                    <input
-                        class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        type="number" name="materialPrice" id="materialPrice" min="1" value="">
+                <div class="sm:flex justify-between font-bold">
+                    <div>
+                        <label for="sellingPrice">HARGA JUAL UMUM</label>
+                        <input
+                            class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="number" name="sellingPrice" id="sellingPrice" min="1" value="">
+                    </div>
+                    <div class="sm:ml-5">
+                        <label for="distributorPrice">HARGA JUAL DISTRIBUTOR</label>
+                        <input
+                            class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="number" name="distributorPrice" id="distributorPrice" min="1" value="">
+                    </div>
+                    <div class="sm:ml-5">
+                        <label for="materialPrice">HARGA JUAL MATERIAL</label>
+                        <input
+                            class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="number" name="materialPrice" id="materialPrice" min="1" value="">
+                    </div>
                 </div>
                 <br>
             </div>
