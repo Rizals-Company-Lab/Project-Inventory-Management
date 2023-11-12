@@ -322,7 +322,7 @@ class Transaction_model extends CI_Model
             foreach ($POSTDATA as $key => $value) {
                 if (strpos($key, 'qtyOrder') === 0) {
                     $idCheckout = substr($key, 8);
-                    echo $idCheckout;
+                    // echo $idCheckout;
                     $qtyOrder = $value;
                     $sellingPrice = $POSTDATA[$typeTrans . $idCheckout];
                     $priceAmount = $sellingPrice * $qtyOrder;

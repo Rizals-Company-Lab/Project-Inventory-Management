@@ -372,7 +372,7 @@
         $('#loading-container').show();
         console.log("loadinggggggg");
         $.ajax({
-            url: "<?= base_url('transaction_umum/insert_checkout') ?>",
+            url: "<?= base_url('Transaction_umum/insert_checkout') ?>",
             type: "post",
             data: {
                 SKU: SKU
@@ -404,7 +404,7 @@
         $('#loading-container').show();
         console.log("loadinggggggg");
         $.ajax({
-            url: "<?= base_url('transaction_umum/delete_checkout') ?>",
+            url: "<?= base_url('Transaction_umum/delete_checkout') ?>",
             type: "post",
             data: {
                 SKU: SKU

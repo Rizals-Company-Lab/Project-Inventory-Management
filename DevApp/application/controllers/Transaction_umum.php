@@ -84,7 +84,7 @@ class Transaction_umum extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('ajax/CheckoutList_umum.php', $data);
+        $this->load->view('ajax/checkoutList_umum.php', $data);
     }
 
     public function delete_checkout()
@@ -96,7 +96,7 @@ class Transaction_umum extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('ajax/CheckoutList_umum.php', $data);
+        $this->load->view('ajax/checkoutList_umum.php', $data);
     }
 
     public function delete_order()

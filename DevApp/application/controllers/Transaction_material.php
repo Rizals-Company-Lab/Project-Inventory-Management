@@ -84,7 +84,7 @@ class transaction_material extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('ajax/CheckoutList_material.php', $data);
+        $this->load->view('ajax/checkoutList_material.php', $data);
     }
 
     public function delete_checkout()
@@ -96,7 +96,7 @@ class transaction_material extends CI_Controller
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('ajax/CheckoutList_material.php', $data);
+        $this->load->view('ajax/checkoutList_material.php', $data);
     }
 
     public function delete_order()
