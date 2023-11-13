@@ -169,7 +169,9 @@ class Product_model extends CI_Model
             'SKU' => $SKU,
             'productName' => $productName,
             'productDescription' => $productDescription,
-            'sellingPrice' => $sellingPrice
+            'sellingPrice' => $sellingPrice,
+            'distributorPrice' => $distributorPrice,
+            'materialPrice' => $materialPrice
         );
 
         $this->db->insert('tbl_product', $data_tbl_product);
