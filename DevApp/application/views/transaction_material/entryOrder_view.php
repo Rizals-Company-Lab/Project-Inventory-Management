@@ -1,25 +1,8 @@
 <body>
     <form
-        class="sm:mx-auto  bg-white sm:mt-5 relative mb-5 w-auto mt-6 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
+        class="sm:mx-auto  sm:mt-5 relative mb-5 w-auto mt-0 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
         action="<?= site_url('transaction_material/save_transaction'); ?>" method="post">
-        <h1 class="font-bold sm:text-2xl text-base py-3 bg-bg2 text-center">TAMBAH TRANSAKSI MATERIAL</h1>
-        <br>
-        <div class="flex w-full justify-evenly">
-            <div>
-                <label class="font-bold sm:text-lg text-sm " for="buyerName">Nama Pembeli</label>
-
-                <input
-                    class="mt-2 appearance-none w-full bg-gray-200 text-gray-700 border border-blue-500 rounded sm:py-3 py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    required type="text" name="buyerName" id="buyerName">
-            </div>
-            <div class="ml-10">
-                <label class="font-bold sm:text-lg text-base " for="bankAccountNumber">Rekening</label>
-
-                <input
-                    class="mt-2 appearance-none  w-full bg-gray-200 text-gray-700 border border-blue-500 rounded sm:py-3 py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    type="text" name="bankAccountNumber" id="bankAccountNumber">
-            </div>
-        </div>
+        <h1 class="font-bold sm:text-2xl text-base mb-3 py-3 bg-bg2 text-center">TAMBAH TRANSAKSI MATERIAL</h1>
         <style>
         #loading-container {
             position: fixed;
@@ -51,13 +34,42 @@
             <div id="loading-spinner"></div>
         </div>
         <div id="allContent">
-            <div class="mt-3">
-                <label for="search">Search:</label>
-                <input class="mt-2 sm:mb-4 sm:w-1/2 h-[40px] border text-black px-5  rounded-md shadow-md" type="text"
-                    id="search" placeholder="Cari Barang Disini...">
+            <div class="sm:flex w-full sm:justify-evenly">
+                <div class="">
+                    <label class="font-bold sm:text-lg text-sm " for="buyerName">Nama Pembeli :</label>
+                    <input class="mt-2 w-full py-2 border text-black px-5  rounded-md shadow-md"
+                        placeholder="Nama Pembeli" required type="text" name="buyerName" id="buyerName">
+                </div>
+                <div class="sm:ml-3">
+                    <label class="font-bold sm:text-lg text-sm " for="buyerName">Alamat Pembeli :</label>
+                    <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
+                        placeholder="Alamat Pembeli" required type="text" name="buyerName" id="buyerName">
+                </div>
+                <div class="sm:ml-3">
+                    <label class="font-bold sm:text-lg text-sm " for="buyerName">No Hp Pembeli :</label>
+                    <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
+                        placeholder="No Hp Pembeli" required type="text" name="buyerName" id="buyerName">
+                </div>
+                <div class="sm:ml-3">
+                    <label class="font-bold sm:text-lg text-sm " for="buyerName">No. REK Pembeli :</label>
+                    <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
+                        placeholder="Rekening Pembeli" required type="text" name="buyerName" id="buyerName">
+                </div>
+            </div>
+            <div class="sm:flex w-full justify-between mb-5 sm:mt-3">
+                <div class="">
+                    <label class="font-bold sm:text-lg text-sm" for="search">Search:</label>
+                    <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md" type="text"
+                        id="search" placeholder="Cari Barang Disini...">
+                </div>
+                <div class="sm:ml-3">
+                    <label class="font-bold sm:text-lg text-sm" for="buyerName">Ongkos Kirim :</label>
+                    <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
+                        placeholder="Input Nominal" required type="text" name="buyerName" id="buyerName">
+                </div>
             </div>
             <div class="overflow-x-scroll">
-                <table class=" w-[500px] sm:w-full mt-5">
+                <table class=" w-[500px] sm:w-full mt-0 sm:mt-5">
                     <div class="p-3 w-full sm:bg-dark">
                         <thead class="bg-blue-400">
                             <tr class="text-[12px] sm:text-xl">
