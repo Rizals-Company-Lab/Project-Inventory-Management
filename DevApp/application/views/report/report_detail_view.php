@@ -137,7 +137,7 @@
                 <H1 class="text-center rounded-md sm:text-3xl text-sm  font-bold  bg-blue-500  py-3 ">KOLAKAN
                 </H1>
                 <div class="sm:flex">
-                    <div class="rounded-md sm:mb-5 w-full  mt-3 py-3 px-3 bg-green-600">
+                    <div class="rounded-md sm:mb-5 w-full  mt-3 py-3 px-3 bg-blue-600">
                         <h1 class="font-bold text-white">
                             TOTAL QTY
                             <input
@@ -145,7 +145,7 @@
                                 disabled value="<?= $grandTotalPurcase->grandTotalQtyPurcase ?>" type="text">
                         </h1>
                     </div>
-                    <div class="rounded-md sm:mb-5 w-full sm:ml-5  mt-3 py-3 px-3 bg-green-600">
+                    <div class="rounded-md sm:mb-5 w-full sm:ml-5  mt-3 py-3 px-3 bg-blue-600">
                         <h1 class="font-bold text-white">
                             TOTAL BELI
                             <input
@@ -156,7 +156,7 @@
                 </div>
                 <H1 class="text-center sm:text-3xl text-sm rounded-md font-bold  bg-bg2 py-3 mt-3">PENJUALAN</H1>
                 <div class="sm:flex">
-                    <div class="rounded-md sm:mb-5 w-full   mt-3 py-3 px-3 bg-green-600">
+                    <div class="rounded-md sm:mb-5 w-full   mt-3 py-3 px-3 bg-bg2">
                         <h1 class="font-bold text-white">
                             TOTAL QTY
                             <input
@@ -164,12 +164,31 @@
                                 disabled value="<?= $grandTotalOrder->grandTotalQtyOrder ?>" type="text">
                         </h1>
                     </div>
-                    <div class="rounded-md sm:mb-5 w-full sm:ml-5  mt-3 py-3 px-3 bg-green-600">
+                    <div class="rounded-md sm:mb-5 w-full sm:ml-5  mt-3 py-3 px-3 bg-bg2">
                         <h1 class="font-bold text-white">
                             TOTAL JUAL
                             <input
                                 class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 disabled value="<?= $grandTotalOrder->grandTotalPriceOrderAmount ?>" type="text">
+                        </h1>
+                    </div>
+                </div>
+                <H1 class="text-center sm:text-3xl text-sm rounded-md font-bold  bg-red-500 py-3 mt-3">PENGELUARAN</H1>
+                <div class="sm:flex">
+                    <div class="rounded-md sm:mb-5 w-full   mt-3 py-3 px-3 bg-red-600">
+                        <h1 class="font-bold text-white">
+                            TOTAL QTY
+                            <input
+                                class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                disabled value="<?= $grandTotalSpending->grandTotalQtySpending ?>" type="text">
+                        </h1>
+                    </div>
+                    <div class="rounded-md sm:mb-5 w-full sm:ml-5  mt-3 py-3 px-3 bg-red-600">
+                        <h1 class="font-bold text-white">
+                            TOTAL PENGELUARAN
+                            <input
+                                class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                disabled value="<?= $grandTotalSpending->grandTotalPriceSpendingAmount ?>" type="text">
                         </h1>
                     </div>
                 </div>
@@ -186,31 +205,54 @@
                                 <th class="py-3">TOTAL JUAL </th>
                             </tr>
                         </thead>
-                        <?php foreach ($reportDetailProduct->result() as $singleView): ?>
                         <tbody>
-                            <tr
-                                class="cursor-pointer bg-white sm:text-center text-[12px] sm:text-base hover:bg-slate-300 duration-300">
+                            <?php foreach($reportDetailProduct->result() as $singleView): ?>
+                                <tr
+                                    class="cursor-pointer bg-white sm:text-center text-[12px] sm:text-base hover:bg-slate-300 duration-300">
 
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->SKU ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->productName ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->grandTotalQtyAmount ?>
-                                </td>
-                                <td class="py-3 w-auto">
-                                    <?= $singleView->grandTotalSellingAmount ?>
-                                </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->SKU ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->productName ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->grandTotalQtyAmount ?>
+                                    </td>
+                                    <td class="py-3 w-auto">
+                                        <?= $singleView->grandTotalSellingAmount ?>
+                                    </td>
 
-                            </tr>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </div>
                 </table>
             </div>
             <?= $pagination ?>
+            <div class="bg-white font-bold sm:text-base text-[12px] rounded-md mb-1 mt-1 py-3">
+                <div class="sm:ml-20 sm:mr-20 ml-5 ">
+                    <div class="flex mt-2 mr-3 mb-5 bg-slate-400">
+                        <p class="sm:px-5 sm:py-2 px-3 py-2 sm:w-[400px] w-[200px]">KATEGORI PENGELUARAN</p><span
+                            class="sm:w-full   w-[200px] px-5 py-2  rounded-md">
+                            TOTAL PENGELUARAN</span>
+                    </div>
+                    <?php foreach($spending as $singleView): ?>
+                        <tbody>
+
+
+                            <div class="flex mt-2 mr-3 bg-slate-300">
+                                <p class="sm:px-5 sm:py-2 px-3 py-2 sm:w-[200px] w-[400px]">
+                                    <?= $singleView->totalSpending ?>
+                                </p><span class="sm:w-full   w-[200px] py-2  rounded-md">
+                                    <?= $singleView->categorySpending ?>
+                                </span>
+                            </div>
+                        <?php endforeach; ?>
+
+
+                </div>
+            </div>
         </div>
         <!-- akhir tabel Details -->
     </div>

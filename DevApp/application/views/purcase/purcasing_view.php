@@ -70,54 +70,50 @@
                     </tr>
                 </thead>
                 <?php foreach ($purcase->result() as $singleView): ?>
-                    <tbody>
-                        <tr
-                            class="cursor-pointer text-[10px] sm:text-lg text-center bg-white py-2 hover:bg-blue-200 duration-300">
-                            <td class="py-3 w-auto">
-                                <?= $singleView->SKU ?>
-                            </td>
-                            <td class="py-3 w-auto  ">
-                                <?= $singleView->productName ?>
-                            </td>
-                            <td class="py-3 w-auto  ">
-                                <?= $singleView->buyingPrice ?>
-                            </td>
-                            <td class="py-3 w-auto   ">
-                                <?= $singleView->qtyPurcase ?>
-                            </td>
-                            <td class="py-3 w-auto  ">
-                                <?= $singleView->priceAmount ?>
-                            </td>
-                            <td class="py-3 w-auto  ">
-                                <?= $singleView->purcaseTimestamp ?>
-                            </td>
-                            <td class="py-3 w-auto text-white  text-center">
-                                <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
+                <tbody>
+                    <tr
+                        class="cursor-pointer text-[10px] sm:text-lg text-center bg-white py-2 hover:bg-blue-200 duration-300">
+                        <td class="py-3 w-auto">
+                            <?= $singleView->SKU ?>
+                        </td>
+                        <td class="py-3 w-auto  ">
+                            <?= $singleView->productName ?>
+                        </td>
+                        <td class="py-3 w-auto  ">
+                            <?= $singleView->buyingPrice ?>
+                        </td>
+                        <td class="py-3 w-auto   ">
+                            <?= $singleView->qtyPurcase ?>
+                        </td>
+                        <td class="py-3 w-auto  ">
+                            <?= $singleView->priceAmount ?>
+                        </td>
+                        <td class="py-3 w-auto  ">
+                            <?= $singleView->purcaseTimestamp ?>
+                        </td>
+                        <td class="py-3 w-auto text-white  text-center">
+                            <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                                 onclick="insertDataPesan(<?= $singleView->idPurcase ?>)">Update</button> -->
-                                <!-- <button class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
+                            <!-- <button class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
                             onclick="insertDataPesan(<?= $singleView->idPurcase ?>)">Details</button> -->
-                                <form action="<?= site_url('purcase/get_update'); ?>" method="post">
-                                    <button type="submit" value="<?= $singleView->idPurcase ?>" name="idPurcase"
-                                        id="idPurcase"
-                                        class="bg-lime-400 rounded-md px-3 py-1 shadow-md hover:bg-lime-600"><i
-                                            class="fa-regular fa-pen-to-square"></i> Update</button>
-                                </form>
+                            <form action="<?= site_url('purcase/get_update'); ?>" method="post">
+                                <button type="submit" value="<?= $singleView->idPurcase ?>" name="idPurcase"
+                                    id="idPurcase"
+                                    class="bg-lime-400 rounded-md px-3 py-1 shadow-md hover:bg-lime-600"><i
+                                        class="fa-regular fa-pen-to-square"></i> Update</button>
+                            </form>
 
 
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     <?php endforeach; ?>
                 </tbody>
             </div>
         </table>
         <div>
-            <div>
-                <p class="px-5 font-bold">
-                    Total Transaksi =
-                    <?= $totalRow ?>
-                </p>
-
-            </div>
+            <p>Total Transaksi =
+                <?= $totalRow ?>
+            </p>
         </div>
     </div>
     <div class="flex justify-center mt-4">

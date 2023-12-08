@@ -65,56 +65,68 @@
             </div>
             <div class="flex sm:mt-3">
                 <div class="">
-                    <div class="sm:flex justify-evenly">
-                        <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-red-600">
-                            <h1 class="font-bold text-white">
-                                TOTAL BELI :
-                                <input
-                                    class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                    disabled type="text" value="<?= $grandTotal->grandTotalBuyingAmount ?>">
-                            </h1>
-                        </div>
-                        <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-lime-600">
-                            <h1 class="font-bold text-white">
-                                TOTAL JUAL :
-                                <input
-                                    class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                    disabled type="text" value=" <?= $grandTotal->grandTotalSellingAmount ?>">
-
-                            </h1>
-                        </div>
-                        <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-yellow-400">
-                            <h1 class="font-bold text-white">
-                                KEUNTUNGAN :
-                                <input
-                                    class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                    disabled type="text" value=" <?= $grandTotal->grandTotalDifference ?>">
-                            </h1>
-                        </div>
-                        <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-orange-500">
-                            <h1 class="font-bold text-white">
-                                ASET :
-                                <input
-                                    class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                    disabled type="text" value=" <?= $grandTotal->grandTotalaset ?>">
-                            </h1>
-                        </div>
-                        <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-green-600">
-                            <h1 class="font-bold text-white">
-                                PROFIT ESTIMASI
-                                <input
-                                    class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                    disabled type="text" value=" <?= $grandTotal->grandTotalProfitEstimation ?>">
-                            </h1>
-                        </div>
-                        <a class="rounded-md hover:bg-blue-800 flex justify-center items-center sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-blue-500"
-                            href="<?php echo site_url('Report/Details'); ?>">
-                            <div>
-                                <h1 class="px-5  text-white font-bold">
-                                    FILTER PROFIT
+                    <div>
+                        <div class="sm:flex justify-evenly">
+                            <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-red-600">
+                                <h1 class="font-bold text-white">
+                                    TOTAL BELI :
+                                    <input
+                                        class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        disabled type="text" value="<?= $grandTotal->grandTotalBuyingAmount ?>">
                                 </h1>
                             </div>
-                        </a>
+                            <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-lime-600">
+                                <h1 class="font-bold text-white">
+                                    TOTAL JUAL :
+                                    <input
+                                        class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        disabled type="text" value=" <?= $grandTotal->grandTotalSellingAmount ?>">
+
+                                </h1>
+                            </div>
+                            <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-yellow-400">
+                                <h1 class="font-bold text-white">
+                                    KEUNTUNGAN :
+                                    <input
+                                        class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        disabled type="text" value=" <?= $grandTotal->grandTotalDifference ?>">
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="sm:flex justify-evenly">
+                            <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-orange-500">
+                                <h1 class="font-bold text-white">
+                                    ASET :
+                                    <input
+                                        class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        disabled type="text" value=" <?= $grandTotal->grandTotalaset ?>">
+                                </h1>
+                            </div>
+                            <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-green-600">
+                                <h1 class="font-bold text-white">
+                                    PROFIT ESTIMASI
+                                    <input
+                                        class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        disabled type="text" value=" <?= $grandTotal->grandTotalProfitEstimation ?>">
+                                </h1>
+                            </div>
+                            <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-green-600">
+                                <h1 class="font-bold text-white">
+                                    PENGELUARAN HARIAN
+                                    <input
+                                        class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        disabled type="text" value=" <?= $totalSpending ?>">
+                                </h1>
+                            </div>
+                            <a class="rounded-md hover:bg-blue-800 flex justify-center items-center sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-blue-500"
+                                href="<?php echo site_url('Report/Details'); ?>">
+                                <div>
+                                    <h1 class="px-5  text-white font-bold">
+                                        FILTER PROFIT
+                                    </h1>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,7 +147,7 @@
                                 <th class="py-3"> PROF EST</th>
                             </tr>
                         </thead>
-                        <?php foreach ($report->result() as $singleView): ?>
+                        <?php foreach($report->result() as $singleView): ?>
                             <tbody>
                                 <tr
                                     class="cursor-pointer bg-white sm:text-center text-[12px] sm:text-base hover:bg-slate-300 duration-300">
@@ -174,12 +186,7 @@
                     </div>
                 </table>
             </div>
-            <div class="flex justify-center mt-4">
-                <!-- Pagination -->
-                <div class="pagination">
-                    <?= $pagination; ?>
-                </div>
-            </div>
+            <?= $pagination ?>
         </div>
         <!-- akhir tabel Details -->
     </div>

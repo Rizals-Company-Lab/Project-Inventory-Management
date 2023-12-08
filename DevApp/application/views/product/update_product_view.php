@@ -33,6 +33,11 @@
                     class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="number" name="materialPrice" id="materialPrice" min="1"
                     value="<?= $product->materialPrice ?>">
+                <label for="productionPrice">HARGA JUAL PRODUKSI</label>
+                <input
+                    class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    type="number" name="productionPrice" id="productionPrice" min="1"
+                    value="<?= $product->productionPrice ?>">
 
                 <button
                     class="sm:text-lg mb-3 text-base font-bold px-[50px] text-white py-2 w-full rounded-sm bg-blue-700 hover:bg-primary"
