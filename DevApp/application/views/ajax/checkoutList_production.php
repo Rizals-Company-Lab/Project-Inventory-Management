@@ -27,7 +27,7 @@
                                 <?= $singleView->productDescription ?>
                             </td>
                             <td class="py-3 w-auto">
-                                <?= $singleView->materialPrice ?>
+                                <?= $singleView->productionPrice ?>
                             </td>
                             <td class="py-3 w-auto">
                                 <?= $singleView->sisa_stock ?>
@@ -107,9 +107,9 @@
                                 <input type="hidden" name="SKU<?= $row->idCheckout ?>" id="SKU<?= $row->idCheckout ?>"
                                     value="<?= $row->idCheckout ?>">
 
-                                <input type="hidden" name="materialPrice<?= $row->idCheckout ?>"
-                                    id="materialPrice<?= $row->idCheckout ?>" value="<?= $row->materialPrice ?>">
-                                <!-- <?= $row->materialPrice ?> -->
+                                <input type="hidden" name="productionPrice<?= $row->idCheckout ?>"
+                                    id="productionPrice<?= $row->idCheckout ?>" value="<?= $row->productionPrice ?>">
+                                <!-- <?= $row->productionPrice ?> -->
                                 <td class="border px-3 py-2 shadow-sm">
                                     <!-- <input type="hidden" name="productName<?= $row->productName ?>"
                                         id="productName<?= $row->productName ?>" value="<?= $row->productName ?>"> -->

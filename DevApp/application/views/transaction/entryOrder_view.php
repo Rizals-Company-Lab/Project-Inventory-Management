@@ -1,25 +1,8 @@
 <body>
     <form
-        class="sm:mx-auto  bg-white sm:mt-5 relative mb-5 w-auto mt-6 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
+        class="sm:mx-auto  bg-white sm:mt-5 relative mb-5 w-auto mt-0 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
         action="<?= site_url('transaction/save_transaction'); ?>" method="post">
-        <h1 class="font-bold sm:text-2xl text-base py-3 bg-bg2 text-center">TAMBAH TRANSAKSI</h1>
-        <br>
-        <div class="flex w-full justify-evenly">
-            <div>
-                <label class="font-bold sm:text-lg text-sm " for="buyerName">Nama Pembeli</label>
-
-                <input
-                    class="mt-2 appearance-none w-full bg-gray-200 text-gray-700 border border-blue-500 rounded sm:py-3 py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    required type="text" name="buyerName" id="buyerName">
-            </div>
-            <div class="ml-10">
-                <label class="font-bold sm:text-lg text-base " for="bankAccountNumber">Rekening</label>
-
-                <input
-                    class="mt-2 appearance-none  w-full bg-gray-200 text-gray-700 border border-blue-500 rounded sm:py-3 py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    type="text" name="bankAccountNumber" id="bankAccountNumber">
-            </div>
-        </div>
+        <h1 class="font-bold sm:text-2xl text-base mb-3 py-3 bg-bg2 text-center">TAMBAH TRANSAKSI</h1>
         <style>
             #loading-container {
                 position: fixed;
@@ -50,13 +33,48 @@
         <div id="loading-container">
             <div id="loading-spinner"></div>
         </div>
-        <div id="allContent">
-            <div class="mt-3">
-                <label for="search">Search:</label>
-                <input type="text" id="search" placeholder="Enter keywords...">
+        <div class="sm:flex w-full sm:justify-evenly">
+            <div class="">
+                <label class="font-bold sm:text-lg text-sm " for="buyerName">Nama Pembeli :</label>
+                <input class="mt-2 w-full py-2 border text-black px-5  rounded-md shadow-md" placeholder="Nama Pembeli"
+                    required type="text" name="buyerName" id="buyerName"
+                    value="<?= (isset($buyerNameTransaction)) ? $buyerNameTransaction : '' ?>">
             </div>
+            <div class="sm:ml-3">
+                <label class="font-bold sm:text-lg text-sm " for="buyerAddress">Alamat Pembeli :</label>
+                <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
+                    placeholder="Alamat Pembeli" required type="text" name="buyerAddress" id="buyerAddress"
+                    value="<?= (isset($buyerAddressTransaction)) ? $buyerAddressTransaction : '' ?>">
+            </div>
+            <div class="sm:ml-3">
+                <label class="font-bold sm:text-lg text-sm " for="buyerPhone">No Hp Pembeli :</label>
+                <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
+                    placeholder="No Hp Pembeli" required type="text" name="buyerPhone" id="buyerPhone"
+                    value="<?= (isset($buyerPhoneTransaction)) ? $buyerPhoneTransaction : '' ?>">
+            </div>
+            <div class="sm:ml-3">
+                <label class="font-bold sm:text-lg text-sm " for="bankAccountNumber">No. REK Pembeli :</label>
+                <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
+                    placeholder="Rekening Pembeli" required type="text" name="bankAccountNumber" id="bankAccountNumber"
+                    value="<?= (isset($bankAccountNumberTransaction)) ? $bankAccountNumberTransaction : '' ?>">
+            </div>
+        </div>
+        <div class="sm:flex w-full justify-between mb-5 sm:mt-3">
+            <div class="">
+                <label class="font-bold sm:text-lg text-sm" for="search">Search:</label>
+                <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md" type="text" id="search"
+                    placeholder="Cari Barang Disini...">
+            </div>
+            <div class="sm:ml-3">
+                <label class="font-bold sm:text-lg text-sm" for="ongkir">Ongkos Kirim :</label>
+                <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
+                    placeholder="Input Nominal" required type="number" name="ongkir" id="ongkir"
+                    value="<?= (isset($ongkirTransaction)) ? $ongkirTransaction : '' ?>">
+            </div>
+        </div>
+        <div id="allContent">
             <div class="overflow-x-scroll">
-                <table class=" w-[500px] sm:w-full mt-5">
+                <table class=" w-[500px] sm:w-full mt-0 sm:mt-5">
                     <div class="p-3 w-full sm:bg-dark">
                         <thead class="bg-blue-400">
                             <tr class="text-[12px] sm:text-xl">
@@ -70,7 +88,7 @@
                         </thead>
                         <tbody id="dataProduct">
 
-                            <?php foreach ($product->result() as $singleView): ?>
+                            <?php foreach($product->result() as $singleView): ?>
                                 <tr
                                     class="cursor-pointer text-[10px] sm:text-xl bg-white py-2  hover:bg-slate-200 duration-300">
                                     <td class="py-3 w-auto">
@@ -158,7 +176,7 @@
                             </thead>
                             <tbody>
 
-                                <?php foreach ($checkout->result() as $row): ?>
+                                <?php foreach($checkout->result() as $row): ?>
                                     <tr>
 
                                         <input type="hidden" name="SKU<?= $row->idCheckout ?>"
@@ -177,12 +195,12 @@
                                         </td>
                                         <td class="border px-3 py-2 shadow-sm">
 
-                                            <input type="number" name="qtyOrder<?= $row->idCheckout ?>" value="1" min="1"
-                                                max="<?php foreach ($product->result() as $singleView):
-                                                    if ($row->SKU == $singleView->SKU) {
-                                                        echo $singleView->sisa_stock;
-                                                    }
-                                                endforeach; ?>">
+                                            <input class="py-2 w-full ml-3 text-center border" type="number"
+                                                name="qtyOrder<?= $row->idCheckout ?>" value="1" min="1" max="<?php foreach($product->result() as $singleView):
+                                                      if($row->SKU == $singleView->SKU) {
+                                                          echo $singleView->sisa_stock;
+                                                      }
+                                                  endforeach; ?>">
                                         </td>
                                         <td class="border px-3 py-2 shadow-sm">
 
@@ -209,10 +227,26 @@
 
 <script src="<?= base_url() ?>dist/js/jquery.min.js"></script>
 
+<script>
+    function validateAndSubmit() {
+        $.ajax({
+            url: "<?= base_url('transaction_umum/check_order_product') ?>",
+            type: "post",
+            success: function (response) {
+                console.log(response);
+                // Response akan berisi hasil dari validasi di server
+                if (response === 'sudah') {
+                    // Jika validasi berhasil, kirim formulir
+                    document.forms[0].submit(); // Ganti 0 dengan indeks formulir yang sesuai jika ada lebih dari satu formulir
+                } else {
+                    // Jika validasi gagal, berikan pesan atau lakukan tindakan lain
+                    alert("Belum Memilih Pesanan");
+                }
+            }
+        });
+    }
+</script>
 <script type="text/javascript">
-
-
-
     function test() {
 
         var currentPage = sessionStorage.getItem('currentPage') || 1;
@@ -349,6 +383,7 @@
             }
 
         });
+
         function searchProduct() {
 
             var searchText = sessionStorage.getItem('searchText');
@@ -372,7 +407,7 @@
         $('#loading-container').show();
         console.log("loadinggggggg");
         $.ajax({
-            url: "<?= base_url('Transaction_umum/insert_checkout') ?>",
+            url: "<?= base_url('transaction_umum/insert_checkout') ?>",
             type: "post",
             data: {
                 SKU: SKU
@@ -404,7 +439,7 @@
         $('#loading-container').show();
         console.log("loadinggggggg");
         $.ajax({
-            url: "<?= base_url('Transaction_umum/delete_checkout') ?>",
+            url: "<?= base_url('transaction_umum/delete_checkout') ?>",
             type: "post",
             data: {
                 SKU: SKU

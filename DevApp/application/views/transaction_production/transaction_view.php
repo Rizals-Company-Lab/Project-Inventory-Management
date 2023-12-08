@@ -28,20 +28,11 @@
             </div>
         </a>
         <a class="rounded-md w-full sm:py-5 hover:bg-blue-800 flex justify-center items-center sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-dark"
-            href="<?php echo site_url('Transaction_distributor/add_new_transaction'); ?>">
-            <div>
-                <h1 class="px-5 text-white font-bold">
-                    <i class="fa-sharp fa-solid fa-cart-plus">
-                    </i> TAMBAH DISTRIBUTOR
-                </h1>
-            </div>
-        </a>
-        <a class="rounded-md w-full sm:py-5 hover:bg-blue-800 flex justify-center items-center sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-dark"
             href="<?php echo site_url('Transaction_production/add_new_transaction'); ?>">
             <div>
                 <h1 class="px-5 text-white font-bold">
                     <i class="fa-sharp fa-solid fa-cart-plus">
-                    </i> TAMBAH PRODUCTION
+                    </i> TAMBAH production
                 </h1>
             </div>
         </a>

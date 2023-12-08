@@ -1,10 +1,8 @@
 <?php
 
-class Product_model extends CI_Model
-{
+class Product_model extends CI_Model {
 
-    public function get_stock_product()
-    {
+    public function get_stock_product() {
         // $this->db->select('TPC.SKU, productName, productDescription, sellingPrice, SUM(qtyPurcase) AS QTY');
         // $this->db->from('tbl_purcase AS TPC');
         // $this->db->join('tbl_product AS TPD', 'TPC.SKU = TPD.SKU');
@@ -29,7 +27,7 @@ class Product_model extends CI_Model
             ->group_by('SKU')
             ->get_compiled_select();
 
-        $this->db->select('p.SKU, productName, productDescription, sellingPrice, distributorPrice, materialPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
+        $this->db->select('p.SKU, productName, productDescription, sellingPrice, distributorPrice, materialPrice, productionPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
             ->from("($subquery_s) s")
             ->join("($subquery_t) t", 's.SKU = t.SKU', 'left')
             ->join('tbl_product p', 's.SKU = p.SKU', 'right');
@@ -55,8 +53,7 @@ class Product_model extends CI_Model
         return $result;
     }
 
-    public function get_stock_product_limit($rowno, $rowperpage, $searchSKU, $searchProduct, $searchITEMNAME)
-    {
+    public function get_stock_product_limit($rowno, $rowperpage, $searchSKU, $searchProduct, $searchITEMNAME) {
         // $this->db->select('TPC.SKU, productName, productDescription, sellingPrice, SUM(qtyPurcase) AS QTY');
         // $this->db->from('tbl_purcase AS TPC');
         // $this->db->join('tbl_product AS TPD', 'TPC.SKU = TPD.SKU');
@@ -81,7 +78,7 @@ class Product_model extends CI_Model
             ->group_by('SKU')
             ->get_compiled_select();
 
-        $this->db->select('p.SKU, productName, productDescription,  sellingPrice, distributorPrice, materialPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
+        $this->db->select('p.SKU, productName, productDescription,  sellingPrice, distributorPrice, materialPrice, productionPrice,  s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
             ->from("($subquery_s) s")
             ->join("($subquery_t) t", 's.SKU = t.SKU', 'left')
             ->join('tbl_product p', 's.SKU = p.SKU', 'right');
@@ -91,11 +88,11 @@ class Product_model extends CI_Model
 
         // $query = $this->db->get();
 
-        if ($searchSKU) {
+        if($searchSKU) {
             $this->db->like('p.SKU', $searchSKU);
         }
 
-        if ($searchProduct) {
+        if($searchProduct) {
             $this->db->like('p.productName', $searchProduct);
         }
 
@@ -114,19 +111,18 @@ class Product_model extends CI_Model
     }
 
 
-    public function get_product_count($searchSKU = "", $searchProduct = "", $ITEMNAME = "")
-    {
+    public function get_product_count($searchSKU = "", $searchProduct = "", $ITEMNAME = "") {
         $this->db->select('*');
         $this->db->from('tbl_product');
 
         // $this->db->like('INVENTTRANSID', $INVENTTRANSID);
         // $this->db->like('NAME', $NAME);
         // $this->db->like('ITEMNAME', $ITEMNAME);
-        if ($searchSKU) {
+        if($searchSKU) {
             $this->db->like('SKU', $searchSKU);
         }
 
-        if ($searchProduct) {
+        if($searchProduct) {
             $this->db->like('productName', $searchProduct);
         }
 
@@ -135,8 +131,7 @@ class Product_model extends CI_Model
         return $result;
     }
 
-    public function get_product()
-    {
+    public function get_product() {
         $this->db->select('*');
         $this->db->from('tbl_product');
 
@@ -150,8 +145,7 @@ class Product_model extends CI_Model
     }
 
 
-    public function get_product_ByID($SKU)
-    {
+    public function get_product_ByID($SKU) {
         $this->db->select('*');
         $this->db->from('tbl_product');
 
@@ -162,8 +156,7 @@ class Product_model extends CI_Model
         return $result;
     }
 
-    public function save_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice)
-    {
+    public function save_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice, $productionPrice) {
 
         $data_tbl_product = array(
             'SKU' => $SKU,
@@ -171,29 +164,28 @@ class Product_model extends CI_Model
             'productDescription' => $productDescription,
             'sellingPrice' => $sellingPrice,
             'distributorPrice' => $distributorPrice,
-            'materialPrice' => $materialPrice
+            'materialPrice' => $materialPrice,
+            'productionPrice' => $productionPrice
         );
 
         $this->db->insert('tbl_product', $data_tbl_product);
     }
 
-    public function update_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice)
-    {
+    public function update_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice, $productionPrice) {
 
         $data_tbl_product = array(
             'productName' => $productName,
             'productDescription' => $productDescription,
             'sellingPrice' => $sellingPrice,
             'distributorPrice' => $distributorPrice,
-            'materialPrice' => $materialPrice
+            'productionPrice' => $productionPrice
         );
 
         $this->db->where('SKU', $SKU);
         $this->db->update('tbl_product', $data_tbl_product);
     }
 
-    public function delete_product($SKU)
-    {
+    public function delete_product($SKU) {
 
         $this->db->where('SKU', $SKU);
         $this->db->delete('tbl_product');

@@ -1,9 +1,7 @@
 <?php
 
-class Transaction_model extends CI_Model
-{
-    public function get_all_transaction($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
-    {
+class Transaction_model extends CI_Model {
+    public function get_all_transaction($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "") {
         $this->db->select('*');
         $this->db->from('purchline AS PL');
         $this->db->join('purchtable AS PT', 'PL.PURCHID = PT.PURCHID');
@@ -20,8 +18,7 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_transaction($rowno, $rowperpage, $searchBuyer = "", $searchDate = "", $searchStatus = "")
-    {
+    public function get_transaction($rowno, $rowperpage, $searchBuyer = "", $searchDate = "", $searchStatus = "") {
         $this->db->select('*');
         $this->db->from('tbl_order AS TO');
         // $this->db->join('purchtable AS PT', 'PL.PURCHID = PT.PURCHID');
@@ -32,15 +29,15 @@ class Transaction_model extends CI_Model
         // $this->db->like('NAME', $NAME);
         // $this->db->like('ITEMNAME', $ITEMNAME);
 
-        if ($searchBuyer) {
+        if($searchBuyer) {
             $this->db->like('buyerName', $searchBuyer);
         }
 
-        if ($searchDate) {
+        if($searchDate) {
             $formattedDate = date('Y-m-d', strtotime($searchDate));
             $this->db->where("DATE(orderTimestamp) =", $formattedDate);
         }
-        if ($searchStatus != "") {
+        if($searchStatus != "") {
             $this->db->where('paymentStatus', $searchStatus);
         }
         $this->db->order_by('orderTimestamp', 'DESC');
@@ -48,8 +45,8 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_product()
-    {
+
+    public function get_product() {
         // $this->db->select('TPC.SKU, productName, productDescription, sellingPrice, SUM(qtyPurcase) AS QTY');
         // $this->db->from('tbl_purcase AS TPC');
         // $this->db->join('tbl_product AS TPD', 'TPC.SKU = TPD.SKU');
@@ -72,7 +69,7 @@ class Transaction_model extends CI_Model
             ->group_by('SKU')
             ->get_compiled_select();
 
-        $this->db->select('s.SKU, productName, productDescription, sellingPrice, distributorPrice, materialPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
+        $this->db->select('s.SKU, productName, productDescription, sellingPrice, distributorPrice, materialPrice, productionPrice, s.stock - COALESCE(t.terjual, 0) AS sisa_stock')
             ->from("($subquery_s) s")
             ->join("($subquery_t) t", 's.SKU = t.SKU', 'left')
             ->join('tbl_product p', 's.SKU = p.SKU', 'left');
@@ -98,15 +95,64 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function insert_checkout($SKU)
-    {
+    public function get_buying_price($SKU) {
+
+        $this->db->select_avg('buyingPrice');
+        $this->db->where('SKU', $SKU);
+        $query = $this->db->get('tbl_purcase');
+        $result = $query->row()->buyingPrice;
+
+        return $result;
+    }
+
+    public function get_total_paying($idOrder) {
+
+        $this->db->select_sum('totalPayment');
+        $this->db->from('tbl_payment');
+        $this->db->where('idOrder', $idOrder);
+        $query = $this->db->get();
+        $result = $query->row()->totalPayment;
+
+
+        return $result;
+    }
+
+    public function paying($idOrder, $totalPayment) {
+
+        $data = array(
+            'idOrder' => $idOrder,
+            'paymentTimestamp' => date('Y-m-d H:i:s'),
+            'totalPayment' => $totalPayment
+        );
+
+        if($this->db->insert('tbl_payment', $data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function get_payment($idOrder) {
+        $this->db->select('*');
+        $this->db->from('tbl_payment');
+        $this->db->where('idOrder', $idOrder);
+        $this->db->order_by('idPayment', 'DESC');
+        $result = $this->db->get();
+        return $result;
+    }
+
+    public function insert_checkout($SKU) {
+
+        $buying_price = $this->get_buying_price($SKU);
         $data_checkout = array(
             'idCheckout' => NULL,
             'idOrder' => NULL,
             'SKU' => $SKU,
+            'buyingPrice' => $buying_price,
             'productPrice' => 0,
             'qtyOrder' => 0,
             'priceAmount' => 0,
+            'profitAmount' => 0,
         );
 
         $this->db->insert('tbl_checkout', $data_checkout);
@@ -114,10 +160,23 @@ class Transaction_model extends CI_Model
         return true;
     }
 
+    public function add_spending($idCategory, $totalSpending) {
+
+        $data_spending = array(
+            'idSpending' => NULL,
+            'idCategory' => $idCategory,
+            'totalSpending' => $totalSpending,
+            'spendingTimestamp' => date('Y-m-d H:i:s')
+        );
+
+        $this->db->insert('tbl_spending', $data_spending);
+
+        return true;
+    }
 
 
-    public function get_order_detail($idOrder)
-    {
+
+    public function get_order_detail($idOrder) {
         $this->db->select('*');
         $this->db->from('tbl_order TOR');
         $this->db->join('tbl_checkout TCK', 'TOR.idOrder = TCK.idOrder');
@@ -131,8 +190,7 @@ class Transaction_model extends CI_Model
     }
 
 
-    public function get_checkout()
-    {
+    public function get_checkout() {
         $this->db->select('*');
         $this->db->from('tbl_checkout AS CO');
         $this->db->join('tbl_product AS TPD', 'CO.SKU = TPD.SKU');
@@ -151,8 +209,7 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_QTY()
-    {
+    public function get_QTY() {
         $this->db->select('TPC.SKU, productName, productDescription, sellingPrice, SUM(qtyPurcase) AS QTY');
         $this->db->from('tbl_purcase AS TPC');
         $this->db->join('tbl_product AS TPD', 'TPC.SKU = TPD.SKU');
@@ -170,8 +227,7 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_new_purcase($rowno, $rowperpage, $INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
-    {
+    public function get_new_purcase($rowno, $rowperpage, $INVENTTRANSID = "", $NAME = "", $ITEMNAME = "") {
         $this->db->select('PT.PURCHID, NAME, SUM(LINEAMOUNT) AS TOTAL');
         $this->db->from('purchtable AS PT');
         $this->db->join('purchline AS PL', 'PL.PURCHID = PT.PURCHID');
@@ -193,20 +249,17 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_vendor()
-    {
+    public function get_vendor() {
         $result = $this->db->get('vendtable');
         return $result;
     }
 
-    public function get_items()
-    {
+    public function get_items() {
         $result = $this->db->get('inventtable');
         return $result;
     }
 
-    public function get_new_idOrder()
-    {
+    public function get_new_idOrder() {
         $this->db->select('idOrder');
         $this->db->from('tbl_order');
         $this->db->order_by('idOrder', 'DESC');
@@ -220,8 +273,55 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_new_purchid()
-    {
+    public function check_order_product() {
+        $this->db->select('COUNT(*) AS totalProduct');
+        $this->db->from('tbl_checkout');
+        $this->db->where('idOrder IS NULL');
+        $result = $this->db->get()->row()->totalProduct;
+
+        return ($result > 0) ? true : false;
+    }
+
+
+    public function get_spending_category() {
+        $result = $this->db->get('tbl_spending_category');
+
+        return $result;
+    }
+
+    public function get_total_spending() {
+        $this->db->select_sum('totalSpending');
+        $result = $this->db->get('tbl_spending')->row()->totalSpending;
+
+        return $result;
+    }
+
+
+    public function get_total_spending_today() {
+        $this->db->select_sum('totalSpending');
+        $this->db->where('DATE(spendingTimestamp)', 'DATE(CURRENT_DATE)', false);
+        $result = $this->db->get('tbl_spending')->row()->totalSpending;
+
+        return $result;
+    }
+
+    public function get_total_transaction_today() {
+        $this->db->select_sum('orderPriceAmount');
+        $this->db->where('DATE(paidTimestamp)', 'DATE(CURRENT_DATE)', false);
+        $result = $this->db->get('tbl_order')->row()->orderPriceAmount;
+
+        return $result;
+    }
+
+    public function get_total_profit_today() {
+        $this->db->select_sum('orderProfitAmount');
+        $this->db->where('DATE(paidTimestamp)', 'DATE(CURRENT_DATE)', false);
+        $result = $this->db->get('tbl_order')->row()->orderProfitAmount;
+
+        return $result;
+    }
+
+    public function get_new_purchid() {
         $this->db->select('PURCHID');
         $this->db->from('purchtable');
         $this->db->order_by('PURCHID', 'DESC');
@@ -229,7 +329,7 @@ class Transaction_model extends CI_Model
         $purchid = $this->db->get()->row()->PURCHID;
         $last_purchid = substr($purchid, strrpos($purchid, "-") + 1);
         $new_purchid = intval($last_purchid) + 1;
-        $result = "PO-23-" . str_pad($new_purchid, 4, "0", STR_PAD_LEFT);
+        $result = "PO-23-".str_pad($new_purchid, 4, "0", STR_PAD_LEFT);
         return $result;
     }
 
@@ -251,21 +351,19 @@ class Transaction_model extends CI_Model
     //     // $result = $this->db->limit($rowperpage, $rowno)->get();
     //     return $result;
     // }
-    public function delete_checkout($SKU)
-    {
+    public function delete_checkout($SKU) {
         $this->db->where('idOrder', NULL);
         $this->db->where('SKU', $SKU);
         $this->db->delete('tbl_checkout');
         return true;
     }
 
-    public function update_checkout($data_post, $PURCHID)
-    {
-        foreach ($data_post as $key => $value) {
-            if (strpos($key, 'QTYMID') === 0) {
+    public function update_checkout($data_post, $PURCHID) {
+        foreach($data_post as $key => $value) {
+            if(strpos($key, 'QTYMID') === 0) {
                 $INVENTTRANSID = substr($key, 3);
                 $QTY = $value;
-                $PRICE = $data_post['PRICE' . $INVENTTRANSID];
+                $PRICE = $data_post['PRICE'.$INVENTTRANSID];
                 $LINEAMOUNT = $PRICE * $QTY;
 
                 // var_dump($key);
@@ -296,8 +394,7 @@ class Transaction_model extends CI_Model
         // }
     }
 
-    public function save_transaction($POSTDATA, $typeTrans)
-    {
+    public function save_transaction($POSTDATA, $typeTrans) {
 
         $this->db->trans_start();
         // var_dump($POSTDATA);
@@ -313,18 +410,23 @@ class Transaction_model extends CI_Model
                 'idOrder' => $idOrder,
                 'buyerName' => $POSTDATA['buyerName'],
                 'bankAccountNumber' => $POSTDATA['bankAccountNumber'],
+                'buyerAddress' => $POSTDATA['buyerAddress'],
+                'buyerPhone' => $POSTDATA['buyerPhone'],
+                'ongkir' => $POSTDATA['ongkir'],
+                'orderPriceAmount' => 0,
+                'orderProfitAmount' => 0,
                 'orderTimestamp' => NULL,
                 'paymentStatus' => 0
             );
 
             $this->db->insert('tbl_order', $data_tbl_order);
             // var_dump($POSTDATA);
-            foreach ($POSTDATA as $key => $value) {
-                if (strpos($key, 'qtyOrder') === 0) {
+            foreach($POSTDATA as $key => $value) {
+                if(strpos($key, 'qtyOrder') === 0) {
                     $idCheckout = substr($key, 8);
                     // echo $idCheckout;
                     $qtyOrder = $value;
-                    $sellingPrice = $POSTDATA[$typeTrans . $idCheckout];
+                    $sellingPrice = $POSTDATA[$typeTrans.$idCheckout];
                     $priceAmount = $sellingPrice * $qtyOrder;
 
                     // var_dump($sellingPrice);
@@ -335,11 +437,28 @@ class Transaction_model extends CI_Model
                     $this->db->set('productPrice', $sellingPrice);
                     $this->db->set('qtyOrder', $qtyOrder);
                     $this->db->set('priceAmount', $priceAmount);
+                    $this->db->set('profitAmount', '('.$sellingPrice.' - (SELECT buyingPrice FROM tbl_checkout WHERE idCheckout = '.$idCheckout.')) * '.$qtyOrder, FALSE);
+
                     $this->db->where('idCheckout', $idCheckout);
                     $this->db->update('tbl_checkout');
 
+
                 }
             }
+
+            $this->db->select_sum('priceAmount', 'grandTotalPriceAmount');
+            $this->db->select_sum('profitAmount', 'grandTotalProfitAmount');
+            $this->db->from('tbl_checkout');
+            $this->db->where('idOrder', $idOrder);
+
+            $dataCheckout = $this->db->get()->row();
+
+            $this->db->set('orderPriceAmount', floatval($dataCheckout->grandTotalPriceAmount) + floatval($POSTDATA['ongkir']));
+
+            $this->db->set('orderProfitAmount', $dataCheckout->grandTotalProfitAmount);
+
+            $this->db->where('idOrder', $idOrder);
+            $this->db->update('tbl_order');
 
             $this->db->trans_commit();
             // die;
@@ -351,8 +470,7 @@ class Transaction_model extends CI_Model
 
     }
 
-    public function save_purcase($INVENTTRANSID, $PURCHID, $ACCOUNTNUM, $ITEMID, $LINENUM, $QTYORDERED, $PURCHRECEIVEDNOW, $PURCHPRICE, $LINEAMOUNT, $DELIVERYDATE, $PURCHSTATUS)
-    {
+    public function save_purcase($INVENTTRANSID, $PURCHID, $ACCOUNTNUM, $ITEMID, $LINENUM, $QTYORDERED, $PURCHRECEIVEDNOW, $PURCHPRICE, $LINEAMOUNT, $DELIVERYDATE, $PURCHSTATUS) {
         $this->db->trans_start();
 
         try {
@@ -386,8 +504,7 @@ class Transaction_model extends CI_Model
 
 
     }
-    public function checkout_purcase($data_post)
-    {
+    public function checkout_purcase($data_post) {
         $this->db->select('INVENTTRANSID');
         $this->db->from('purchline');
         $this->db->order_by('INVENTTRANSID', 'DESC');
@@ -400,12 +517,12 @@ class Transaction_model extends CI_Model
         try {
 
             $linenum = 1;
-            foreach ($data_post as $key => $value) {
+            foreach($data_post as $key => $value) {
                 $new_inventtransid = intval($last_inventtransid) + $linenum;
-                $result_inventtransid = "MID" . str_pad($new_inventtransid, 3, "0", STR_PAD_LEFT);
+                $result_inventtransid = "MID".str_pad($new_inventtransid, 3, "0", STR_PAD_LEFT);
 
 
-                if ($value != "checkout") {
+                if($value != "checkout") {
                     $data = array(
                         'INVENTTRANSID' => $result_inventtransid,
                         'PURCHID' => NULL,
@@ -453,8 +570,7 @@ class Transaction_model extends CI_Model
 
     }
 
-    public function update_order($idOrder, $buyerName, $bankAccountNumber, $paymentStatus)
-    {
+    public function update_order($idOrder, $buyerName, $bankAccountNumber, $paymentStatus) {
 
         $data_tbl_order = array(
             'buyerName' => $buyerName,
@@ -466,8 +582,7 @@ class Transaction_model extends CI_Model
         $this->db->update('tbl_order', $data_tbl_order);
     }
 
-    public function update_purcase($INVENTTRANSID, $PURCHID, $ACCOUNTNUM, $ITEMID, $LINENUM, $QTYORDERED, $PURCHRECEIVEDNOW, $PURCHPRICE, $LINEAMOUNT, $DELIVERYDATE, $PURCHSTATUS)
-    {
+    public function update_purcase($INVENTTRANSID, $PURCHID, $ACCOUNTNUM, $ITEMID, $LINENUM, $QTYORDERED, $PURCHRECEIVEDNOW, $PURCHPRICE, $LINEAMOUNT, $DELIVERYDATE, $PURCHSTATUS) {
         $query = "UPDATE purchline
         JOIN purchtable ON purchtable.PURCHID = purchline.PURCHID
         SET purchline.LINENUM = '$LINENUM',
@@ -528,8 +643,7 @@ class Transaction_model extends CI_Model
         return true;
     }
 
-    public function get_purcase_id($INVENTTRANSID)
-    {
+    public function get_purcase_id($INVENTTRANSID) {
         $this->db->select('*');
         $this->db->from('purchline AS PL');
         $this->db->join('purchtable AS PT', 'PL.PURCHID = PT.PURCHID');
@@ -541,8 +655,7 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function delete($INVENTTRANSID, $PURCHID)
-    {
+    public function delete($INVENTTRANSID, $PURCHID) {
         $this->db->trans_start();
 
         try {
@@ -554,7 +667,7 @@ class Transaction_model extends CI_Model
 
             $this->db->trans_complete();
 
-            if ($this->db->trans_status() === false) {
+            if($this->db->trans_status() === false) {
                 return false;
             }
 
@@ -566,24 +679,23 @@ class Transaction_model extends CI_Model
     }
 
     //count total record
-    public function get_transaction_count($searchBuyer = "", $searchDate = "", $searchStatus = "")
-    {
+    public function get_transaction_count($searchBuyer = "", $searchDate = "", $searchStatus = "") {
         $this->db->select('*');
         $this->db->from('tbl_order AS TO');
 
         // $this->db->like('INVENTTRANSID', $INVENTTRANSID);
         // $this->db->like('NAME', $NAME);
         // $this->db->like('ITEMNAME', $ITEMNAME);
-        if ($searchBuyer) {
+        if($searchBuyer) {
             $this->db->like('buyerName', $searchBuyer);
         }
 
-        if ($searchDate) {
+        if($searchDate) {
             $formattedDate = date('Y-m-d', strtotime($searchDate));
             $this->db->where("DATE(orderTimestamp) =", $formattedDate);
         }
 
-        if ($searchStatus != "") {
+        if($searchStatus != "") {
             $this->db->where('paymentStatus', $searchStatus);
         }
         $result = $this->db->count_all_results();
@@ -591,8 +703,7 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_new_purcase_count($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
-    {
+    public function get_new_purcase_count($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "") {
         $this->db->select('PT.PURCHID, NAME, SUM(LINEAMOUNT) AS TOTAL');
         $this->db->from('purchtable AS PT');
         $this->db->join('purchline AS PL', 'PL.PURCHID = PT.PURCHID');
@@ -615,11 +726,25 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function delete_order($idOrder)
-    {
+    public function delete_order($idOrder) {
         $this->db->where('idOrder', $idOrder);
         $this->db->delete('tbl_order');
         return true;
+    }
+
+    public function update_payment_status($idOrder) {
+        $data = array(
+            'paymentStatus' => 1,
+            'paidTimestamp' => date('Y-m-d H:i:s')
+        );
+
+        $this->db->where('idOrder', $idOrder);
+        if($this->db->update('tbl_order', $data)) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }

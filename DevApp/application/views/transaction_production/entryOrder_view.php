@@ -1,8 +1,8 @@
 <body>
     <form
-        class="sm:mx-auto sm:mt-5 relative mb-5 w-auto mt-0 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
-        action="<?= site_url('transaction_umum/save_transaction'); ?>" method="post">
-        <h1 class="font-bold sm:text-2xl text-base py-3 mb-2 bg-bg2 text-center">TAMBAH TRANSAKSI UMUM</h1>
+        class="sm:mx-auto  sm:mt-5 relative mb-5 w-auto mt-0 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
+        action="<?= site_url('transaction_production/save_transaction'); ?>" method="post">
+        <h1 class="font-bold sm:text-2xl text-base mb-3 py-3 bg-bg2 text-center">TAMBAH TRANSAKSI production</h1>
         <style>
             #loading-container {
                 position: fixed;
@@ -73,9 +73,8 @@
             </div>
         </div>
         <div id="allContent">
-
             <div class="overflow-x-scroll">
-                <table class=" w-[500px] sm:w-full  mt-0 sm:mt-5">
+                <table class=" w-[500px] sm:w-full sm:mt-5">
                     <div class="p-3 w-full sm:bg-dark">
                         <thead class="bg-blue-400">
                             <tr class="text-[12px] sm:text-xl">
@@ -102,7 +101,7 @@
                                         <?= $singleView->productDescription ?>
                                     </td>
                                     <td class="py-3 w-auto">
-                                        <?= $singleView->sellingPrice ?>
+                                        <?= $singleView->productionPrice ?>
                                     </td>
                                     <td class="py-3 w-auto">
                                         <?= $singleView->sisa_stock ?>
@@ -161,11 +160,9 @@
                 <button id="nextPage">Next</button> -->
             </div>
             <br>
-
             <div>
                 <h1 class="font-bold sm:text-2xl text-base py-3 bg-bg2 text-center">PEMESANAN</h1>
                 <div class="overflow-x-scroll">
-
 
                     <table class=" w-[500px] sm:w-full sm:mt-5">
                         <div class="p-3 w-full sm:bg-dark">
@@ -185,9 +182,10 @@
                                         <input type="hidden" name="SKU<?= $row->idCheckout ?>"
                                             id="SKU<?= $row->idCheckout ?>" value="<?= $row->idCheckout ?>">
 
-                                        <input type="hidden" name="sellingPrice<?= $row->idCheckout ?>"
-                                            id="sellingPrice<?= $row->idCheckout ?>" value="<?= $row->sellingPrice ?>">
-                                        <!-- <?= $row->sellingPrice ?> -->
+                                        <input type="hidden" name="productionPrice<?= $row->idCheckout ?>"
+                                            id="productionPrice<?= $row->idCheckout ?>"
+                                            value="<?= $row->productionPrice ?>">
+                                        <!-- <?= $row->productionPrice ?> -->
                                         <td class="border px-3 py-2 shadow-sm">
                                             <!-- <input type="hidden" name="productName<?= $row->productName ?>"
                                         id="productName<?= $row->productName ?>" value="<?= $row->productName ?>"> -->
@@ -216,17 +214,10 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </div>
-
                     </table>
-
                 </div>
             </div>
-
-
-
-
         </div>
-
         <button
             class="sm:text-lg text-sm mb-3 sm:font-bold font-semibold mt-3 px-[50px] text-white py-2 w-full rounded-sm bg-blue-500 hover:bg-lime-500"
             type="submit">PESAN SEKARANG</button>
@@ -236,6 +227,7 @@
 <script src="<?= base_url() ?>/dist/js/script.js"></script>
 
 <script src="<?= base_url() ?>dist/js/jquery.min.js"></script>
+
 
 <script>
     function validateAndSubmit() {
@@ -256,7 +248,6 @@
         });
     }
 </script>
-
 
 <script type="text/javascript">
     function test() {
@@ -419,7 +410,7 @@
         $('#loading-container').show();
         console.log("loadinggggggg");
         $.ajax({
-            url: "<?= base_url('transaction_umum/insert_checkout') ?>",
+            url: "<?= base_url('transaction_production/insert_checkout') ?>",
             type: "post",
             data: {
                 SKU: SKU
@@ -451,7 +442,7 @@
         $('#loading-container').show();
         console.log("loadinggggggg");
         $.ajax({
-            url: "<?= base_url('transaction_umum/delete_checkout') ?>",
+            url: "<?= base_url('transaction_production/delete_checkout') ?>",
             type: "post",
             data: {
                 SKU: SKU
@@ -476,273 +467,5 @@
         });
     }
 </script>
-<!-- <script>
-    $(document).ready(function () {
-        var itemsPerPage = 3; // Set the number of items per page
-        var currentPage = 1;
-        // Menghitung jumlah elemen <tr> dalam tabel
-        var jumlahTr = $('#dataProduct tr').length;
-
-        var maxPages = Math.ceil(jumlahTr / itemsPerPage);
-
-        // Menampilkan jumlah <tr> dalam console (bisa diubah sesuai kebutuhan)
-        console.log("Jumlah <tr> dalam tabel: " + maxPages);
-        // Function to update the displayed items based on the current page
-        function updateDisplay() {
-            var startIndex = (currentPage - 1) * itemsPerPage;
-            var endIndex = startIndex + itemsPerPage;
-
-            $('#dataProduct tr').hide(); // Hide all rows
-            $('#dataProduct tr').slice(startIndex, endIndex).show(); // Show the current page items
-            $('#prevPrevCurrent').text(currentPage - 2); // Update the current page indicator
-            $('#prevCurrent').text(currentPage - 1); // Update the current page indicator
-            $('#currentPage').text(currentPage); // Update the current page indicator
-            $('#nextCurrent').text(currentPage + 1); // Update the current page indicator
-            $('#nextNextCurrent').text(currentPage + 2); // Update the current page indicator
-
-            if (currentPage < maxPages) {
-                $('#nextPage').show()
-
-            } else {
-                $('#nextPage').hide()
-            }
-            if (currentPage < maxPages - 1) {
-                $('#nextNextCurrent').show()
-            } else {
-                $('#nextNextCurrent').hide()
-            }
-            if (currentPage < maxPages) {
-                $('#nextCurrent').show()
-            } else {
-                $('#nextCurrent').hide()
-            }
-            if (currentPage > 1) {
-                $('#prevCurrent').show()
-            } else {
-                $('#prevCurrent').hide()
-            }
-            if (currentPage > 2) {
-                $('#prevPrevCurrent').show()
-            } else {
-                $('#prevPrevCurrent').hide()
-            }
-            if (currentPage > 1) {
-                $('#prevPage').show()
-            } else {
-                $('#prevPage').hide()
-            }
-
-
-        }
-
-        // Initialize the display
-        updateDisplay();
-
-        // Pagination - Next Page
-        $('#nextNextCurrent').click(function () {
-            currentPage = currentPage + 2;
-            updateDisplay();
-        });
-
-        // Pagination - Previous Page
-        $('#prevPrevCurrent').click(function () {
-            if (currentPage > 1) {
-                currentPage = currentPage - 2;
-                updateDisplay();
-            }
-        });
-
-        // Pagination - Next Page
-        $('#nextCurrent').click(function () {
-            currentPage++;
-            updateDisplay();
-        });
-
-        // Pagination - Previous Page
-        $('#prevCurrent').click(function () {
-            if (currentPage > 1) {
-                currentPage--;
-                updateDisplay();
-            }
-        });
-
-        // Pagination - Next Page
-        $('#nextPage').click(function () {
-            currentPage++;
-            updateDisplay();
-        });
-
-        // Pagination - Previous Page
-        $('#prevPage').click(function () {
-            if (currentPage > 1) {
-                currentPage--;
-                updateDisplay();
-            }
-        });
-
-        // Search functionality
-        // $('#search').on('input', function () {
-        //     var searchText = $(this).val().toLowerCase();
-        //     console.log("aksdfhkasdf: '" + searchText + "'");
-
-
-        //     $('#dataProduct tr').hide(); // Hide all rows
-
-        //     // Show rows that match the search text
-        //     $('#dataProduct tr').filter(function () {
-        //         return $(this).text().toLowerCase().includes(searchText);
-        //     }).show();
-
-        // });
-
-        // if (searchText = '') {
-        //     updateDisplay();
-        // }
-
-
-        // MINIMAL SEPERTI INI
-        // $('#search').on('keydown', function (e) {
-        //     var searchText = $(this).val().toLowerCase();
-        //     var characterCount = searchText.length;
-        //     if (e.which === 8 || e.keyCode === 8) {
-        //         console.log("Backspace tertekan" + characterCount);
-        //         if (characterCount <= 1) {
-        //             console.log("Backspace koso" + characterCount);
-        //             updateDisplay();
-        //         } else {
-
-        //             $('#dataProduct tr').hide(); // Hide all rows
-
-        //             // Show rows that match the search text
-        //             $('#dataProduct tr').filter(function () {
-        //                 return $(this).text().toLowerCase().includes(searchText);
-        //             }).show();
-        //         }
-        //     } else {
-        //         $('#dataProduct tr').hide(); // Hide all rows
-
-        //         // Show rows that match the search text
-        //         $('#dataProduct tr').filter(function () {
-        //             return $(this).text().toLowerCase().includes(searchText);
-        //         }).show();
-        //     }
-        // });
-
-
-        // VERSI MINIMUM YANG LEBIH SINGKAT
-        // $('#search').on('keyup', function (e) {
-        //     var searchText = $(this).val().toLowerCase();
-        //     var characterCount = searchText.length;
-
-
-        //     console.log("SDFG tertekan" + characterCount);
-        //     if (characterCount <= 0) {
-        //         console.log("Backspace koso" + characterCount);
-        //         updateDisplay();
-        //     } else {
-        //         $('#dataProduct tr').hide(); // Hide all rows
-
-        //         // Show rows that match the search text
-        //         $('#dataProduct tr').filter(function () {
-        //             return $(this).text().toLowerCase().includes(searchText);
-        //         }).show();
-        //     }
-
-        // });
-        $('#search').on('keyup', function (e) {
-            var searchText = $(this).val().toLowerCase();
-            var characterCount = searchText.length;
-
-
-            console.log("SDFG tertekan" + characterCount);
-            if (characterCount <= 0) {
-                console.log("Backspace koso" + characterCount);
-                $('#pagination').show()
-                updateDisplay();
-            } else {
-                $('#dataProduct tr').hide(); // Hide all rows
-                $('#pagination').hide()
-                // Show rows that match the search text
-                $('#dataProduct tr').filter(function () {
-                    return $(this).text().toLowerCase().includes(searchText);
-                }).show();
-            }
-
-        });
-
-    });
-
-</script> -->
-<!-- <script>
-    $(document).ready(function () {
-        var itemsPerPage = 3; // Set the number of items per page
-        var currentPage = 1;
-        // Menghitung jumlah elemen <tr> dalam tabel
-        var jumlahTr = $('#dataProduct tr').length;
-
-        var maxPages = Math.ceil(jumlahTr / itemsPerPage);
-
-        // Menampilkan jumlah <tr> dalam console (bisa diubah sesuai kebutuhan)
-        console.log("Jumlah <tr> dalam tabel: " + maxPages);
-        // Function to update the displayed items based on the current page
-        function updateDisplay() {
-            var startIndex = (currentPage - 1) * itemsPerPage;
-            var endIndex = startIndex + itemsPerPage;
-
-            $('#dataProduct tr').hide(); // Hide all rows
-            $('#dataProduct tr').slice(startIndex, endIndex).show(); // Show the current page items
-            $('#currentPage').text(currentPage); // Update the current page indicator
-
-            if (currentPage < maxPages) {
-                $('#nextPage').show()
-
-            } else {
-
-                $('#nextPage').hide()
-            }
-            if (currentPage > 1) {
-                $('#prevPage').show()
-
-            } else {
-
-                $('#prevPage').hide()
-            }
-
-
-        }
-
-        // Initialize the display
-        updateDisplay();
-
-        // Pagination - Next Page
-        $('#nextPage').click(function () {
-            currentPage++;
-            updateDisplay();
-        });
-
-        // Pagination - Previous Page
-        $('#prevPage').click(function () {
-            if (currentPage > 1) {
-                currentPage--;
-                updateDisplay();
-            }
-        });
-
-        // Search functionality
-        $('#search').on('input', function () {
-            var searchText = $(this).val().toLowerCase();
-
-            $('#dataProduct tr').hide(); // Hide all rows
-
-            // Show rows that match the search text
-            $('#dataProduct tr').filter(function () {
-                return $(this).text().toLowerCase().includes(searchText);
-            }).show();
-        });
-    });
-</script> -->
-
-
-
 
 </html>

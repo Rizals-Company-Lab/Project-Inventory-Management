@@ -1,10 +1,8 @@
 <?php
 
-class Report_model extends CI_Model
-{
+class Report_model extends CI_Model {
 
-    public function get_report()
-    {
+    public function get_report() {
 
         // Assuming you have already loaded the database library in CodeIgniter
 
@@ -34,9 +32,48 @@ class Report_model extends CI_Model
     }
 
 
+    public function get_total_spending() {
+        $this->db->select_sum('totalSpending');
+        $result = $this->db->get('tbl_spending')->row()->totalSpending;
 
-    public function get_report_byProduct($rowno, $rowperpage, $INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
-    {
+        return $result;
+    }
+    public function get_spending() {
+        $this->db->select_sum('TS.totalSpending');
+        $this->db->select('TSC.categorySpending');
+        $this->db->from('tbl_spending AS TS');
+        $this->db->join('tbl_spending_category AS TSC', 'TS.idCategory = TSC.idCategory');
+        $this->db->group_by('TSC.categorySpending');
+
+        $result = $this->db->get();
+
+
+        return $result;
+    }
+
+
+    public function get_spending_filter($dateStart = "", $dateEnd = "") {
+        $this->db->select_sum('TS.totalSpending');
+        $this->db->select('TSC.categorySpending');
+        $this->db->from('tbl_spending AS TS');
+        $this->db->join('tbl_spending_category AS TSC', 'TS.idCategory = TSC.idCategory');
+        $this->db->group_by('TSC.categorySpending');
+        if($dateStart != "" && $dateEnd != "") {
+            $formattedStartDate = date('Y-m-d', strtotime($dateStart));
+            $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
+            $startDate = $formattedStartDate.' 00:00:00';
+            $endDate = $formattedEndDate.' 23:59:59';
+            $this->db->where("spendingTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
+        }
+
+        $result = $this->db->get();
+
+
+        return $result;
+    }
+
+
+    public function get_report_byProduct($rowno, $rowperpage, $INVENTTRANSID = "", $NAME = "", $ITEMNAME = "") {
         // $this->db->select('*');
 
 
@@ -111,8 +148,7 @@ class Report_model extends CI_Model
 
 
 
-    public function get_report_count_byProduct($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "")
-    {
+    public function get_report_count_byProduct($INVENTTRANSID = "", $NAME = "", $ITEMNAME = "") {
         // $this->db->select('*');
         // $this->db->from('tbl_purcase');
 
@@ -138,19 +174,18 @@ class Report_model extends CI_Model
     }
 
 
-    public function get_report_details_byProduct($rowno, $rowperpage, $dateStart = "", $dateEnd = "", $ITEMNAME = "")
-    {
+    public function get_report_details_byProduct($rowno, $rowperpage, $dateStart = "", $dateEnd = "", $ITEMNAME = "") {
         // SELECT tbl_product.productName, tbl_checkout.SKU, SUM(qtyOrder) grandTotalQtyAmount, SUM(priceAmount) grandTotalSellingAmount FROM `tbl_order` JOIN tbl_checkout ON tbl_order.idOrder = tbl_checkout.idOrder JOIN tbl_product ON tbl_product.SKU = tbl_checkout.SKU GROUP BY tbl_checkout.SKU
 
         $this->db->select('TPD.productName, TC.SKU, SUM(qtyOrder) AS grandTotalQtyAmount, SUM(priceAmount) AS grandTotalSellingAmount ');
         $this->db->from('tbl_order AS TO');
         $this->db->join('tbl_checkout AS TC', 'TO.idOrder = TC.idOrder');
         $this->db->join('tbl_product AS TPD', 'TPD.SKU = TC.SKU');
-        if ($dateStart != "" && $dateEnd != "") {
+        if($dateStart != "" && $dateEnd != "") {
             $formattedStartDate = date('Y-m-d', strtotime($dateStart));
             $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
-            $startDate = $formattedStartDate . ' 00:00:00';
-            $endDate = $formattedEndDate . ' 23:59:59';
+            $startDate = $formattedStartDate.' 00:00:00';
+            $endDate = $formattedEndDate.' 23:59:59';
             $this->db->where("orderTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
         }
         $this->db->group_by('SKU');
@@ -169,8 +204,7 @@ class Report_model extends CI_Model
         return $result;
     }
 
-    public function get_report_count_details_byProduct($dateStart = "", $dateEnd = "", $ITEMNAME = "")
-    {
+    public function get_report_count_details_byProduct($dateStart = "", $dateEnd = "", $ITEMNAME = "") {
         // $this->db->select('*');
         // $this->db->from('tbl_purcase');
 
@@ -185,11 +219,11 @@ class Report_model extends CI_Model
         $this->db->from('tbl_order AS TO');
         $this->db->join('tbl_checkout AS TC', 'TO.idOrder = TC.idOrder');
         $this->db->join('tbl_product AS TPD', 'TPD.SKU = TC.SKU');
-        if ($dateStart != "" && $dateEnd != "") {
+        if($dateStart != "" && $dateEnd != "") {
             $formattedStartDate = date('Y-m-d', strtotime($dateStart));
             $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
-            $startDate = $formattedStartDate . ' 00:00:00';
-            $endDate = $formattedEndDate . ' 23:59:59';
+            $startDate = $formattedStartDate.' 00:00:00';
+            $endDate = $formattedEndDate.' 23:59:59';
             $this->db->where("orderTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
         }
         $this->db->group_by('SKU');
@@ -199,18 +233,17 @@ class Report_model extends CI_Model
     }
 
 
-    public function get_purcasing_details($dateStart = "", $dateEnd = "", $ITEMNAME = "")
-    {
+    public function get_purcasing_details($dateStart = "", $dateEnd = "", $ITEMNAME = "") {
         // SELECT SUM(qtyPurcase) AS grandTotalQtyPurcase, SUM(priceAmount) AS grandTotalPriceAmount FROM `tbl_purcase`;
         $this->db->select('SUM(qtyPurcase) AS grandTotalQtyPurcase, SUM(priceAmount) AS grandTotalPricePurcaseAmount');
 
 
 
-        if ($dateStart != "" && $dateEnd != "") {
+        if($dateStart != "" && $dateEnd != "") {
             $formattedStartDate = date('Y-m-d', strtotime($dateStart));
             $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
-            $startDate = $formattedStartDate . ' 00:00:00';
-            $endDate = $formattedEndDate . ' 23:59:59';
+            $startDate = $formattedStartDate.' 00:00:00';
+            $endDate = $formattedEndDate.' 23:59:59';
             $this->db->where("purcaseTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
         }
 
@@ -223,18 +256,36 @@ class Report_model extends CI_Model
 
 
 
-    public function get_order_details($dateStart = "", $dateEnd = "", $ITEMNAME = "")
-    {
+    public function get_spending_details($dateStart = "", $dateEnd = "") {
+        // SELECT SUM(qtyOrder) AS grandTotalQtyOrder, SUM(priceAmount) AS grandTotalPriceOrderAmount FROM `tbl_order` JOIN tbl_checkout ON tbl_order.idOrder = tbl_checkout.idOrder;
+        $this->db->select('COUNT(idSpending) AS grandTotalQtySpending, SUM(totalSpending) AS grandTotalPriceSpendingAmount');
+        $this->db->from('tbl_spending');
+        if($dateStart != "" && $dateEnd != "") {
+            $formattedStartDate = date('Y-m-d', strtotime($dateStart));
+            $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
+            $startDate = $formattedStartDate.' 00:00:00';
+            $endDate = $formattedEndDate.' 23:59:59';
+            $this->db->where("spendingTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
+        }
+
+
+
+        $result = $this->db->get();
+
+        return $result;
+    }
+
+    public function get_order_details($dateStart = "", $dateEnd = "", $ITEMNAME = "") {
         // SELECT SUM(qtyOrder) AS grandTotalQtyOrder, SUM(priceAmount) AS grandTotalPriceOrderAmount FROM `tbl_order` JOIN tbl_checkout ON tbl_order.idOrder = tbl_checkout.idOrder;
         $this->db->select('SUM(qtyOrder) AS grandTotalQtyOrder, SUM(priceAmount) AS grandTotalPriceOrderAmount');
         $this->db->from('tbl_order AS TO');
         $this->db->join('tbl_checkout AS TC', 'TO.idOrder = TC.idOrder');
 
-        if ($dateStart != "" && $dateEnd != "") {
+        if($dateStart != "" && $dateEnd != "") {
             $formattedStartDate = date('Y-m-d', strtotime($dateStart));
             $formattedEndDate = date('Y-m-d', strtotime($dateEnd));
-            $startDate = $formattedStartDate . ' 00:00:00';
-            $endDate = $formattedEndDate . ' 23:59:59';
+            $startDate = $formattedStartDate.' 00:00:00';
+            $endDate = $formattedEndDate.' 23:59:59';
             $this->db->where("orderTimestamp BETWEEN '$startDate' AND '$endDate'", null, false);
         }
 

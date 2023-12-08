@@ -54,46 +54,50 @@
                         <th class="py-3 ">HARGA UMUM</th>
                         <th class="py-3 ">HARGA DISTRIBUTOR</th>
                         <th class="py-3 ">HARGA MATERIAL</th>
+                        <th class="py-3 ">HARGA PRODUKSI</th>
                         <th class="py-3 ">Action</th>
                     </tr>
                 </thead>
                 <tbody class="">
-                    <?php foreach ($product->result() as $singleView): ?>
-                    <tr class=" bg-white py-2 text-[9px] sm:text-[13px] cursor-pointer  hover:bg-slate-300">
-                        <td class="py-3 w-auto px-3">
-                            <?= $singleView->SKU ?>
-                        </td>
-                        <td class="py-3 w-auto ">
-                            <?= $singleView->productName ?>
-                        </td>
-                        <td class="py-3 w-auto ">
-                            <?= $singleView->productDescription ?>
-                        </td>
-                        <td class="py-3 w-auto px-3">
-                            <?= $singleView->sisa_stock ?>
-                        </td>
-                        <td class="py-3 w-auto text-center px-3">
-                            <?= $singleView->sellingPrice ?>
-                        </td>
-                        <td class="py-3 w-auto text-center px-3">
-                            <?= $singleView->distributorPrice ?>
-                        </td>
-                        <td class="py-3 w-auto text-center px-3">
-                            <?= $singleView->materialPrice ?>
-                        </td>
-                        <td class="flex text-white justify-center mt-1">
-                            <form action="<?= site_url('product/get_update'); ?>" method="post">
-                                <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
-                                    class="bg-lime-500 rounded-md sm:px-3 px-2 py-1 shadow-md hover:bg-green-700"><i
-                                        class="sm:flex hidden fa-regular fa-pen-to-square"></i> Update</button>
-                            </form>
-                            <form action="<?= site_url('product/delete_product'); ?>" method="post">
-                                <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
-                                    onclick="return confirm('Anda yakin ingin delete <?= $singleView->SKU ?>')"
-                                    class="bg-red-500 rounded-md ml-2 px-3 py-1 shadow-md hover:bg-red-700">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
+                    <?php foreach($product->result() as $singleView): ?>
+                        <tr class=" bg-white py-2 text-[9px] sm:text-[13px] cursor-pointer  hover:bg-slate-300">
+                            <td class="py-3 w-auto px-3">
+                                <?= $singleView->SKU ?>
+                            </td>
+                            <td class="py-3 w-auto ">
+                                <?= $singleView->productName ?>
+                            </td>
+                            <td class="py-3 w-auto ">
+                                <?= $singleView->productDescription ?>
+                            </td>
+                            <td class="py-3 w-auto px-3">
+                                <?= $singleView->sisa_stock ?>
+                            </td>
+                            <td class="py-3 w-auto text-center px-3">
+                                <?= $singleView->sellingPrice ?>
+                            </td>
+                            <td class="py-3 w-auto text-center px-3">
+                                <?= $singleView->distributorPrice ?>
+                            </td>
+                            <td class="py-3 w-auto text-center px-3">
+                                <?= $singleView->materialPrice ?>
+                            </td>
+                            <td class="py-3 w-auto text-center px-3">
+                                <?= $singleView->productionPrice ?>
+                            </td>
+                            <td class="flex text-white justify-center mt-1">
+                                <form action="<?= site_url('product/get_update'); ?>" method="post">
+                                    <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
+                                        class="bg-lime-500 rounded-md sm:px-3 px-2 py-1 shadow-md hover:bg-green-700"><i
+                                            class="sm:flex hidden fa-regular fa-pen-to-square"></i> Update</button>
+                                </form>
+                                <form action="<?= site_url('product/delete_product'); ?>" method="post">
+                                    <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
+                                        onclick="return confirm('Anda yakin ingin delete <?= $singleView->SKU ?>')"
+                                        class="bg-red-500 rounded-md ml-2 px-3 py-1 shadow-md hover:bg-red-700">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </div>

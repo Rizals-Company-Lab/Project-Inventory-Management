@@ -1,9 +1,5 @@
 <div id="allContent">
-    <div class="mt-3">
-        <label for="search">Search:</label>
-        <input class="mt-2 sm:mb-4 sm:w-1/2 h-[40px] border text-black px-5  rounded-md shadow-md" type="text"
-            id="search" placeholder="Cari Barang Disini...">
-    </div>
+
     <div class="overflow-x-scroll">
 
         <table class=" w-[500px] sm:w-full mt-5">
@@ -20,38 +16,38 @@
                 </thead>
                 <tbody id="dataProduct">
 
-                    <?php foreach ($product->result() as $singleView): ?>
-                    <tr class="cursor-pointer text-[10px] sm:text-xl bg-white py-2  hover:bg-slate-200 duration-300">
-                        <td class="py-3 w-auto">
-                            <?= $singleView->SKU ?>
-                        </td>
-                        <td class="py-3 w-auto">
-                            <?= $singleView->productName ?>
-                        </td>
-                        <td class="py-3 w-auto">
-                            <?= $singleView->productDescription ?>
-                        </td>
-                        <td class="py-3 w-auto">
-                            <?= $singleView->sellingPrice ?>
-                        </td>
-                        <td class="py-3 w-auto">
-                            <?= $singleView->sisa_stock ?>
-                        </td>
-                        <td class="py-3 w-auto">
-                            <?php
+                    <?php foreach($product->result() as $singleView): ?>
+                        <tr class="cursor-pointer text-[10px] sm:text-xl bg-white py-2  hover:bg-slate-200 duration-300">
+                            <td class="py-3 w-auto">
+                                <?= $singleView->SKU ?>
+                            </td>
+                            <td class="py-3 w-auto">
+                                <?= $singleView->productName ?>
+                            </td>
+                            <td class="py-3 w-auto">
+                                <?= $singleView->productDescription ?>
+                            </td>
+                            <td class="py-3 w-auto">
+                                <?= $singleView->sellingPrice ?>
+                            </td>
+                            <td class="py-3 w-auto">
+                                <?= $singleView->sisa_stock ?>
+                            </td>
+                            <td class="py-3 w-auto">
+                                <?php
 
 
-                                        $isSKUExist = in_array($singleView->SKU, array_column($checkout->result(), 'SKU'));
+                                $isSKUExist = in_array($singleView->SKU, array_column($checkout->result(), 'SKU'));
 
-                                        ?>
-                            <button class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
-                                <?= $isSKUExist ? 'disabled' : ($singleView->sisa_stock > 0 ? '' : 'disabled') ?>
-                                type="button" onclick="insertDataPesan('<?= $singleView->SKU ?>')">
+                                ?>
+                                <button class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
+                                    <?= $isSKUExist ? 'disabled' : ($singleView->sisa_stock > 0 ? '' : 'disabled') ?>
+                                    type="button" onclick="insertDataPesan('<?= $singleView->SKU ?>')">
 
-                                <?= $isSKUExist ? 'Sudah dipesan' : ($singleView->sisa_stock > 0 ? 'Pesan' : 'Stock Kosong') ?>
-                            </button>
-                        </td>
-                    </tr>
+                                    <?= $isSKUExist ? 'Sudah dipesan' : ($singleView->sisa_stock > 0 ? 'Pesan' : 'Stock Kosong') ?>
+                                </button>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </div>
@@ -108,39 +104,39 @@
                     </thead>
                     <tbody>
 
-                        <?php foreach ($checkout->result() as $row): ?>
-                        <tr>
+                        <?php foreach($checkout->result() as $row): ?>
+                            <tr>
 
-                            <input type="hidden" name="SKU<?= $row->idCheckout ?>" id="SKU<?= $row->idCheckout ?>"
-                                value="<?= $row->idCheckout ?>">
+                                <input type="hidden" name="SKU<?= $row->idCheckout ?>" id="SKU<?= $row->idCheckout ?>"
+                                    value="<?= $row->idCheckout ?>">
 
-                            <input type="hidden" name="sellingPrice<?= $row->idCheckout ?>"
-                                id="sellingPrice<?= $row->idCheckout ?>" value="<?= $row->sellingPrice ?>">
-                            <!-- <?= $row->sellingPrice ?> -->
-                            <td class="border px-3 py-2 shadow-sm">
-                                <!-- <input type="hidden" name="productName<?= $row->productName ?>"
+                                <input type="hidden" name="sellingPrice<?= $row->idCheckout ?>"
+                                    id="sellingPrice<?= $row->idCheckout ?>" value="<?= $row->sellingPrice ?>">
+                                <!-- <?= $row->sellingPrice ?> -->
+                                <td class="border px-3 py-2 shadow-sm">
+                                    <!-- <input type="hidden" name="productName<?= $row->productName ?>"
                                         id="productName<?= $row->productName ?>" value="<?= $row->productName ?>"> -->
-                                <?= $row->productName ?>
-                            </td>
-                            <td class="border px-3 py-2 shadow-sm">
-                                <?= $row->productDescription ?>
-                            </td>
-                            <td class="border px-3 py-2 shadow-sm">
+                                    <?= $row->productName ?>
+                                </td>
+                                <td class="border px-3 py-2 shadow-sm">
+                                    <?= $row->productDescription ?>
+                                </td>
+                                <td class="border px-3 py-2 shadow-sm">
 
-                                <input class="py-2 w-full ml-3 text-center border" type="number"
-                                    name="qtyOrder<?= $row->idCheckout ?>" value="1" min="1" max="<?php foreach ($product->result() as $singleView):
-                                                    if ($row->SKU == $singleView->SKU) {
-                                                        echo $singleView->sisa_stock;
-                                                    }
-                                                endforeach; ?>">
-                            </td>
-                            <td class="border px-3 py-2 shadow-sm">
+                                    <input class="py-2 w-full ml-3 text-center border" type="number"
+                                        name="qtyOrder<?= $row->idCheckout ?>" value="1" min="1" max="<?php foreach($product->result() as $singleView):
+                                              if($row->SKU == $singleView->SKU) {
+                                                  echo $singleView->sisa_stock;
+                                              }
+                                          endforeach; ?>">
+                                </td>
+                                <td class="border px-3 py-2 shadow-sm">
 
-                                <button class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
-                                    type="button" onclick="deleteDataPesan('<?= $row->SKU ?>')">-</button>
-                            </td>
+                                    <button class="bg-blue-700 rounded-md text-white px-5 py-1 shadow-md hover:bg-blue-900"
+                                        type="button" onclick="deleteDataPesan('<?= $row->SKU ?>')">-</button>
+                                </td>
 
-                        </tr>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </div>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Transaction_umum extends CI_Controller {
+class transaction_production extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -72,7 +72,6 @@ class Transaction_umum extends CI_Controller {
         $data['spendingToday'] = $totalSpending;
         $data['get_total_profit_today'] = $totalProfit;
         $data['get_total_final_profit_today'] = $totalProfit - $totalSpending;
-
         if($this->session->userdata('login_id') == 'admin') {
 
             $this->load->view('nav/navbar.php');
@@ -81,7 +80,7 @@ class Transaction_umum extends CI_Controller {
 
         }
         $this->load->view('transaction/transaction_view.php', $data);
-        // $this->load->view('transaction_umum/transaction_view', $data);
+        // $this->load->view('transaction_production/transaction_view', $data);
     }
 
     public function add_spending() {
@@ -101,7 +100,7 @@ class Transaction_umum extends CI_Controller {
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('ajax/checkoutList_umum.php', $data);
+        $this->load->view('ajax/checkoutList_production.php', $data);
     }
 
     public function delete_checkout() {
@@ -112,7 +111,7 @@ class Transaction_umum extends CI_Controller {
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
         // var_dump($this->Transaction_model->get_checkout()->result());
-        $this->load->view('ajax/checkoutList_umum.php', $data);
+        $this->load->view('ajax/checkoutList_production.php', $data);
     }
 
     public function delete_order() {
@@ -120,7 +119,7 @@ class Transaction_umum extends CI_Controller {
         $idOrder = $this->input->post('idOrder');
 
         $this->Transaction_model->delete_order($idOrder);
-        redirect('Transaction_umum');
+        redirect('Transaction_production');
     }
 
     public function add_new_transaction() {
@@ -134,8 +133,9 @@ class Transaction_umum extends CI_Controller {
 
         $data['product'] = $this->Transaction_model->get_product();
 
-        $data['checkout'] = $this->Transaction_model->get_checkout();
+        // var_dump($data['product']->result());
 
+        $data['checkout'] = $this->Transaction_model->get_checkout();
         if($this->session->userdata('login_id') == 'admin') {
 
             $this->load->view('nav/navbar.php');
@@ -143,9 +143,7 @@ class Transaction_umum extends CI_Controller {
             $this->load->view('nav/navbar_kasir.php');
 
         }
-        $this->load->view('transaction_umum/entryOrder_view.php', $data);
-
-
+        $this->load->view('transaction_production/entryOrder_view.php', $data);
     }
 
     public function entryOrder() {
@@ -155,7 +153,6 @@ class Transaction_umum extends CI_Controller {
     public function createOrder() {
         $this->load->view('entryJual.php');
     }
-
     public function check_order_product() {
         // var_dump($this->input->post());
         // $idOrder = $this->Transaction_model->get_new_idOrder();
@@ -167,28 +164,17 @@ class Transaction_umum extends CI_Controller {
 
 
     }
-
     public function save_transaction() {
         // var_dump($this->input->post());
         // $idOrder = $this->Transaction_model->get_new_idOrder();
 
-        // var_dump($this->Transaction_model->check_order_product());
-        // die;
-
-
-
         if($this->Transaction_model->check_order_product()) {
-            $this->Transaction_model->save_transaction($this->input->post(), 'sellingPrice');
+            $this->Transaction_model->save_transaction($this->input->post(), 'productionPrice');
             $this->session->keep_flashdata('buyerName');
             $this->session->keep_flashdata('buyerAddress');
             $this->session->keep_flashdata('buyerPhone');
             $this->session->keep_flashdata('bankAccountNumber');
             $this->session->keep_flashdata('ongkir');
-            // $idOrder = $this->input->post('idOrder');
-            // $this->session->set_flashdata('idOrder', $idOrder);
-            // var_dump($this->input->post());
-            // die;
-            // $this->order_detail();
             redirect('Transaction_umum');
         } else {
             $buyerName = $this->input->post('buyerName');
@@ -205,7 +191,6 @@ class Transaction_umum extends CI_Controller {
             $this->session->set_flashdata('ongkir', $ongkir);
             redirect('Transaction_umum/add_new_transaction');
         }
-
     }
 
     public function order_detail() {
@@ -231,7 +216,7 @@ class Transaction_umum extends CI_Controller {
 
         }
         $this->session->keep_flashdata('idOrder');
-        $this->load->view('transaction/detail_transaction_view.php', $data);
+        $this->load->view('transaction_production/detail_transaction_view.php', $data);
     }
 
     public function get_update() {
@@ -246,7 +231,7 @@ class Transaction_umum extends CI_Controller {
             $this->load->view('nav/navbar_kasir.php');
 
         }
-        $this->load->view('transaction_umum/update_transaction_view.php', $data);
+        $this->load->view('transaction_production/update_transaction_view.php', $data);
     }
 
     public function update_order() {
@@ -260,10 +245,9 @@ class Transaction_umum extends CI_Controller {
 
         // $data['product'] = $this->Product_model->get_product();
         // $this->load->view('purcase/add_purcasing_view.php', $data);
-        $this->session->set_flashdata('idOrder', $idOrder);
-        redirect('Transaction/order_detail');
-    }
 
+        redirect('Transaction_production');
+    }
 
     public function paying() {
         // var_dump($this->input->post());
@@ -281,6 +265,5 @@ class Transaction_umum extends CI_Controller {
         $this->session->set_flashdata('idOrder', $idOrder);
         redirect('Transaction/order_detail');
     }
-
 
 }
