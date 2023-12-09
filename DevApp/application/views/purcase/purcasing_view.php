@@ -6,21 +6,16 @@
         <h1 class="text-center sm:text-3xl text-sm  font-bold  bg-bg2 py-3 ml-3 mr-3">
             DETAILS RIWAYAT PEMBELIAN LIST
         </h1>
-
-        <br>
     </div>
-    <div class="flex sm:mt-3">
-        <div>
-            <a class="bg-dark sm:text-lg text-sm text-white sm:ml-5 ml-3 hover:bg-slate-600 px-3 py-2 rounded-md"
-                href="<?php echo site_url('purcase/add_purcase'); ?>"><i class="fa-solid fa-cart-plus"></i> TAMBAH
-                TRANSAKSI KOLAKKAN</a>
-        </div>
-        <div>
-
-        </div>
-    </div>
-    <form class="mt-5 ml-5 mr-5" action="<?= base_url('Purcase/index') ?>" method="post">
-        <div class="sm:flex justify-evenly">
+    <form class="mt-5 sm:ml-0 ml-5 mr-5 " action="<?= base_url('Purcase/index') ?>" method="post">
+        <div class="sm:flex justify-between">
+            <div class="flex sm:mt-5">
+                <a class="bg-slate-900 text-center w-full text-white text-[12px] sm:text-xl px-3 py-5 ml-0 rounded-md"
+                    href="<?php echo site_url('purcase/add_purcase'); ?>"><i class="fa-solid fa-cart-plus"></i>
+                    TAMBAH KOLAKAN</a>
+                <div>
+                </div>
+            </div>
             <div>
                 <label for="default-search"> Cari SKU</label>
                 <div>
@@ -46,7 +41,7 @@
                         value="<?= (isset($searchDate)) ? $searchDate : '' ?>">
                 </div>
             </div>
-            <div>
+            <div class="sm:mt-0 -mt-10">
                 <label class="opacity-0">Cari</label>
                 <div>
                     <button type="submit" value="search" id="search" name="search"

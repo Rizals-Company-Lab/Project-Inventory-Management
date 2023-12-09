@@ -1,13 +1,13 @@
 <body>
     <div class="w-full">
         <!-- <?= var_dump($detailOrder[0]->buyerName) ?> -->
-        <h1 class="bg-yellow-400 font-bold sm:text-3xl ml-5 mr-5 text-base text-center py-3 mt-5">DETAILS RIWAYAT
+        <h1 class="bg-yellow-400 font-bold sm:text-3xl ml-3 mr-3 text-base text-center py-3 mt-5">DETAILS RIWAYAT
             PEMBELIAN</h1>
         <!-- <form class="bg-white font-semibold ml-5 mr-5 py-3" action="<?= site_url('Transaction/update_order'); ?>"
             method="post"> -->
-        <div class="sm:ml-2 ml-2 mr-2">
+        <div class="sm:ml-2 ml-2 mr-2 py-2 font-bold rounded-md sm:mr-2 bg-white">
             <input type="hidden" name="idOrder" id="idOrder" value="<?= $detailOrder[0]->idOrder ?>">
-            <div class="sm:ml-10 sm:text-base text-xs">
+            <div class=" sm:ml-3 text-center  sm:mr-3 sm:text-base text-xs">
                 <div class="sm:flex justify-between w-full mt-3">
                     <div>
                         <label>NAMA PEMBELI</label>
@@ -37,7 +37,7 @@
                         <input
                             class="mt-2 appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
                             disabled type="text" name="paymentStatus" id="paymentStatus"
-                            style="color: <?= ($detailOrder[0]->paymentStatus == 1) ? 'lime' : 'red' ?>"
+                            style="color: <?= ($detailOrder[0]->paymentStatus == 1) ? 'green' : 'red' ?>"
                             value="<?= ($detailOrder[0]->paymentStatus == 1) ? 'LUNAS' : 'PENDING' ?>">
                     </div>
                     <div class="sm:ml-5">
@@ -74,31 +74,31 @@
                             <?php
                             $total = 0;
                             foreach($detailOrder as $row): ?>
-                                <tr class=" bg-white py-3  text-[12px] sm:text-xl text-center hover:bg-slate-100">
-                                    <td class="kolomhover">
-                                        <?= $row->SKU ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->productName ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->buyingPrice ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->productPrice ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->qtyOrder ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->priceAmount ?>
-                                    </td>
-                                    <td class="kolomhover">
-                                        <?= $row->profitAmount ?>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <?php $total += $row->priceAmount; endforeach; ?>
+                            <tr class=" bg-white py-3  text-[12px] sm:text-xl text-center hover:bg-slate-100">
+                                <td class="kolomhover">
+                                    <?= $row->SKU ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->productName ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->buyingPrice ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->productPrice ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->qtyOrder ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->priceAmount ?>
+                                </td>
+                                <td class="kolomhover">
+                                    <?= $row->profitAmount ?>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <?php $total += $row->priceAmount; endforeach; ?>
                     </div>
                 </table>
 
@@ -133,9 +133,9 @@
                                 $kekurangan = $detailOrder[0]->orderPriceAmount - $totalPayment;
 
                                 if($kekurangan > 0): ?>
-                                    <p>(Kurang
-                                        <?= $kekurangan ?>)
-                                    </p>
+                                <p>(Kurang
+                                    <?= $kekurangan ?>)
+                                </p>
                                 <?php endif; ?>
 
                             </span>
@@ -143,7 +143,7 @@
                     </div>
                 </div>
 
-                <div class="sm:ml-10 ml-0 mt-5">
+                <div class="sm:ml-10 ml-0 mt-5 ">
                     <div class="flex justify-around text-white">
                         <div>
                             <form action="<?= site_url('export/surat_jalan'); ?>" method="post" target="_blank">
@@ -171,28 +171,29 @@
                         </div>
 
                     </div>
-                    <form class="bg-white font-semibold ml-5 mr-5 py-3" action="<?= site_url('Transaction/paying'); ?>"
+                    <form class=" font-semibold ml-5 mr-5 py-3" action="<?= site_url('Transaction/paying'); ?>"
                         method="post">
                         <div class="ml-3 sm:mr-5 mt-5 sm:ml-0 sm:mt-7 flex sm:w-full">
                             <input type="hidden" name="idOrder" id="idOrder" value="<?= $detailOrder[0]->idOrder ?>">
                             <input type="hidden" name="kekurangan" id="kekurangan" value="<?= $kekurangan ?>">
                             <?php
                             if($kekurangan > 0): ?>
-                                <input type="number"
-                                    class="sm:mt-2 mb-4 sm:w-full sm:h-[40px] w-[200px] border text-black sm:px-5 py-2 px-3  rounded-md shadow-md "
-                                    placeholder="Masukan Nominal" id="totalPayment" name="totalPayment"
-                                    max="<?= $kekurangan ?>" min="0">
-                                <div class="sm:mt-3 mt-1 sm:ml-5">
+                            <input type="number"
+                                class="sm:mt-2 mb-4 sm:w-full sm:h-[40px] w-[200px] border text-black sm:px-5 py-2 px-3  rounded-md shadow-md "
+                                placeholder="Masukan Nominal" id="totalPayment" name="totalPayment"
+                                max="<?= $kekurangan ?>" min="0">
+                            <div class="sm:mt-3 mt-1 sm:ml-5">
 
-                                    <button type="submit" value="payment" id="payment" name="payment"
-                                        class="text-white ml-2 sm:ml-0 right-2.5 bottom-2.5 bg-red-600 hover:bg-red-800 py-2 px-10 font-medium rounded-lg text-sm sm:px-5 sm:py-2">Bayar</button>
+                                <button type="submit" value="payment" id="payment" name="payment"
+                                    class="text-white ml-2 sm:ml-0 right-2.5 bottom-2.5 bg-red-600 hover:bg-red-800 py-2 px-10 font-medium rounded-lg text-sm sm:px-5 sm:py-2">Bayar</button>
 
-                                </div>
+                            </div>
                             <?php else: ?>
 
-                                <button type="submit" value="payment" id="payment" name="payment" disabled
-                                    class="text-white ml-2 sm:ml-0 right-2.5 bottom-2.5 bg-blue-600 hover:bg-blue-800 py-2 px-10 font-medium rounded-lg text-sm sm:px-5 sm:py-2">Sudah
-                                    Lunas</button>
+                            <button type="submit" value="payment" id="payment" name="payment" disabled
+                                class="text-white ml-2 w-full sm:-mt-2 bg-lime-600  py-2 px-10 font-bold rounded-lg sm:text-xl sm:px-5 sm:py-5">PEMBAYARAN
+                                SUDAH
+                                LUNAS</button>
                             <?php endif; ?>
                         </div>
                         <p>Jika Lunas Tombol input hijau jika pending merah</p>
@@ -211,13 +212,13 @@
                     $total = 0;
                     foreach($payment as $row): ?>
 
-                        <div class="flex mt-2 mr-3 bg-slate-300">
-                            <p class="sm:px-5 sm:py-2 px-3 py-2 w-[200px]">
-                                <?= $row->totalPayment ?>
-                            </p><span class="sm:w-full   w-[200px] py-2  rounded-md">
-                                <?= $row->paymentTimestamp ?>
-                            </span>
-                        </div>
+                    <div class="flex mt-2 mr-3 bg-slate-300">
+                        <p class="sm:px-5 sm:py-2 px-3 py-2 w-[200px]">
+                            <?= $row->totalPayment ?>
+                        </p><span class="sm:w-full   w-[200px] py-2  rounded-md">
+                            <?= $row->paymentTimestamp ?>
+                        </span>
+                    </div>
 
                     <?php endforeach; ?>
 

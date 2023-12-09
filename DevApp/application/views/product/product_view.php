@@ -5,13 +5,11 @@
         LIST BARANG PENJUALAN
     </h1>
     <div class="sm:flex sm:flex-wrap">
-        <div class="sm:mt-5 mt-10">
-            <div class="flex sm:mt-6 mt-3">
-                <div>
-                    <a class="bg-slate-900 text-white text-[12px] sm:text-xl px-3 py-5 ml-3 rounded-md"
-                        href="<?= site_url('Product/add_product'); ?>"><i class="fa-sharp fa-solid fa-cart-plus"></i>
-                        TAMBAH BARANG PENJUALAN</a>
-                </div>
+        <div class="sm:mt-5 mt-0">
+            <div class="flex sm:mt-0 mr-5 mt-3">
+                <a class="bg-slate-900 text-center w-full text-white text-[12px] sm:text-xl px-3 py-5 ml-3 rounded-md"
+                    href="<?= site_url('Product/add_product'); ?>"><i class="fa-sharp fa-solid fa-cart-plus"></i>
+                    TAMBAH BARANG PENJUALAN</a>
             </div>
         </div>
         <div class="ml-5 mr-5">
@@ -60,44 +58,44 @@
                 </thead>
                 <tbody class="">
                     <?php foreach($product->result() as $singleView): ?>
-                        <tr class=" bg-white py-2 text-[9px] sm:text-[13px] cursor-pointer  hover:bg-slate-300">
-                            <td class="py-3 w-auto px-3">
-                                <?= $singleView->SKU ?>
-                            </td>
-                            <td class="py-3 w-auto ">
-                                <?= $singleView->productName ?>
-                            </td>
-                            <td class="py-3 w-auto ">
-                                <?= $singleView->productDescription ?>
-                            </td>
-                            <td class="py-3 w-auto px-3">
-                                <?= $singleView->sisa_stock ?>
-                            </td>
-                            <td class="py-3 w-auto text-center px-3">
-                                <?= $singleView->sellingPrice ?>
-                            </td>
-                            <td class="py-3 w-auto text-center px-3">
-                                <?= $singleView->distributorPrice ?>
-                            </td>
-                            <td class="py-3 w-auto text-center px-3">
-                                <?= $singleView->materialPrice ?>
-                            </td>
-                            <td class="py-3 w-auto text-center px-3">
-                                <?= $singleView->productionPrice ?>
-                            </td>
-                            <td class="flex text-white justify-center mt-1">
-                                <form action="<?= site_url('product/get_update'); ?>" method="post">
-                                    <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
-                                        class="bg-lime-500 rounded-md sm:px-3 px-2 py-1 shadow-md hover:bg-green-700"><i
-                                            class="sm:flex hidden fa-regular fa-pen-to-square"></i> Update</button>
-                                </form>
-                                <form action="<?= site_url('product/delete_product'); ?>" method="post">
-                                    <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
-                                        onclick="return confirm('Anda yakin ingin delete <?= $singleView->SKU ?>')"
-                                        class="bg-red-500 rounded-md ml-2 px-3 py-1 shadow-md hover:bg-red-700">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr class=" bg-white py-2 text-[9px] sm:text-[13px] cursor-pointer  hover:bg-slate-300">
+                        <td class="py-3 w-auto px-3">
+                            <?= $singleView->SKU ?>
+                        </td>
+                        <td class="py-3 w-auto ">
+                            <?= $singleView->productName ?>
+                        </td>
+                        <td class="py-3 w-auto ">
+                            <?= $singleView->productDescription ?>
+                        </td>
+                        <td class="py-3 w-auto px-3">
+                            <?= $singleView->sisa_stock ?>
+                        </td>
+                        <td class="py-3 w-auto text-center px-3">
+                            <?= $singleView->sellingPrice ?>
+                        </td>
+                        <td class="py-3 w-auto text-center px-3">
+                            <?= $singleView->distributorPrice ?>
+                        </td>
+                        <td class="py-3 w-auto text-center px-3">
+                            <?= $singleView->materialPrice ?>
+                        </td>
+                        <td class="py-3 w-auto text-center px-3">
+                            <?= $singleView->productionPrice ?>
+                        </td>
+                        <td class="flex text-white justify-center mt-1">
+                            <form action="<?= site_url('product/get_update'); ?>" method="post">
+                                <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
+                                    class="bg-lime-500 rounded-md sm:px-3 px-2 py-1 shadow-md hover:bg-green-700"><i
+                                        class="sm:flex hidden fa-regular fa-pen-to-square"></i> Update</button>
+                            </form>
+                            <form action="<?= site_url('product/delete_product'); ?>" method="post">
+                                <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"
+                                    onclick="return confirm('Anda yakin ingin delete <?= $singleView->SKU ?>')"
+                                    class="bg-red-500 rounded-md ml-2 px-3 py-1 shadow-md hover:bg-red-700">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                     <?php endforeach; ?>
                 </tbody>
             </div>
