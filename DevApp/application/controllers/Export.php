@@ -162,7 +162,7 @@ class Export extends CI_Controller {
             }
             return $carry;
         }, array());
-        $heightPage = 180 + (15 * count($idCheckoutCount));
+        $heightPage = 215 + (15 * count($idCheckoutCount));
         // echo count($idCheckoutCount);
         // var_dump($idCheckoutCount);
 
@@ -171,12 +171,12 @@ class Export extends CI_Controller {
 
         $pdf->AddPage("P", array(80, $heightPage));
 
-        $pdf->Image(base_url('dist/img/abk3Outline.png'), -3, -3, 80, 0);
+        $pdf->Image(base_url('dist/img/abTrasOuline.png'), 10, 0, 60, 0);
         $pdf->Cell(0, 35, '', 0, 1);
         $pdf->SetFont('Arial', 'B', 12);
 
 
-        $pdf->Cell(0, 5, "FAKTUR PENJUALAN", 0, 1, "C");
+        // $pdf->Cell(0, 5, "FAKTUR PENJUALAN", 0, 1, "C");
         $pdf->Cell(
             0,
             10,
@@ -233,6 +233,24 @@ class Export extends CI_Controller {
             1,
             'L'
         );
+        $pdf->Cell(
+            0,
+            6,
+            'Alamat                 : '.$Transaction[0]->buyerAddress
+            ,
+            0,
+            1,
+            'L'
+        );
+        $pdf->Cell(
+            0,
+            6,
+            'No. HP                 : '.$Transaction[0]->buyerPhone
+            ,
+            0,
+            1,
+            'L'
+        );
         $pdf->Cell(35, 10, '', 0, 1);
 
 
@@ -259,15 +277,27 @@ class Export extends CI_Controller {
             $pdf->SetFont('Arial', '', 10);
             // $pdf->Cell(40, 10, $row->qtyOrder . ' X ' . number_format($row->productPrice, 0, ',', '.'), 1, 0, 'C');
             // $pdf->Cell(10, 10, $row->qtyOrder, 1, 0, 'C');
-            // $pdf->Cell(60, 10, number_format($row->priceAmount, 0, ',', '.'), 1, 1, 'C');
+            // $pdf->Cell(607, 10, number_format($row->priceAmount, 0, ',', '.'), 1, 1, 'C');
             // $pdf->Cell(30, 10, $row->productName, 1, 1, 'C');
             $count++;
             $PRICEAMOUNT += $row->priceAmount;
         }
+        $grandTotalAmount = $PRICEAMOUNT + $row->ongkir;
+        $pdf->Cell(0, 5, '-----------------------------------------------------------', 0, 1, "C");
+        $pdf->Cell(0, 5, 'Subtotal', 0, 0, 'L');
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(0, 5, number_format($PRICEAMOUNT, 0, ',', '.'), 0, 1, 'R');
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(0, 5, 'Ongkir', 0, 0, 'L');
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(0, 5, number_format($row->ongkir, 0, ',', '.'), 0, 1, 'R');
+        $pdf->Cell(0, 5, 'Total bayar', 0, 0, 'L');
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(0, 5, number_format($grandTotalAmount, 0, ',', '.'), 0, 1, 'R');
 
-        $pdf->Cell(0, 5, ' ', 0, 1, 'C');
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(0, 10, 'Total Bayar : '."Rp. ".number_format($PRICEAMOUNT, 0, ',', '.'), 0, 0);
+        // $pdf->Cell(0, 5, ' ', 0, 1, 'C');
+        // $pdf->SetFont('Arial', 'B', 12);
+        // $pdf->Cell(0, 10, 'Total Bayar : '."Rp. ".number_format($PRICEAMOUNT, 0, ',', '.'), 0, 0);
 
         // $pdf->Cell(60, 10, 'TIDAK TERIMA RETUR', 1, 1, 'C');
         // // $pdf->Cell(0, 10, $PRICEAMOUNT, 0, 1);
@@ -303,7 +333,7 @@ class Export extends CI_Controller {
             }
             return $carry;
         }, array());
-        $heightPage = 180 + (10 * count($idCheckoutCount));
+        $heightPage = 190 + (15 * count($idCheckoutCount));
         // echo count($idCheckoutCount);
         // var_dump($idCheckoutCount);
 
@@ -312,12 +342,12 @@ class Export extends CI_Controller {
 
         $pdf->AddPage("P", array(80, $heightPage));
 
-        $pdf->Image(base_url('dist/img/abk3Outline.png'), -3, -3, 80, 0);
+        $pdf->Image(base_url('dist/img/abTrasOuline.png'), 10, 0, 60, 0);
         $pdf->Cell(0, 35, '', 0, 1);
         $pdf->SetFont('Arial', 'B', 12);
 
 
-        $pdf->Cell(0, 5, "FAKTUR PENJUALAN", 0, 1, "C");
+        // $pdf->Cell(0, 5, "FAKTUR PENJUALAN", 0, 1, "C");
         $pdf->Cell(
             0,
             10,
@@ -369,6 +399,24 @@ class Export extends CI_Controller {
             0,
             6,
             'Rekening             : '.$Transaction[0]->bankAccountNumber
+            ,
+            0,
+            1,
+            'L'
+        );
+        $pdf->Cell(
+            0,
+            6,
+            'Alamat                 : '.$Transaction[0]->buyerAddress
+            ,
+            0,
+            1,
+            'L'
+        );
+        $pdf->Cell(
+            0,
+            6,
+            'No. HP                 : '.$Transaction[0]->buyerPhone
             ,
             0,
             1,
