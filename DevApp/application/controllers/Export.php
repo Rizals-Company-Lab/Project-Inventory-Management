@@ -1,9 +1,11 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Export extends CI_Controller {
+class Export extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Transaction_model');
     }
@@ -149,20 +151,21 @@ class Export extends CI_Controller {
     // }
 
 
-    public function index() {
+    public function index()
+    {
         $idOrder = $this->input->post('idOrder');
         ;
         $Transaction = $this->Transaction_model->get_order_detail($idOrder)->result();
 
         $idCheckoutCount = array_reduce($Transaction, function ($carry, $item) {
-            if(isset($carry[$item->idCheckout])) {
+            if (isset($carry[$item->idCheckout])) {
                 $carry[$item->idCheckout]++;
             } else {
                 $carry[$item->idCheckout] = 1;
             }
             return $carry;
         }, array());
-        $heightPage = 215 + (15 * count($idCheckoutCount));
+        $heightPage = 210 + (15 * count($idCheckoutCount));
         // echo count($idCheckoutCount);
         // var_dump($idCheckoutCount);
 
@@ -199,7 +202,7 @@ class Export extends CI_Controller {
         $pdf->Cell(
             0,
             6,
-            'Nomor Transaksi : '.$Transaction[0]->idOrder.'/'.'ABJ/'.date('m/y')
+            'Nomor Transaksi : ' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y')
             ,
             0,
             1,
@@ -208,7 +211,7 @@ class Export extends CI_Controller {
         $pdf->Cell(
             0,
             6,
-            'Tanggal               : '.date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
+            'Tanggal               : ' . date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
             ,
             0,
             1,
@@ -217,17 +220,26 @@ class Export extends CI_Controller {
         $pdf->Cell(
             0,
             6,
-            'Pembeli               : '.$Transaction[0]->buyerName
+            'Pembeli               : ' . $Transaction[0]->buyerName
             ,
             0,
             1,
             'L'
         );
         // $pdf->Cell(85, 20, '                      ', 0, 0);
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Rekening             : '.$Transaction[0]->bankAccountNumber
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
         $pdf->Cell(
             0,
             6,
-            'Rekening             : '.$Transaction[0]->bankAccountNumber
+            'Alamat                 : ' . $Transaction[0]->buyerAddress
             ,
             0,
             1,
@@ -236,16 +248,7 @@ class Export extends CI_Controller {
         $pdf->Cell(
             0,
             6,
-            'Alamat                 : '.$Transaction[0]->buyerAddress
-            ,
-            0,
-            1,
-            'L'
-        );
-        $pdf->Cell(
-            0,
-            6,
-            'No. HP                 : '.$Transaction[0]->buyerPhone
+            'No. HP                 : ' . $Transaction[0]->buyerPhone
             ,
             0,
             1,
@@ -265,12 +268,12 @@ class Export extends CI_Controller {
 
         $count = 1;
         $PRICEAMOUNT = 0;
-        foreach($Transaction as $row) {
+        foreach ($Transaction as $row) {
             // $pdf->Cell(10, 10, $count, 1, 0, 'C');
 
 
             $pdf->Cell(70, 5, $row->productName, 0, 1, 'L');
-            $pdf->Cell(0, 10, $row->qtyOrder.' x '.number_format($row->productPrice, 0, ',', '.'), 0, 0, 'L');
+            $pdf->Cell(0, 10, $row->qtyOrder . ' x ' . number_format($row->productPrice, 0, ',', '.'), 0, 0, 'L');
             $pdf->SetFont('Arial', 'B', 10);
             $pdf->Cell(0, 10, number_format($row->priceAmount, 0, ',', '.'), 0, 1, 'R');
 
@@ -317,23 +320,24 @@ class Export extends CI_Controller {
         // $pdf->Cell(100, 40, ".............", 0, 0, "C");
 
 
-        $pdf->Output('I', 'Daftar Transaction.pdf');
+        $pdf->Output('I', 'Struk.pdf');
     }
 
-    public function surat_jalan() {
+    public function surat_jalan()
+    {
         $idOrder = $this->input->post('idOrder');
         ;
         $Transaction = $this->Transaction_model->get_order_detail($idOrder)->result();
 
         $idCheckoutCount = array_reduce($Transaction, function ($carry, $item) {
-            if(isset($carry[$item->idCheckout])) {
+            if (isset($carry[$item->idCheckout])) {
                 $carry[$item->idCheckout]++;
             } else {
                 $carry[$item->idCheckout] = 1;
             }
             return $carry;
         }, array());
-        $heightPage = 190 + (15 * count($idCheckoutCount));
+        $heightPage = 190 + (5 * count($idCheckoutCount));
         // echo count($idCheckoutCount);
         // var_dump($idCheckoutCount);
 
@@ -370,7 +374,7 @@ class Export extends CI_Controller {
         $pdf->Cell(
             0,
             6,
-            'Nomor Transaksi : '.$Transaction[0]->idOrder.'/'.'ABJ/'.date('m/y')
+            'Nomor Transaksi : ' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y')
             ,
             0,
             1,
@@ -379,7 +383,7 @@ class Export extends CI_Controller {
         $pdf->Cell(
             0,
             6,
-            'Tanggal               : '.date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
+            'Tanggal               : ' . date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
             ,
             0,
             1,
@@ -388,17 +392,26 @@ class Export extends CI_Controller {
         $pdf->Cell(
             0,
             6,
-            'Pembeli               : '.$Transaction[0]->buyerName
+            'Pembeli               : ' . $Transaction[0]->buyerName
             ,
             0,
             1,
             'L'
         );
         // $pdf->Cell(85, 20, '                      ', 0, 0);
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Rekening             : ' . $Transaction[0]->bankAccountNumber
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
         $pdf->Cell(
             0,
             6,
-            'Rekening             : '.$Transaction[0]->bankAccountNumber
+            'Alamat                 : ' . $Transaction[0]->buyerAddress
             ,
             0,
             1,
@@ -407,16 +420,7 @@ class Export extends CI_Controller {
         $pdf->Cell(
             0,
             6,
-            'Alamat                 : '.$Transaction[0]->buyerAddress
-            ,
-            0,
-            1,
-            'L'
-        );
-        $pdf->Cell(
-            0,
-            6,
-            'No. HP                 : '.$Transaction[0]->buyerPhone
+            'No. HP                 : ' . $Transaction[0]->buyerPhone
             ,
             0,
             1,
@@ -437,11 +441,11 @@ class Export extends CI_Controller {
         $pdf->SetFont('Arial', '', 10);
         $count = 1;
         $PRICEAMOUNT = 0;
-        foreach($Transaction as $row) {
+        foreach ($Transaction as $row) {
             // $pdf->Cell(10, 10, $count, 1, 0, 'C');
 
 
-            $pdf->Cell(70, 5, $count.'. '.$row->productName, 0, 1, 'L');
+            $pdf->Cell(70, 5, $count . '. ' . $row->productName, 0, 1, 'L');
             // $pdf->Cell(0, 10, $row->qtyOrder.' x '.number_format($row->productPrice, 0, ',', '.'), 0, 0, 'L');
             // $pdf->SetFont('Arial', 'B', 10);
             // $pdf->Cell(0, 10, number_format($row->priceAmount, 0, ',', '.'), 0, 1, 'R');

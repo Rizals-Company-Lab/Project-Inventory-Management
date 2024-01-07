@@ -73,7 +73,7 @@
                         <tbody class="">
                             <?php
                             $total = 0;
-                            foreach($detailOrder as $row): ?>
+                            foreach ($detailOrder as $row): ?>
                                 <tr class=" bg-white py-3  text-[12px] sm:text-xl text-center hover:bg-slate-100">
                                     <td class="kolomhover">
                                         <?= $row->SKU ?>
@@ -132,7 +132,7 @@
                                 <?php
                                 $kekurangan = $detailOrder[0]->orderPriceAmount - $totalPayment;
 
-                                if($kekurangan > 0): ?>
+                                if ($kekurangan > 0): ?>
                                     <p>(Kurang
                                         <?= $kekurangan ?>)
                                     </p>
@@ -177,7 +177,7 @@
                             <input type="hidden" name="idOrder" id="idOrder" value="<?= $detailOrder[0]->idOrder ?>">
                             <input type="hidden" name="kekurangan" id="kekurangan" value="<?= $kekurangan ?>">
                             <?php
-                            if($kekurangan > 0): ?>
+                            if ($kekurangan > 0): ?>
                                 <input type="number"
                                     class="sm:mt-2 mb-4 sm:w-full sm:h-[40px] w-[200px] border text-black sm:px-5 py-2 px-3  rounded-md shadow-md "
                                     placeholder="Masukan Nominal" id="totalPayment" name="totalPayment"
@@ -209,7 +209,7 @@
 
                     <?php
                     $total = 0;
-                    foreach($payment as $row): ?>
+                    foreach ($payment as $row): ?>
 
                         <div class="flex mt-2 mr-3 bg-slate-300">
                             <p class="sm:px-5 sm:py-2 px-3 py-2 w-[200px]">

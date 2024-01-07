@@ -1,23 +1,26 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Transaction extends CI_Controller {
+class Transaction extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Transaction_model');
-        if(!$this->session->userdata('login_id')) {
+        if (!$this->session->userdata('login_id')) {
             redirect('Auth/login');
         }
     }
 
-    public function index($row_no = 0) {
+    public function index($row_no = 0)
+    {
         //search text
         $searchBuyer = "";
         $searchDate = "";
         $searchStatus = "";
         // var_dump($this->input->post());
-        if($this->input->post('search') != '') {
+        if ($this->input->post('search') != '') {
             $searchBuyer = $this->input->post('searchBuyer');
             $searchDate = $this->input->post('searchDate');
             $searchStatus = $this->input->post('searchStatus');
@@ -25,13 +28,13 @@ class Transaction extends CI_Controller {
             $this->session->set_userdata("searchDate", $searchDate);
             $this->session->set_userdata("searchStatus", $searchStatus);
         } else {
-            if($this->session->userdata('searchBuyer') != "") {
+            if ($this->session->userdata('searchBuyer') != "") {
                 $searchBuyer = $this->session->userdata('searchBuyer');
             }
-            if($this->session->userdata('searchDate') != "") {
+            if ($this->session->userdata('searchDate') != "") {
                 $searchDate = $this->session->userdata('searchDate');
             }
-            if($this->session->userdata('searchStatus') != "") {
+            if ($this->session->userdata('searchStatus') != "") {
                 $searchStatus = $this->session->userdata('searchStatus');
             }
         }
@@ -39,7 +42,7 @@ class Transaction extends CI_Controller {
         //--pagination--
         $row_per_page = 5;
 
-        if($row_no != 0) {
+        if ($row_no != 0) {
             $row_no = ($row_no - 1) * $row_per_page;
         }
 
@@ -50,7 +53,7 @@ class Transaction extends CI_Controller {
 
         // All record count
         $config['total_rows'] = $this->Transaction_model->get_transaction_count($searchBuyer, $searchDate, $searchStatus);
-        $config['base_url'] = base_url().'transaction/index';
+        $config['base_url'] = base_url() . 'transaction/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
 
@@ -81,10 +84,12 @@ class Transaction extends CI_Controller {
         $data['get_total_profit_today'] = $totalProfit;
         $data['get_total_final_profit_today'] = $totalProfit - $totalSpending;
 
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
+            $data['admin'] = true;
             $this->load->view('nav/navbar.php');
         } else {
+            $data['admin'] = false;
             $this->load->view('nav/navbar_kasir.php');
 
         }
@@ -92,7 +97,8 @@ class Transaction extends CI_Controller {
         // $this->load->view('transaction/transaction_view', $data);
     }
 
-    public function add_spending() {
+    public function add_spending()
+    {
 
         $idCategory = $this->input->post('idCategory');
         $totalSpending = $this->input->post('totalSpending');
@@ -102,7 +108,8 @@ class Transaction extends CI_Controller {
         redirect('Transaction');
     }
 
-    public function insert_checkout() {
+    public function insert_checkout()
+    {
 
         $SKU = $this->input->post('SKU');
         $this->Transaction_model->insert_checkout($SKU);
@@ -112,7 +119,8 @@ class Transaction extends CI_Controller {
         $this->load->view('ajax/checkoutList.php', $data);
     }
 
-    public function delete_checkout() {
+    public function delete_checkout()
+    {
 
         $SKU = $this->input->post('SKU');
 
@@ -123,7 +131,8 @@ class Transaction extends CI_Controller {
         $this->load->view('ajax/checkoutList.php', $data);
     }
 
-    public function delete_order() {
+    public function delete_order()
+    {
 
         $idOrder = $this->input->post('idOrder');
 
@@ -131,7 +140,8 @@ class Transaction extends CI_Controller {
         redirect('Transaction');
     }
 
-    public function add_new_transaction() {
+    public function add_new_transaction()
+    {
 
 
         $data['buyerNameTransaction'] = $this->session->flashdata('buyerName');
@@ -143,27 +153,32 @@ class Transaction extends CI_Controller {
         $data['product'] = $this->Transaction_model->get_product();
 
         $data['checkout'] = $this->Transaction_model->get_checkout();
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
+            $data['admin'] = true;
             $this->load->view('nav/navbar.php');
         } else {
+            $data['admin'] = false;
             $this->load->view('nav/navbar_kasir.php');
 
         }
         $this->load->view('transaction/entryOrder_view.php', $data);
     }
 
-    public function entryOrder() {
+    public function entryOrder()
+    {
         $this->load->view('entryJual.php');
     }
 
-    public function createOrder() {
+    public function createOrder()
+    {
         $this->load->view('entryJual.php');
     }
-    public function check_order_product() {
+    public function check_order_product()
+    {
         // var_dump($this->input->post());
         // $idOrder = $this->Transaction_model->get_new_idOrder();
-        if($this->Transaction_model->check_order_product()) {
+        if ($this->Transaction_model->check_order_product()) {
             echo "sudah";
         } else {
             echo 'belum';
@@ -173,14 +188,15 @@ class Transaction extends CI_Controller {
     }
 
 
-    public function save_transaction() {
+    public function save_transaction()
+    {
         // var_dump($this->input->post());
         // $idOrder = $this->Transaction_model->get_new_idOrder();
 
         // var_dump($this->Transaction_model->check_order_product());
         // die;
 
-        if($this->Transaction_model->check_order_product()) {
+        if ($this->Transaction_model->check_order_product()) {
             $this->Transaction_model->save_transaction($this->input->post(), 'sellingPrice');
             $this->session->keep_flashdata('buyerName');
             $this->session->keep_flashdata('buyerAddress');
@@ -206,9 +222,10 @@ class Transaction extends CI_Controller {
 
     }
 
-    public function order_detail() {
+    public function order_detail()
+    {
         // var_dump($this->input->post('idOrder'));
-        if($this->session->flashdata('idOrder')) {
+        if ($this->session->flashdata('idOrder')) {
             $idOrder = $this->session->flashdata('idOrder');
         } else {
 
@@ -221,10 +238,12 @@ class Transaction extends CI_Controller {
         // die;
 
         $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
+            $data['admin'] = true;
             $this->load->view('nav/navbar.php');
         } else {
+            $data['admin'] = false;
             $this->load->view('nav/navbar_kasir.php');
 
         }
@@ -232,22 +251,26 @@ class Transaction extends CI_Controller {
         $this->load->view('transaction/detail_transaction_view.php', $data);
     }
 
-    public function get_update() {
+    public function get_update()
+    {
         // var_dump($this->input->post('idOrder'));
         $idOrder = $this->input->post('idOrder');
 
         $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
+            $data['admin'] = true;
             $this->load->view('nav/navbar.php');
         } else {
+            $data['admin'] = false;
             $this->load->view('nav/navbar_kasir.php');
 
         }
         $this->load->view('transaction/update_transaction_view.php', $data);
     }
 
-    public function update_order() {
+    public function update_order()
+    {
         // var_dump($this->input->post());
 
         $idOrder = $this->input->post('idOrder');
@@ -263,13 +286,14 @@ class Transaction extends CI_Controller {
     }
 
 
-    public function paying() {
+    public function paying()
+    {
         // var_dump($this->input->post());
 
         $idOrder = $this->input->post('idOrder');
         $totalPayment = $this->input->post('totalPayment');
         $kekurangan = $this->input->post('kekurangan');
-        if($kekurangan == $totalPayment) {
+        if ($kekurangan == $totalPayment) {
             $this->Transaction_model->update_payment_status($idOrder);
         }
         $this->Transaction_model->paying($idOrder, $totalPayment);
