@@ -79,6 +79,8 @@ class Transaction extends CI_Controller
         $totalProfit = $this->Transaction_model->get_total_profit_today();
         $totalSpending = $this->Transaction_model->get_total_spending_today();
 
+        var_dump($this->Transaction_model->get_total_transaction_today());
+
         $data['transactionToday'] = $totalTransaction;
         $data['spendingToday'] = $totalSpending;
         $data['get_total_profit_today'] = $totalProfit;
@@ -118,6 +120,12 @@ class Transaction extends CI_Controller
         // var_dump($this->Transaction_model->get_checkout()->result());
         $this->load->view('ajax/checkoutList.php', $data);
     }
+
+    public function insert_checkout_SKU($SKU)
+    {
+        $this->Transaction_model->insert_checkout($SKU);
+    }
+
 
     public function delete_checkout()
     {
@@ -198,20 +206,25 @@ class Transaction extends CI_Controller
 
         if ($this->Transaction_model->check_order_product()) {
             $this->Transaction_model->save_transaction($this->input->post(), 'sellingPrice');
+            $this->session->keep_flashdata('idOrder');
             $this->session->keep_flashdata('buyerName');
             $this->session->keep_flashdata('buyerAddress');
             $this->session->keep_flashdata('buyerPhone');
             $this->session->keep_flashdata('bankAccountNumber');
             $this->session->keep_flashdata('ongkir');
             redirect('Transaction_umum');
+
+
         } else {
+            $idOrder = $this->input->post('idOrder');
             $buyerName = $this->input->post('buyerName');
             $buyerAddress = $this->input->post('buyerAddress');
             $buyerPhone = $this->input->post('buyerPhone');
             $bankAccountNumber = $this->input->post('bankAccountNumber');
             $ongkir = $this->input->post('ongkir');
 
-            // Set flash data dengan data post
+
+            $this->session->set_flashdata('idOrder', $idOrder);
             $this->session->set_flashdata('buyerName', $buyerName);
             $this->session->set_flashdata('buyerAddress', $buyerAddress);
             $this->session->set_flashdata('buyerPhone', $buyerPhone);
@@ -222,14 +235,64 @@ class Transaction extends CI_Controller
 
     }
 
+    public function update_transaction()
+    {
+        // var_dump($this->input->post());
+        // $idOrder = $this->Transaction_model->get_new_idOrder();
+
+        // var_dump($this->Transaction_model->check_order_product());
+        // die;
+
+        // var_dump($this->input->post());
+        $idOrder = $this->input->post('idOrder');
+        $buyerName = $this->input->post('buyerName');
+        $buyerAddress = $this->input->post('buyerAddress');
+        $buyerPhone = $this->input->post('buyerPhone');
+        $bankAccountNumber = $this->input->post('bankAccountNumber');
+        $ongkir = $this->input->post('ongkir');
+        $typeTrans = $this->input->post('typeTrans');
+
+        $this->Transaction_model->delete_checkout_by_idOrder($idOrder);
+
+
+        foreach ($this->input->post() as $key => $value) {
+            if (strpos($key, 'SKU') === 0) {
+                $SKUSingle = $key = $value;
+                $this->insert_checkout_SKU($SKUSingle);
+            }
+        }
+        // die;
+
+
+
+        $this->session->set_flashdata('idOrder', $idOrder);
+        $this->session->set_flashdata('buyerName', $buyerName);
+        $this->session->set_flashdata('buyerAddress', $buyerAddress);
+        $this->session->set_flashdata('buyerPhone', $buyerPhone);
+        $this->session->set_flashdata('bankAccountNumber', $bankAccountNumber);
+        $this->session->set_flashdata('ongkir', $ongkir);
+        if ($typeTrans == "distributor") {
+            redirect('Transaction_distributor/add_new_transaction');
+        } elseif ($typeTrans == "material") {
+            redirect('Transaction_material/add_new_transaction');
+        } elseif ($typeTrans == "production") {
+            redirect('Transaction_production/add_new_transaction');
+        } else {
+            redirect('Transaction_umum/add_new_transaction');
+        }
+
+    }
+
     public function order_detail()
     {
         // var_dump($this->input->post('idOrder'));
         if ($this->session->flashdata('idOrder')) {
+            echo "1";
             $idOrder = $this->session->flashdata('idOrder');
         } else {
 
             $idOrder = $this->input->post('idOrder');
+
         }
 
         $data['payment'] = $this->Transaction_model->get_payment($idOrder)->result();
@@ -238,6 +301,7 @@ class Transaction extends CI_Controller
         // die;
 
         $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
+        // var_dump($this->Transaction_model->get_order_detail($idOrder)->result());
         if ($this->session->userdata('login_id') == 'admin') {
 
             $data['admin'] = true;

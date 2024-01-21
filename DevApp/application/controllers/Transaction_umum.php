@@ -135,7 +135,7 @@ class Transaction_umum extends CI_Controller
     public function add_new_transaction()
     {
 
-
+        $data['idOrderTransaction'] = $this->session->flashdata('idOrder');
         $data['buyerNameTransaction'] = $this->session->flashdata('buyerName');
         $data['buyerAddressTransaction'] = $this->session->flashdata('buyerAddress');
         $data['buyerPhoneTransaction'] = $this->session->flashdata('buyerPhone');
@@ -156,8 +156,6 @@ class Transaction_umum extends CI_Controller
 
         }
         $this->load->view('transaction_umum/entryOrder_view.php', $data);
-
-
     }
 
     public function entryOrder()
@@ -194,7 +192,96 @@ class Transaction_umum extends CI_Controller
 
 
         if ($this->Transaction_model->check_order_product()) {
-            $this->Transaction_model->save_transaction($this->input->post(), 'sellingPrice');
+            $this->Transaction_model->save_transaction($this->input->post(), 'umum', 'sellingPrice');
+            $this->session->keep_flashdata('idOrder');
+            $this->session->keep_flashdata('buyerName');
+            $this->session->keep_flashdata('buyerAddress');
+            $this->session->keep_flashdata('buyerPhone');
+            $this->session->keep_flashdata('bankAccountNumber');
+            $this->session->keep_flashdata('ongkir');
+            // $idOrder = $this->input->post('idOrder');
+            // $this->session->set_flashdata('idOrder', $idOrder);
+            // var_dump($this->input->post());
+            // die;
+            // $this->order_detail();
+            redirect('Transaction_umum');
+        } else {
+            $idOrder = $this->input->post('idOrder');
+            $buyerName = $this->input->post('buyerName');
+            $buyerAddress = $this->input->post('buyerAddress');
+            $buyerPhone = $this->input->post('buyerPhone');
+            $bankAccountNumber = $this->input->post('bankAccountNumber');
+            $ongkir = $this->input->post('ongkir');
+
+
+            $this->session->set_flashdata('idOrder', $idOrder);
+            $this->session->set_flashdata('buyerName', $buyerName);
+            $this->session->set_flashdata('buyerAddress', $buyerAddress);
+            $this->session->set_flashdata('buyerPhone', $buyerPhone);
+            $this->session->set_flashdata('bankAccountNumber', $bankAccountNumber);
+            $this->session->set_flashdata('ongkir', $ongkir);
+            redirect('Transaction_umum/add_new_transaction');
+        }
+
+    }
+
+    public function save_transaction_update()
+    {
+        // var_dump($this->input->post());
+        // $idOrder = $this->Transaction_model->get_new_idOrder();
+
+        // var_dump($this->Transaction_model->check_order_product());
+        // die;
+
+
+
+        if ($this->Transaction_model->check_order_product()) {
+            $this->Transaction_model->save_transaction_update($this->input->post(), 'umum', 'sellingPrice');
+            $this->session->keep_flashdata('idOrder');
+            $this->session->keep_flashdata('buyerName');
+            $this->session->keep_flashdata('buyerAddress');
+            $this->session->keep_flashdata('buyerPhone');
+            $this->session->keep_flashdata('bankAccountNumber');
+            $this->session->keep_flashdata('ongkir');
+            // $idOrder = $this->input->post('idOrder');
+            // $this->session->set_flashdata('idOrder', $idOrder);
+            // var_dump($this->input->post());
+            // die;
+            // $this->order_detail();
+            redirect('Transaction_umum');
+        } else {
+            $idOrder = $this->input->post('idOrder');
+            $buyerName = $this->input->post('buyerName');
+            $buyerAddress = $this->input->post('buyerAddress');
+            $buyerPhone = $this->input->post('buyerPhone');
+            $bankAccountNumber = $this->input->post('bankAccountNumber');
+            $ongkir = $this->input->post('ongkir');
+
+
+            $this->session->set_flashdata('idOrder', $idOrder);
+            $this->session->set_flashdata('buyerName', $buyerName);
+            $this->session->set_flashdata('buyerAddress', $buyerAddress);
+            $this->session->set_flashdata('buyerPhone', $buyerPhone);
+            $this->session->set_flashdata('bankAccountNumber', $bankAccountNumber);
+            $this->session->set_flashdata('ongkir', $ongkir);
+            redirect('Transaction_umum/add_new_transaction');
+        }
+
+    }
+
+
+    public function update_transaction()
+    {
+        // var_dump($this->input->post());
+        // $idOrder = $this->Transaction_model->get_new_idOrder();
+
+        // var_dump($this->Transaction_model->check_order_product());
+        // die;
+
+
+
+        if ($this->Transaction_model->check_order_product()) {
+            $this->Transaction_model->save_transaction($this->input->post(), 'umum', 'sellingPrice');
             $this->session->keep_flashdata('buyerName');
             $this->session->keep_flashdata('buyerAddress');
             $this->session->keep_flashdata('buyerPhone');
@@ -223,6 +310,7 @@ class Transaction_umum extends CI_Controller
         }
 
     }
+
 
     public function order_detail()
     {

@@ -1,22 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class transaction_material extends CI_Controller {
+class transaction_material extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Transaction_model');
-        if(!$this->session->userdata('login_id')) {
+        if (!$this->session->userdata('login_id')) {
             redirect('Auth/login');
         }
     }
 
-    public function index($row_no = 0) {
+    public function index($row_no = 0)
+    {
         //search text
         $searchINVENTTRANSID = "";
         $searchNAME = "";
         $searchITEMNAME = "";
-        if($this->input->post('search') != '') {
+        if ($this->input->post('search') != '') {
             $searchINVENTTRANSID = $this->input->post('searchINVENTTRANSID');
             $searchNAME = $this->input->post('searchNAME');
             $searchITEMNAME = $this->input->post('searchITEMNAME');
@@ -24,13 +27,13 @@ class transaction_material extends CI_Controller {
             $this->session->set_userdata("searchNAME", $searchNAME);
             $this->session->set_userdata("searchITEMNAME", $searchITEMNAME);
         } else {
-            if($this->session->userdata('searchINVENTTRANSID') != "") {
+            if ($this->session->userdata('searchINVENTTRANSID') != "") {
                 $searchINVENTTRANSID = $this->session->userdata('searchINVENTTRANSID');
             }
-            if($this->session->userdata('searchNAME') != "") {
+            if ($this->session->userdata('searchNAME') != "") {
                 $searchNAME = $this->session->userdata('searchNAME');
             }
-            if($this->session->userdata('searchITEMNAME') != "") {
+            if ($this->session->userdata('searchITEMNAME') != "") {
                 $searchITEMNAME = $this->session->userdata('searchITEMNAME');
             }
         }
@@ -38,13 +41,13 @@ class transaction_material extends CI_Controller {
         //--pagination--
         $row_per_page = 5;
 
-        if($row_no != 0) {
+        if ($row_no != 0) {
             $row_no = ($row_no - 1) * $row_per_page;
         }
         // Pagination Configuration
         // All record count
         $config['total_rows'] = $this->Transaction_model->get_transaction_count($searchINVENTTRANSID, $searchNAME, $searchITEMNAME);
-        $config['base_url'] = base_url().'transaction/index';
+        $config['base_url'] = base_url() . 'transaction/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
 
@@ -73,7 +76,7 @@ class transaction_material extends CI_Controller {
         $data['get_total_profit_today'] = $totalProfit;
         $data['get_total_final_profit_today'] = $totalProfit - $totalSpending;
 
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
             $this->load->view('nav/navbar.php');
         } else {
@@ -86,7 +89,8 @@ class transaction_material extends CI_Controller {
 
 
 
-    public function add_spending() {
+    public function add_spending()
+    {
 
         $idCategory = $this->input->post('idCategory');
         $totalSpending = $this->input->post('totalSpending');
@@ -96,7 +100,8 @@ class transaction_material extends CI_Controller {
         redirect('Transaction');
     }
 
-    public function insert_checkout() {
+    public function insert_checkout()
+    {
 
         $SKU = $this->input->post('SKU');
         $this->Transaction_model->insert_checkout($SKU);
@@ -106,7 +111,8 @@ class transaction_material extends CI_Controller {
         $this->load->view('ajax/checkoutList_material.php', $data);
     }
 
-    public function delete_checkout() {
+    public function delete_checkout()
+    {
 
         $SKU = $this->input->post('SKU');
 
@@ -117,7 +123,8 @@ class transaction_material extends CI_Controller {
         $this->load->view('ajax/checkoutList_material.php', $data);
     }
 
-    public function delete_order() {
+    public function delete_order()
+    {
 
         $idOrder = $this->input->post('idOrder');
 
@@ -125,7 +132,9 @@ class transaction_material extends CI_Controller {
         redirect('Transaction_material');
     }
 
-    public function add_new_transaction() {
+    public function add_new_transaction()
+    {
+        $data['idOrderTransaction'] = $this->session->flashdata('idOrder');
 
         $data['buyerNameTransaction'] = $this->session->flashdata('buyerName');
         $data['buyerAddressTransaction'] = $this->session->flashdata('buyerAddress');
@@ -135,28 +144,33 @@ class transaction_material extends CI_Controller {
 
         $data['product'] = $this->Transaction_model->get_product();
         $data['checkout'] = $this->Transaction_model->get_checkout();
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
+            $data['admin'] = true;
             $this->load->view('nav/navbar.php');
         } else {
+            $data['admin'] = false;
             $this->load->view('nav/navbar_kasir.php');
 
         }
         $this->load->view('transaction_material/entryOrder_view.php', $data);
     }
 
-    public function entryOrder() {
+    public function entryOrder()
+    {
         $this->load->view('entryJual.php');
     }
 
-    public function createOrder() {
+    public function createOrder()
+    {
         $this->load->view('entryJual.php');
     }
 
-    public function check_order_product() {
+    public function check_order_product()
+    {
         // var_dump($this->input->post());
         // $idOrder = $this->Transaction_model->get_new_idOrder();
-        if($this->Transaction_model->check_order_product()) {
+        if ($this->Transaction_model->check_order_product()) {
             echo "sudah";
         } else {
             echo 'belum';
@@ -166,18 +180,151 @@ class transaction_material extends CI_Controller {
     }
 
 
-    public function save_transaction() {
+    // public function save_transaction()
+    // {
+    //     // var_dump($this->input->post());
+    //     // die;
+    //     // $idOrder = $this->Transaction_model->get_new_idOrder();
+    //     if ($this->Transaction_model->check_order_product()) {
+    //         $this->Transaction_model->save_transaction($this->input->post(), 'materialPrice');
+    //         $this->session->keep_flashdata('buyerName');
+    //         $this->session->keep_flashdata('buyerAddress');
+    //         $this->session->keep_flashdata('buyerPhone');
+    //         $this->session->keep_flashdata('bankAccountNumber');
+    //         $this->session->keep_flashdata('ongkir');
+    //         redirect('Transaction_umum');
+    //     } else {
+    //         $buyerName = $this->input->post('buyerName');
+    //         $buyerAddress = $this->input->post('buyerAddress');
+    //         $buyerPhone = $this->input->post('buyerPhone');
+    //         $bankAccountNumber = $this->input->post('bankAccountNumber');
+    //         $ongkir = $this->input->post('ongkir');
+
+    //         // Set flash data dengan data post
+    //         $this->session->set_flashdata('buyerName', $buyerName);
+    //         $this->session->set_flashdata('buyerAddress', $buyerAddress);
+    //         $this->session->set_flashdata('buyerPhone', $buyerPhone);
+    //         $this->session->set_flashdata('bankAccountNumber', $bankAccountNumber);
+    //         $this->session->set_flashdata('ongkir', $ongkir);
+    //         redirect('Transaction_umum/add_new_transaction');
+    //     }
+
+    // }
+
+    public function save_transaction()
+    {
         // var_dump($this->input->post());
-        // die;
         // $idOrder = $this->Transaction_model->get_new_idOrder();
-        if($this->Transaction_model->check_order_product()) {
-            $this->Transaction_model->save_transaction($this->input->post(), 'materialPrice');
+
+        // var_dump($this->Transaction_model->check_order_product());
+        // die;
+
+
+
+        if ($this->Transaction_model->check_order_product()) {
+            $this->Transaction_model->save_transaction($this->input->post(), 'material', 'materialPrice');
+            $this->session->keep_flashdata('idOrder');
             $this->session->keep_flashdata('buyerName');
             $this->session->keep_flashdata('buyerAddress');
             $this->session->keep_flashdata('buyerPhone');
             $this->session->keep_flashdata('bankAccountNumber');
             $this->session->keep_flashdata('ongkir');
-            redirect('Transaction_umum');
+            // $idOrder = $this->input->post('idOrder');
+            // $this->session->set_flashdata('idOrder', $idOrder);
+            // var_dump($this->input->post());
+            // die;
+            // $this->order_detail();
+            redirect('Transaction');
+        } else {
+            $idOrder = $this->input->post('idOrder');
+            $buyerName = $this->input->post('buyerName');
+            $buyerAddress = $this->input->post('buyerAddress');
+            $buyerPhone = $this->input->post('buyerPhone');
+            $bankAccountNumber = $this->input->post('bankAccountNumber');
+            $ongkir = $this->input->post('ongkir');
+
+
+            $this->session->set_flashdata('idOrder', $idOrder);
+            $this->session->set_flashdata('buyerName', $buyerName);
+            $this->session->set_flashdata('buyerAddress', $buyerAddress);
+            $this->session->set_flashdata('buyerPhone', $buyerPhone);
+            $this->session->set_flashdata('bankAccountNumber', $bankAccountNumber);
+            $this->session->set_flashdata('ongkir', $ongkir);
+            redirect('Transaction_material/add_new_transaction');
+        }
+
+    }
+
+    public function save_transaction_update()
+    {
+        // var_dump($this->input->post());
+        // $idOrder = $this->Transaction_model->get_new_idOrder();
+
+        // var_dump($this->Transaction_model->check_order_product());
+        // die;
+
+
+
+        if ($this->Transaction_model->check_order_product()) {
+            // var_dump($this->input->post());
+            // die;
+            $this->Transaction_model->save_transaction_update($this->input->post(), 'material', 'materialPrice');
+            $this->session->keep_flashdata('idOrder');
+            $this->session->keep_flashdata('buyerName');
+            $this->session->keep_flashdata('buyerAddress');
+            $this->session->keep_flashdata('buyerPhone');
+            $this->session->keep_flashdata('bankAccountNumber');
+            $this->session->keep_flashdata('ongkir');
+            // $idOrder = $this->input->post('idOrder');
+            // $this->session->set_flashdata('idOrder', $idOrder);
+            // var_dump($this->input->post());
+            // die;
+            // $this->order_detail();
+            redirect('Transaction');
+        } else {
+            $idOrder = $this->input->post('idOrder');
+            $buyerName = $this->input->post('buyerName');
+            $buyerAddress = $this->input->post('buyerAddress');
+            $buyerPhone = $this->input->post('buyerPhone');
+            $bankAccountNumber = $this->input->post('bankAccountNumber');
+            $ongkir = $this->input->post('ongkir');
+
+
+            $this->session->set_flashdata('idOrder', $idOrder);
+            $this->session->set_flashdata('buyerName', $buyerName);
+            $this->session->set_flashdata('buyerAddress', $buyerAddress);
+            $this->session->set_flashdata('buyerPhone', $buyerPhone);
+            $this->session->set_flashdata('bankAccountNumber', $bankAccountNumber);
+            $this->session->set_flashdata('ongkir', $ongkir);
+            redirect('Transaction_material/add_new_transaction');
+        }
+
+    }
+
+
+    public function update_transaction()
+    {
+        // var_dump($this->input->post());
+        // $idOrder = $this->Transaction_model->get_new_idOrder();
+
+        // var_dump($this->Transaction_model->check_order_product());
+        // die;
+
+
+
+        if ($this->Transaction_model->check_order_product()) {
+            $this->Transaction_model->save_transaction($this->input->post(), 'material', 'sellingPrice');
+            $this->session->keep_flashdata('buyerName');
+            $this->session->keep_flashdata('buyerAddress');
+            $this->session->keep_flashdata('buyerPhone');
+            $this->session->keep_flashdata('bankAccountNumber');
+            $this->session->keep_flashdata('ongkir');
+            // $idOrder = $this->input->post('idOrder');
+            // $this->session->set_flashdata('idOrder', $idOrder);
+            // var_dump($this->input->post());
+            // die;
+            // $this->order_detail();
+            redirect('Transaction');
         } else {
             $buyerName = $this->input->post('buyerName');
             $buyerAddress = $this->input->post('buyerAddress');
@@ -191,14 +338,15 @@ class transaction_material extends CI_Controller {
             $this->session->set_flashdata('buyerPhone', $buyerPhone);
             $this->session->set_flashdata('bankAccountNumber', $bankAccountNumber);
             $this->session->set_flashdata('ongkir', $ongkir);
-            redirect('Transaction_umum/add_new_transaction');
+            redirect('Transaction_material/add_new_transaction');
         }
 
     }
 
-    public function order_detail() {
+    public function order_detail()
+    {
         // var_dump($this->input->post('idOrder'));
-        if($this->session->flashdata('idOrder')) {
+        if ($this->session->flashdata('idOrder')) {
             $idOrder = $this->session->flashdata('idOrder');
         } else {
 
@@ -210,7 +358,7 @@ class transaction_material extends CI_Controller {
         // var_dump($this->Transaction_model->get_total_paying($idOrder));
         // die;
         $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
             $this->load->view('nav/navbar.php');
         } else {
@@ -218,15 +366,16 @@ class transaction_material extends CI_Controller {
 
         }
         $this->session->keep_flashdata('idOrder');
-        $this->load->view('transaction_material/detail_transaction_view.php', $data);
+        $this->load->view('transaction/detail_transaction_view.php', $data);
     }
 
-    public function get_update() {
+    public function get_update()
+    {
         // var_dump($this->input->post('idOrder'));
         $idOrder = $this->input->post('idOrder');
 
         $data['detailOrder'] = $this->Transaction_model->get_order_detail($idOrder)->result();
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
             $this->load->view('nav/navbar.php');
         } else {
@@ -236,7 +385,8 @@ class transaction_material extends CI_Controller {
         $this->load->view('transaction_material/update_transaction_view.php', $data);
     }
 
-    public function update_order() {
+    public function update_order()
+    {
         // var_dump($this->input->post());
 
         $idOrder = $this->input->post('idOrder');
@@ -252,13 +402,14 @@ class transaction_material extends CI_Controller {
     }
 
 
-    public function paying() {
+    public function paying()
+    {
         // var_dump($this->input->post());
 
         $idOrder = $this->input->post('idOrder');
         $totalPayment = $this->input->post('totalPayment');
         $kekurangan = $this->input->post('kekurangan');
-        if($kekurangan == $totalPayment) {
+        if ($kekurangan == $totalPayment) {
             $this->Transaction_model->update_payment_status($idOrder);
         }
         $this->Transaction_model->paying($idOrder, $totalPayment);
