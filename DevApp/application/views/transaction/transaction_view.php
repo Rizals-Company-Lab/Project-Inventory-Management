@@ -60,12 +60,10 @@
                         <option value="" <?php echo (isset($searchStatus) && $searchStatus == '') ? 'selected' : ''; ?>>
                             Semua
                         </option>
-                        <option value="0"
-                            <?php echo (isset($searchStatus) && $searchStatus == '0') ? 'selected' : ''; ?>>
+                        <option value="0" <?php echo (isset($searchStatus) && $searchStatus == '0') ? 'selected' : ''; ?>>
                             Pending
                         </option>
-                        <option value="1"
-                            <?php echo (isset($searchStatus) && $searchStatus == '1') ? 'selected' : ''; ?>>
+                        <option value="1" <?php echo (isset($searchStatus) && $searchStatus == '1') ? 'selected' : ''; ?>>
                             Lunas</option>
                     </select>
                 </div>
@@ -99,11 +97,11 @@
                 <label>Kategori</label>
                 <br>
                 <select name="idCategory"
-                    class="sm:mt-2 sm:ml-0 ml-0 sm:mr-5 mr-3 sm:mb-4 cursor-text sm:w-[50px] sm:h-[40px] border text-black sm:px-5 py-2 px-3  rounded-md shadow-md">
-                    <?php foreach($spendingCategory as $category): ?>
-                    <option value="<?= $category->idCategory; ?>">
-                        <?= $category->categorySpending; ?>
-                    </option>
+                    class="sm:mt-2 sm:ml-0 ml-0 sm:mr-5 mr-3 sm:mb-4 cursor-text sm:w-[100px] sm:h-[40px] border text-black sm:px-5 py-2 px-3  rounded-md shadow-md">
+                    <?php foreach ($spendingCategory as $category): ?>
+                        <option value="<?= $category->idCategory; ?>">
+                            <?= $category->categorySpending; ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -136,33 +134,33 @@
                 </thead>
                 <?php
                 $count = $row + 1;
-                foreach($transaction->result() as $singleView):
+                foreach ($transaction->result() as $singleView):
                     ?>
-                <tbody class="">
-                    <tr
-                        class="cursor-pointer text-[11px] sm:text-sm text-center bg-white py-1 group-hover:text-white hover:bg-slate-400 duration-300 group">
-                        <th class="kolomhover">
-                            <?= $count; ?>
-                        </th>
-                        <td class="kolomhover ">
-                            <?= $singleView->buyerName ?>
-                        </td>
-                        <td class="kolomhover  ">
-                            <?= $singleView->orderTimestamp ?>
-                        </td>
-                        <td class="kolomhover font-bold"
-                            style="color: <?= ($singleView->paymentStatus == 1) ? 'green' : 'red' ?>">
-                            <?= ($singleView->paymentStatus == 1) ? 'LUNAS  <span style="color: black;"> ('.$singleView->paidTimestamp.')</span>' : 'PENDING' ?>
-                        </td>
+                    <tbody class="">
+                        <tr
+                            class="cursor-pointer text-[11px] sm:text-sm text-center bg-white py-1 group-hover:text-white hover:bg-slate-400 duration-300 group">
+                            <th class="kolomhover">
+                                <?= $count; ?>
+                            </th>
+                            <td class="kolomhover ">
+                                <?= $singleView->buyerName ?>
+                            </td>
+                            <td class="kolomhover  ">
+                                <?= $singleView->orderTimestamp ?>
+                            </td>
+                            <td class="kolomhover font-bold"
+                                style="color: <?= ($singleView->paymentStatus == 1) ? 'green' : 'red' ?>">
+                                <?= ($singleView->paymentStatus == 1) ? 'LUNAS  <span style="color: black;"> (' . $singleView->paidTimestamp . ')</span>' : 'PENDING' ?>
+                            </td>
 
 
-                        <td class=" p-1 px-3 text-[10px] sm:text-base text-white flex justify-evenly mt-1">
-                            <form action="<?= site_url('transaction/order_detail'); ?>" method="post">
-                                <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
-                                    class="bg-blue-600 rounded-md px-3 py-1 shadow-md hover:bg-blue-900"><i
-                                        class="fa-solid fa-circle-info "></i> Details</button>
-                            </form>
-                            <!-- <form action="<?= site_url('transaction/get_update'); ?>" method="post">
+                            <td class=" p-1 px-3 text-[10px] sm:text-base text-white flex justify-evenly mt-1">
+                                <form action="<?= site_url('transaction/order_detail'); ?>" method="post">
+                                    <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
+                                        class="bg-blue-600 rounded-md px-3 py-1 shadow-md hover:bg-blue-900"><i
+                                            class="fa-solid fa-circle-info "></i> Details</button>
+                                </form>
+                                <!-- <form action="<?= site_url('transaction/get_update'); ?>" method="post">
                                 <button type="submit" value="<?= $singleView->idOrder ?>" name="idOrder" id="idOrder"
                                     class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"><i
                                         class="fa-regular fa-pen-to-square"></i> Update</button>
@@ -179,14 +177,14 @@
                                         class="fa-solid fa-circle-info"></i>
                                     Print</button>
                             </form> -->
-                            <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
+                                <!-- <button class="bg-lime-500 rounded-md px-3 py-1 shadow-md hover:bg-green-700"
                             onclick="insertDataPesan(<?= $singleView->idOrder ?>)">Update</button>
 
                         <button class="bg-blue-500 rounded-md px-3 py-1 ml-2 shadow-md hover:bg-blue-700"
                             onclick="insertDataPesan(<?= $singleView->idOrder ?>)">Details</button> -->
-                        </td>
-                    </tr>
-                    <?php
+                            </td>
+                        </tr>
+                        <?php
                         $count++;
                 endforeach; ?>
                 </tbody>

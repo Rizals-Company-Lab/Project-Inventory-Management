@@ -79,7 +79,7 @@ class Transaction extends CI_Controller
         $totalProfit = $this->Transaction_model->get_total_profit_today();
         $totalSpending = $this->Transaction_model->get_total_spending_today();
 
-        var_dump($this->Transaction_model->get_total_transaction_today());
+        // var_dump($this->Transaction_model->get_total_transaction_today());
 
         $data['transactionToday'] = $totalTransaction;
         $data['spendingToday'] = $totalSpending;

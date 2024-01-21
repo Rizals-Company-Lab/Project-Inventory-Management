@@ -2,7 +2,6 @@
     <?php
     if (isset($idOrderTransaction)):
         ?>
-        masuk update
 
         <form
             class="sm:mx-auto  sm:mt-5 relative mb-5 w-auto mt-0 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
@@ -11,7 +10,6 @@
             <?php
     else:
         ?>
-            masuk baru
 
             <form
                 class="sm:mx-auto  sm:mt-5 relative mb-5 w-auto mt-0 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
@@ -19,7 +17,19 @@
                 <?php
     endif;
     ?>
-            <h1 class="font-bold sm:text-2xl text-base mb-3 py-3 bg-bg2 text-center">TAMBAH TRANSAKSI MATERIAL</h1>
+            <h1 class="font-bold sm:text-2xl text-base mb-3 py-3 bg-bg2 text-center">
+                <?php
+                if (isset($idOrderTransaction)):
+                    ?>
+                    TAMBAH TRANSAKSI MATERIAL
+                    <?php
+                else:
+                    ?>
+                    UPDATE TRANSAKSI MATERIAL
+                    <?php
+                endif;
+                ?>
+            </h1>
             <style>
                 #loading-container {
                     position: fixed;

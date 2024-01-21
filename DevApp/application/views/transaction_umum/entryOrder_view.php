@@ -17,8 +17,19 @@
     endif;
     ?>
 
-            <h1 class="font-bold sm:text-2xl text-base py-3 mb-2 bg-bg2 text-center">TAMBAH TRANSAKSI UMUM</h1>
-
+            <h1 class="font-bold sm:text-2xl text-base mb-3 py-3 bg-bg2 text-center">
+                <?php
+                if (isset($idOrderTransaction)):
+                    ?>
+                    TAMBAH TRANSAKSI UMUM
+                    <?php
+                else:
+                    ?>
+                    UPDATE TRANSAKSI UMUM
+                    <?php
+                endif;
+                ?>
+            </h1>
             <style>
                 #loading-container {
                     position: fixed;
