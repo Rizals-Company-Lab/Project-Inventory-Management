@@ -26,8 +26,8 @@
                 </div>
                 <div class="p-2 ">
                     <label>password</label><br>
-                    <input class="mt-2 mb-4 w-full  h-[40px] border text-black px-5  rounded-md shadow-md" type="text"
-                        id="password" name="password" placeholder="   password">
+                    <input class="mt-2 mb-4 w-full  h-[40px] border text-black px-5  rounded-md shadow-md"
+                        type="password" id="password" name="password" placeholder="   password">
                 </div>
                 <div class="grid items-center mt-10">
                     <button class=" px-[50px] py-1  rounded-sm bg-blue-700 hover:bg-primary" name="login" id="login"

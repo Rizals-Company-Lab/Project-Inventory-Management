@@ -50,7 +50,7 @@
                         <th class="py-3 sm:text-left ">DESKRIPSI BARANG </th>
                         <th class="py-3 ">STOK</th>
                         <th class="py-3 ">HARGA UMUM</th>
-                        <th class="py-3 ">HARGA DISTRIBUTOR</th>
+                        <th class="py-3 ">HARGA PEMBORONG</th>
                         <th class="py-3 ">HARGA MATERIAL</th>
                         <th class="py-3 ">HARGA PRODUKSI</th>
                         <th class="py-3 ">Action</th>

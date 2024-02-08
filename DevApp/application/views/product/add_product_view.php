@@ -37,7 +37,7 @@
                             type="number" name="sellingPrice" id="sellingPrice" min="1" value="">
                     </div>
                     <div class="sm:ml-5">
-                        <label for="distributorPrice">HARGA JUAL DISTRIBUTOR</label>
+                        <label for="distributorPrice">HARGA JUAL PEMBORONG</label>
                         <input
                             class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             type="number" name="distributorPrice" id="distributorPrice" min="1" value="">
