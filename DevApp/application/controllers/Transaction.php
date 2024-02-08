@@ -16,18 +16,24 @@ class Transaction extends CI_Controller
     public function index($row_no = 0)
     {
         //search text
+        $searchIdOrder = "";
         $searchBuyer = "";
         $searchDate = "";
         $searchStatus = "";
         // var_dump($this->input->post());
         if ($this->input->post('search') != '') {
+            $searchIdOrder = $this->input->post('searchIdOrder');
             $searchBuyer = $this->input->post('searchBuyer');
             $searchDate = $this->input->post('searchDate');
             $searchStatus = $this->input->post('searchStatus');
+            $this->session->set_userdata("searchIdOrder", $searchIdOrder);
             $this->session->set_userdata("searchBuyer", $searchBuyer);
             $this->session->set_userdata("searchDate", $searchDate);
             $this->session->set_userdata("searchStatus", $searchStatus);
         } else {
+            if ($this->session->userdata('searchIdOrder') != "") {
+                $searchIdOrder = $this->session->userdata('searchIdOrder');
+            }
             if ($this->session->userdata('searchBuyer') != "") {
                 $searchBuyer = $this->session->userdata('searchBuyer');
             }
@@ -52,7 +58,7 @@ class Transaction extends CI_Controller
         // Pagination Configuration
 
         // All record count
-        $config['total_rows'] = $this->Transaction_model->get_transaction_count($searchBuyer, $searchDate, $searchStatus);
+        $config['total_rows'] = $this->Transaction_model->get_transaction_count($searchIdOrder, $searchBuyer, $searchDate, $searchStatus);
         $config['base_url'] = base_url() . 'transaction/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
@@ -63,12 +69,13 @@ class Transaction extends CI_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         // Get record
-        $data['transaction'] = $this->Transaction_model->get_transaction($row_no, $row_per_page, $searchBuyer, $searchDate, $searchStatus);
+        $data['transaction'] = $this->Transaction_model->get_transaction($row_no, $row_per_page, $searchIdOrder, $searchBuyer, $searchDate, $searchStatus);
 
         $data['row'] = $row_no;
 
 
 
+        $data['searchIdOrder'] = $searchIdOrder;
         $data['searchBuyer'] = $searchBuyer;
         $data['searchDate'] = $searchDate;
         $data['searchStatus'] = $searchStatus;
