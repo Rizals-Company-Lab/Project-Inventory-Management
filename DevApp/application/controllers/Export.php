@@ -165,18 +165,98 @@ class Export extends CI_Controller
             }
             return $carry;
         }, array());
-        $heightPage = 210 + (15 * count($idCheckoutCount));
+        $heightPage = 170 + (15 * count($idCheckoutCount));
         // echo count($idCheckoutCount);
         // var_dump($idCheckoutCount);
 
         $this->load->library('pdf');
         $pdf = new Pdf();
 
-        $pdf->AddPage("P", array(80, $heightPage));
+        $pdf->AddPage("P", array(50, $heightPage));
 
-        $pdf->Image(base_url('dist/img/abTrasOuline.png'), 10, 0, 60, 0);
-        $pdf->Cell(0, 35, '', 0, 1);
-        $pdf->SetFont('Arial', 'B', 12);
+        // $pdf->Image(base_url('dist/img/abTrasOuline.png'), 10, 0, 60, 0);
+        // $pdf->Cell(0, 35, '', 0, 1);
+        // $pdf->SetFont('Arial', 'B', 12);
+
+
+        // // $pdf->Cell(0, 5, "FAKTUR PENJUALAN", 0, 1, "C");
+        // $pdf->Cell(
+        //     0,
+        //     10,
+        //     "AB. TRASS",
+        //     0,
+        //     1,
+        //     "C"
+        // );
+        // $pdf->SetFont('Arial', '', 10);
+        // $pdf->Cell(0, 5, 'Menerima Pemasangan Rangka', 0, 1, "C");
+        // $pdf->Cell(0, 5, 'Atap & Plavon PVC', 0, 1, "C");
+        // $pdf->Cell(0, 5, 'Dempel Kulon Kali RT 5 RW 9 Kebonbatur', 0, 1, "C");
+        // $pdf->Cell(0, 5, '085786046376', 0, 1, "C");
+        // $pdf->Cell(0, 5, '-----------------------------------------------------------', 0, 1, "C");
+
+        // $pdf->Cell(0, 5, '', 0, 1);
+
+
+
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Nomor Transaksi : ' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y')
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Tanggal               : ' . date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Pembeli               : ' . $Transaction[0]->buyerName
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // // $pdf->Cell(85, 20, '                      ', 0, 0);
+        // // $pdf->Cell(
+        // //     0,
+        // //     6,
+        // //     'Rekening             : ' . $Transaction[0]->bankAccountNumber
+        // //     ,
+        // //     0,
+        // //     1,
+        // //     'L'
+        // // );
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Alamat                 : ' . $Transaction[0]->buyerAddress
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'No. HP                 : ' . $Transaction[0]->buyerPhone
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // $pdf->Cell(35, 10, '', 0, 1);
+
+        $pdf->SetFont('Arial', 'B', 18);
 
 
         // $pdf->Cell(0, 5, "FAKTUR PENJUALAN", 0, 1, "C");
@@ -188,19 +268,21 @@ class Export extends CI_Controller
             1,
             "C"
         );
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 5, 'Menerima Pemasangan Rangka', 0, 1, "C");
         $pdf->Cell(0, 5, 'Atap & Plavon PVC', 0, 1, "C");
-        $pdf->Cell(0, 5, 'Dempel Kulon Kali RT 5 RW 9 Kebonbatur', 0, 1, "C");
+        $pdf->Cell(0, 5, 'Dempel Kulon Kali', 0, 1, "C");
+        $pdf->Cell(0, 5, 'RT 5 RW 9 Kebonbatur', 0, 1, "C");
         $pdf->Cell(0, 5, '085786046376', 0, 1, "C");
         $pdf->Cell(0, 5, '-----------------------------------------------------------', 0, 1, "C");
 
         $pdf->Cell(0, 5, '', 0, 1);
 
 
-
+        $pdf->SetX(3);
+        // $pdf->SetY(-10);
         $pdf->Cell(
-            0,
+            500,
             6,
             'Nomor Transaksi : ' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y')
             ,
@@ -208,15 +290,26 @@ class Export extends CI_Controller
             1,
             'L'
         );
+        $pdf->SetX(3); // Cell untuk tanggal
         $pdf->Cell(
             0,
             6,
-            'Tanggal               : ' . date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
-            ,
+            'Tanggal               : ' . date('d-m-Y', strtotime($Transaction[0]->orderTimestamp)), // Hapus waktu dari format tanggal
             0,
-            1,
+            1, // Jangan melakukan line break setelah sel ini
             'L'
         );
+
+        $pdf->SetX(3); // Cell untuk waktu
+        $pdf->Cell(
+            0,
+            6,
+            'Waktu                  : ' . date('H:i:s', strtotime($Transaction[0]->orderTimestamp)), // Hanya waktu
+            0,
+            1, // Line break setelah sel ini
+            'L'
+        );
+        $pdf->SetX(3);
         $pdf->Cell(
             0,
             6,
@@ -236,26 +329,27 @@ class Export extends CI_Controller
         //     1,
         //     'L'
         // );
+        $pdf->SetX(3);
         $pdf->Cell(
             0,
             6,
-            'Alamat                 : ' . $Transaction[0]->buyerAddress
+            'No. HP                : ' . $Transaction[0]->buyerPhone
             ,
             0,
             1,
             'L'
         );
-        $pdf->Cell(
-            0,
-            6,
-            'No. HP                 : ' . $Transaction[0]->buyerPhone
-            ,
-            0,
-            1,
-            'L'
-        );
-        $pdf->Cell(35, 10, '', 0, 1);
 
+        $pdf->SetX(3);
+        $pdf->MultiCell(
+            50,
+            6,
+            'Alamat                 : ' . $Transaction[0]->buyerAddress,
+            0,
+            'L'
+        );
+        // $pdf->Cell(35, 10, '', 0, 1);
+        $pdf->Cell(0, 5, '-----------------------------------------------------------', 0, 1, "C");
 
         // $pdf->Cell(10, 10, 'No', 1, 0, 'C');
         // $pdf->Cell(70, 10, 'Nama Barang', 1, 0, 'C');
@@ -264,7 +358,7 @@ class Export extends CI_Controller
         // $pdf->Cell(60, 10, 'Total Harga', 1, 1, 'C');
         // $pdf->Cell(30, 10, 'Received Now', 1, 1, 'C');
 
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', '', 8);
 
         $count = 1;
         $PRICEAMOUNT = 0;
@@ -274,10 +368,10 @@ class Export extends CI_Controller
 
             $pdf->Cell(70, 5, $row->productName, 0, 1, 'L');
             $pdf->Cell(0, 10, $row->qtyOrder . ' x ' . number_format($row->productPrice, 0, ',', '.'), 0, 0, 'L');
-            $pdf->SetFont('Arial', 'B', 10);
+            $pdf->SetFont('Arial', 'B', 8);
             $pdf->Cell(0, 10, number_format($row->priceAmount, 0, ',', '.'), 0, 1, 'R');
 
-            $pdf->SetFont('Arial', '', 10);
+            $pdf->SetFont('Arial', '', 8);
             // $pdf->Cell(40, 10, $row->qtyOrder . ' X ' . number_format($row->productPrice, 0, ',', '.'), 1, 0, 'C');
             // $pdf->Cell(10, 10, $row->qtyOrder, 1, 0, 'C');
             // $pdf->Cell(607, 10, number_format($row->priceAmount, 0, ',', '.'), 1, 1, 'C');
@@ -288,14 +382,14 @@ class Export extends CI_Controller
         $grandTotalAmount = $PRICEAMOUNT + $row->ongkir;
         $pdf->Cell(0, 5, '-----------------------------------------------------------', 0, 1, "C");
         $pdf->Cell(0, 5, 'Subtotal', 0, 0, 'L');
-        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 5, number_format($PRICEAMOUNT, 0, ',', '.'), 0, 1, 'R');
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 5, 'Ongkir', 0, 0, 'L');
-        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 5, number_format($row->ongkir, 0, ',', '.'), 0, 1, 'R');
         $pdf->Cell(0, 5, 'Total bayar', 0, 0, 'L');
-        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 5, number_format($grandTotalAmount, 0, ',', '.'), 0, 1, 'R');
 
         // $pdf->Cell(0, 5, ' ', 0, 1, 'C');
@@ -308,7 +402,7 @@ class Export extends CI_Controller
         // $pdf->Cell(10, 10, ' ', 0, 1, 'C');
 
         $pdf->Cell(0, 15, '', 0, 1);
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 5, 'Terima kasih sudah berbelanja di', 0, 1, "C");
         $pdf->Cell(0, 5, 'toko kami', 0, 1, "C");
         $pdf->Cell(0, 5, 'ditunggu transaksi berikutnya', 0, 1, "C");
@@ -320,7 +414,7 @@ class Export extends CI_Controller
         // $pdf->Cell(100, 40, ".............", 0, 0, "C");
 
 
-        $pdf->Output('I', 'Struk.pdf');
+        $pdf->Output('I', 'Struk-' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y') . '.pdf');
     }
 
     public function surat_jalan()
@@ -337,18 +431,98 @@ class Export extends CI_Controller
             }
             return $carry;
         }, array());
-        $heightPage = 190 + (5 * count($idCheckoutCount));
+        $heightPage = 160 + (5 * count($idCheckoutCount));
         // echo count($idCheckoutCount);
         // var_dump($idCheckoutCount);
 
         $this->load->library('pdf');
         $pdf = new Pdf();
 
-        $pdf->AddPage("P", array(80, $heightPage));
+        $pdf->AddPage("P", array(50, $heightPage));
 
-        $pdf->Image(base_url('dist/img/abTrasOuline.png'), 10, 0, 60, 0);
-        $pdf->Cell(0, 35, '', 0, 1);
-        $pdf->SetFont('Arial', 'B', 12);
+        // $pdf->Image(base_url('dist/img/abTrasOuline.png'), 10, 0, 60, 0);
+        // $pdf->Cell(0, 35, '', 0, 1);
+        // $pdf->SetFont('Arial', 'B', 12);
+
+
+        // // $pdf->Cell(0, 5, "FAKTUR PENJUALAN", 0, 1, "C");
+        // $pdf->Cell(
+        //     0,
+        //     10,
+        //     "AB. TRASS",
+        //     0,
+        //     1,
+        //     "C"
+        // );
+        // $pdf->SetFont('Arial', '', 10);
+        // $pdf->Cell(0, 5, 'Menerima Pemasangan Rangka', 0, 1, "C");
+        // $pdf->Cell(0, 5, 'Atap & Plavon PVC', 0, 1, "C");
+        // $pdf->Cell(0, 5, 'Dempel Kulon Kali RT 5 RW 9 Kebonbatur', 0, 1, "C");
+        // $pdf->Cell(0, 5, '085786046376', 0, 1, "C");
+        // $pdf->Cell(0, 5, '-----------------------------------------------------------', 0, 1, "C");
+
+        // $pdf->Cell(0, 5, '', 0, 1);
+
+
+
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Nomor Transaksi : ' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y')
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Tanggal               : ' . date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Pembeli               : ' . $Transaction[0]->buyerName
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // // $pdf->Cell(85, 20, '                      ', 0, 0);
+        // // $pdf->Cell(
+        // //     0,
+        // //     6,
+        // //     'Rekening             : ' . $Transaction[0]->bankAccountNumber
+        // //     ,
+        // //     0,
+        // //     1,
+        // //     'L'
+        // // );
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'Alamat                 : ' . $Transaction[0]->buyerAddress
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // $pdf->Cell(
+        //     0,
+        //     6,
+        //     'No. HP                 : ' . $Transaction[0]->buyerPhone
+        //     ,
+        //     0,
+        //     1,
+        //     'L'
+        // );
+        // $pdf->Cell(35, 10, '', 0, 1);
+
+        $pdf->SetFont('Arial', 'B', 18);
 
 
         // $pdf->Cell(0, 5, "FAKTUR PENJUALAN", 0, 1, "C");
@@ -360,19 +534,21 @@ class Export extends CI_Controller
             1,
             "C"
         );
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 5, 'Menerima Pemasangan Rangka', 0, 1, "C");
         $pdf->Cell(0, 5, 'Atap & Plavon PVC', 0, 1, "C");
-        $pdf->Cell(0, 5, 'Dempel Kulon Kali RT 5 RW 9 Kebonbatur', 0, 1, "C");
+        $pdf->Cell(0, 5, 'Dempel Kulon Kali', 0, 1, "C");
+        $pdf->Cell(0, 5, 'RT 5 RW 9 Kebonbatur', 0, 1, "C");
         $pdf->Cell(0, 5, '085786046376', 0, 1, "C");
         $pdf->Cell(0, 5, '-----------------------------------------------------------', 0, 1, "C");
 
         $pdf->Cell(0, 5, '', 0, 1);
 
 
-
+        $pdf->SetX(3);
+        // $pdf->SetY(-10);
         $pdf->Cell(
-            0,
+            500,
             6,
             'Nomor Transaksi : ' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y')
             ,
@@ -380,15 +556,26 @@ class Export extends CI_Controller
             1,
             'L'
         );
+        $pdf->SetX(3); // Cell untuk tanggal
         $pdf->Cell(
             0,
             6,
-            'Tanggal               : ' . date('d-m-Y H:i:s', strtotime($Transaction[0]->orderTimestamp))
-            ,
+            'Tanggal               : ' . date('d-m-Y', strtotime($Transaction[0]->orderTimestamp)), // Hapus waktu dari format tanggal
             0,
-            1,
+            1, // Jangan melakukan line break setelah sel ini
             'L'
         );
+
+        $pdf->SetX(3); // Cell untuk waktu
+        $pdf->Cell(
+            0,
+            6,
+            'Waktu                  : ' . date('H:i:s', strtotime($Transaction[0]->orderTimestamp)), // Hanya waktu
+            0,
+            1, // Line break setelah sel ini
+            'L'
+        );
+        $pdf->SetX(3);
         $pdf->Cell(
             0,
             6,
@@ -402,31 +589,33 @@ class Export extends CI_Controller
         // $pdf->Cell(
         //     0,
         //     6,
-        //     'Rekening             : ' . $Transaction[0]->bankAccountNumber
+        //     'Rekening             : '.$Transaction[0]->bankAccountNumber
         //     ,
         //     0,
         //     1,
         //     'L'
         // );
+        $pdf->SetX(3);
         $pdf->Cell(
             0,
             6,
-            'Alamat                 : ' . $Transaction[0]->buyerAddress
+            'No. HP                : ' . $Transaction[0]->buyerPhone
             ,
             0,
             1,
             'L'
         );
-        $pdf->Cell(
-            0,
+
+        $pdf->SetX(3);
+        $pdf->MultiCell(
+            50,
             6,
-            'No. HP                 : ' . $Transaction[0]->buyerPhone
-            ,
+            'Alamat                 : ' . $Transaction[0]->buyerAddress,
             0,
-            1,
             'L'
         );
-        $pdf->Cell(35, 10, '', 0, 1);
+        // $pdf->Cell(35, 10, '', 0, 1);
+        $pdf->Cell(0, 5, '-----------------------------------------------------------', 0, 1, "C");
 
 
         // $pdf->Cell(10, 10, 'No', 1, 0, 'C');
@@ -436,9 +625,9 @@ class Export extends CI_Controller
         // $pdf->Cell(60, 10, 'Total Harga', 1, 1, 'C');
         // $pdf->Cell(30, 10, 'Received Now', 1, 1, 'C');
 
-        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(70, 10, 'Produk yang dibeli :', 0, 1, 'L');
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', '', 8);
         $count = 1;
         $PRICEAMOUNT = 0;
         foreach ($Transaction as $row) {
@@ -469,7 +658,7 @@ class Export extends CI_Controller
         // $pdf->Cell(10, 10, ' ', 0, 1, 'C');
 
         $pdf->Cell(0, 15, '', 0, 1);
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 5, 'Terima kasih sudah berbelanja di', 0, 1, "C");
         $pdf->Cell(0, 5, 'toko kami', 0, 1, "C");
         $pdf->Cell(0, 5, 'ditunggu transaksi berikutnya', 0, 1, "C");
@@ -481,7 +670,7 @@ class Export extends CI_Controller
         // $pdf->Cell(100, 40, ".............", 0, 0, "C");
 
 
-        $pdf->Output('I', 'Daftar Transaction.pdf');
+        $pdf->Output('I', 'SJ-' . $Transaction[0]->idOrder . '/' . 'ABJ/' . date('m/y') . '.pdf');
     }
 
 }
