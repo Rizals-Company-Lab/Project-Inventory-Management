@@ -20,7 +20,7 @@ class Transaction_model extends CI_Model
         return $result;
     }
 
-    public function get_transaction($rowno, $rowperpage, $searchBuyer = "", $searchDate = "", $searchStatus = "")
+    public function get_transaction($rowno, $rowperpage, $searchIdOrder = "", $searchBuyer = "", $searchDate = "", $searchStatus = "")
     {
         $this->db->select('*');
         $this->db->from('tbl_order AS TO');
@@ -36,6 +36,9 @@ class Transaction_model extends CI_Model
             $this->db->like('buyerName', $searchBuyer);
         }
 
+        if ($searchIdOrder) {
+            $this->db->where('idOrder', $searchIdOrder);
+        }
         if ($searchDate) {
             $formattedDate = date('Y-m-d', strtotime($searchDate));
             $this->db->where("DATE(orderTimestamp) =", $formattedDate);
@@ -889,8 +892,9 @@ class Transaction_model extends CI_Model
     }
 
     //count total record
-    public function get_transaction_count($searchBuyer = "", $searchDate = "", $searchStatus = "")
+    public function get_transaction_count($searchIdOrder = "", $searchBuyer = "", $searchDate = "", $searchStatus = "")
     {
+        // var_dump($searchIdOrder);    
         $this->db->select('*');
         $this->db->from('tbl_order AS TO');
 
@@ -900,7 +904,9 @@ class Transaction_model extends CI_Model
         if ($searchBuyer) {
             $this->db->like('buyerName', $searchBuyer);
         }
-
+        if ($searchIdOrder) {
+            $this->db->where('idOrder', $searchIdOrder);
+        }
         if ($searchDate) {
             $formattedDate = date('Y-m-d', strtotime($searchDate));
             $this->db->where("DATE(orderTimestamp) =", $formattedDate);
@@ -940,10 +946,30 @@ class Transaction_model extends CI_Model
 
     public function delete_order($idOrder)
     {
-        $this->db->where('idOrder', $idOrder);
-        $this->db->delete('tbl_order');
-        return true;
+        $this->db->trans_start(); // Memulai transaksi
+
+        try {
+            $this->db->where('idOrder', $idOrder);
+            $this->db->delete('tbl_order');
+
+            $this->db->where('idOrder', $idOrder);
+            $this->db->delete('tbl_payment');
+
+            $this->db->trans_complete(); // Menyelesaikan transaksi
+
+            if ($this->db->trans_status() === FALSE) {
+                // Transaksi gagal, lakukan sesuatu di sini jika diperlukan
+                return false;
+            } else {
+                // Transaksi berhasil
+                return true;
+            }
+        } catch (Exception $e) {
+            $this->db->trans_rollback(); // Rollback transaksi jika terjadi kesalahan
+            return false;
+        }
     }
+
 
     public function update_payment_status($idOrder)
     {
