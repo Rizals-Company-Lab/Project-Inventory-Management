@@ -33,6 +33,7 @@ class Report_model extends CI_Model {
 
     public function get_total_profit() {
         $this->db->select_sum('orderProfitAmount');
+        $this->db->where("paymentStatus = '1'");
         $result = $this->db->get('tbl_order')->row()->orderProfitAmount;
 
         return $result;
