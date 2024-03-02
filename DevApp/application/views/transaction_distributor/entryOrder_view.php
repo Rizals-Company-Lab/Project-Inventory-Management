@@ -79,7 +79,7 @@
                         value="<?= (isset($buyerPhoneTransaction)) ? $buyerPhoneTransaction : '' ?>">
                 </div>
                 <div class="sm:ml-3">
-                    <label class="font-bold sm:text-lg text-sm " for="bankAccountNumber"> CATATAN :</label>
+                    <label class="font-bold sm:text-lg text-sm " for="bankAccountNumber"> Catatan :</label>
                     <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md" placeholder="Catatan"
                         type="text" name="bankAccountNumber" id="bankAccountNumber"
                         value="<?= (isset($bankAccountNumberTransaction)) ? $bankAccountNumberTransaction : '' ?>">
@@ -94,7 +94,7 @@
                 <div class="sm:ml-3">
                     <label class="font-bold sm:text-lg text-sm" for="ongkir">Ongkos Kirim :</label>
                     <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
-                        placeholder="Input Nominal" type="number" name="ongkir" id="ongkir"
+                        placeholder="Input Nominal" type="number" name="ongkir" id="ongkir" min="0"
                         value="<?= (isset($ongkirTransaction)) ? $ongkirTransaction : '' ?>">
                 </div>
             </div>

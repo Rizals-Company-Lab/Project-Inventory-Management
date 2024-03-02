@@ -37,7 +37,9 @@
                 </h1>
             </div>
         </a>
-        <a class="rounded-md w-full sm:py-5 hover:bg-blue-800 flex justify-center items-center sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-dark"
+        <?php if ($admin == true): ?>
+
+<a class="rounded-md w-full sm:py-5 hover:bg-blue-800 flex justify-center items-center sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-dark"
             href="<?php echo site_url('Transaction_production/add_new_transaction'); ?>">
             <div>
                 <h1 class="px-5 text-white font-bold">
@@ -46,6 +48,10 @@
                 </h1>
             </div>
         </a>
+                        <?php else: ?>
+                            
+                        <?php endif; ?>
+        
 
     </div>
     <div class="sm:flex sm:justify-evenly mt-3 sm:-mt-2 mb-0 sm:mb-5">
@@ -229,12 +235,20 @@
                         <?= ($spendingToday == NULL) ? '0' : $spendingToday ?>
                     </span>
                 </div>
-                <div class="flex mt-2 mr-3">
-                    <p class="sm:px-5 sm:py-2 py-2 w-[200px]">Total Laba</p><span
-                        class="sm:w-[200px] w-[200px] hover:bg-slate-300 text-green-500 px-5 py-2  rounded-md">=
-                        <?= ($get_total_final_profit_today == NULL) ? '0' : $get_total_final_profit_today ?>
-                    </span>
-                </div>
+
+
+                <?php if ($admin == true): ?>
+
+
+                            <div class="flex mt-2 mr-3">
+                                <p class="sm:px-5 sm:py-2 py-2 w-[200px]">Total Laba</p><span
+                                    class="sm:w-[200px] w-[200px] hover:bg-slate-300 text-green-500 px-5 py-2  rounded-md">=
+                                    <?= ($get_total_final_profit_today == NULL) ? '0' : $get_total_final_profit_today ?>
+                                </span>
+                            </div>
+                        <?php else: ?>
+                            
+                        <?php endif; ?>
             </div>
         </div>
     </div>

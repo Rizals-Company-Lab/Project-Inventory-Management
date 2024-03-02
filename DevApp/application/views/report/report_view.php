@@ -92,6 +92,22 @@
                                         disabled type="text" value=" <?= $grandTotal->grandTotalDifference ?>">
                                 </h1>
                             </div>
+                            <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-blue-400">
+                                <h1 class="font-bold text-white">
+                                    LABA KOTOR :
+                                    <input
+                                        class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        disabled type="text" value=" <?= $totalProfit ?>">
+                                </h1>
+                            </div>
+                            <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-lime-600">
+                                <h1 class="font-bold text-white">
+                                    LABA BERSIH :
+                                    <input
+                                        class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        disabled type="text" value=" <?= $totalProfit - $totalSpending?>">
+                                </h1>
+                            </div>
                         </div>
                         <div class="sm:flex justify-evenly">
                             <div class="rounded-md sm:mb-5 sm:mt-3 sm:ml-3 ml-3 mr-3 mt-3 py-3 px-3 bg-orange-500">

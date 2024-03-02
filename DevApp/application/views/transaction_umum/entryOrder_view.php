@@ -2,14 +2,14 @@
     <?php
     if (isset($idOrderTransaction)):
         ?>
-    masuk update
+    <!-- masuk update -->
     <form
         class="sm:mx-auto sm:mt-5 relative mb-5 w-auto mt-0 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
         action="<?= site_url('transaction_umum/save_transaction_update'); ?>" method="post">
         <?php
     else:
         ?>
-        masuk baru
+        <!-- masuk baru -->
         <form
             class="sm:mx-auto sm:mt-5 relative mb-5 w-auto mt-0 h-full sm:w-[75%] sm:h-[90%] p-3 ml-3 mr-3  shadow-sm border shadow-white rounded-md group"
             action="<?= site_url('transaction_umum/save_transaction'); ?>" method="post">
@@ -80,7 +80,7 @@
                         value="<?= (isset($buyerPhoneTransaction)) ? $buyerPhoneTransaction : '' ?>">
                 </div>
                 <div class="sm:ml-3">
-                    <label class="font-bold sm:text-lg text-sm " for="bankAccountNumber">CATATAN :</label>
+                    <label class="font-bold sm:text-lg text-sm " for="bankAccountNumber">Catatan :</label>
                     <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md" placeholder="Catatan"
                         type="text" name="bankAccountNumber" id="bankAccountNumber"
                         value="<?= (isset($bankAccountNumberTransaction)) ? $bankAccountNumberTransaction : '' ?>">
@@ -95,7 +95,7 @@
                 <div class="sm:ml-3">
                     <label class="font-bold sm:text-lg text-sm" for="ongkir">Ongkos Kirim :</label>
                     <input class="mt-2 w-full  py-2 border text-black px-5  rounded-md shadow-md"
-                        placeholder="Input Nominal" type="number" name="ongkir" id="ongkir"
+                        placeholder="Input Nominal" type="number" name="ongkir" id="ongkir" min="0"
                         value="<?= (isset($ongkirTransaction)) ? $ongkirTransaction : '' ?>">
                 </div>
             </div>

@@ -52,7 +52,13 @@
                         <th class="py-3 ">HARGA UMUM</th>
                         <th class="py-3 ">HARGA PEMBORONG</th>
                         <th class="py-3 ">HARGA MATERIAL</th>
-                        <th class="py-3 ">HARGA PRODUKSI</th>
+                        <?php if ($admin == true): ?>
+
+
+                            <th class="py-3 ">HARGA PRODUKSI</th>
+                        <?php else: ?>
+                            
+                        <?php endif; ?>
                         <th class="py-3 ">Action</th>
                     </tr>
                 </thead>
@@ -80,9 +86,16 @@
                         <td class="py-3 w-auto text-center px-3">
                             <?= $singleView->materialPrice ?>
                         </td>
-                        <td class="py-3 w-auto text-center px-3">
-                            <?= $singleView->productionPrice ?>
-                        </td>
+                        <?php if ($admin == true): ?>
+
+                            <td class="py-3 w-auto text-center px-3">
+                                <?= $singleView->productionPrice ?>
+                            </td>
+
+                        <?php else: ?>
+                            
+                        <?php endif; ?>
+                        
                         <td class="flex text-white justify-center mt-1">
                             <form action="<?= site_url('product/get_update'); ?>" method="post">
                                 <button type="submit" value="<?= $singleView->SKU ?>" name="SKU" id="SKU"

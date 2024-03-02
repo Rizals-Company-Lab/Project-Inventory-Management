@@ -66,10 +66,12 @@ class Product extends CI_Controller {
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
 
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
+            $data['admin'] = true;
             $this->load->view('nav/navbar.php');
         } else {
+            $data['admin'] = false;
             $this->load->view('nav/navbar_kasir.php');
 
         }
@@ -79,15 +81,16 @@ class Product extends CI_Controller {
 
 
     public function add_product() {
-        // $data['product'] = $this->Product_model->get_product();
-        if($this->session->userdata('login_id') == 'admin') {
+        if ($this->session->userdata('login_id') == 'admin') {
 
+            $data['admin'] = true;
             $this->load->view('nav/navbar.php');
         } else {
+            $data['admin'] = false;
             $this->load->view('nav/navbar_kasir.php');
 
-        }
-        $this->load->view('product/add_product_view.php');
+        }   
+        $this->load->view('product/add_product_view.php', $data);
     }
 
     public function save_product() {
@@ -113,10 +116,12 @@ class Product extends CI_Controller {
 
         $SKU = $this->input->post('SKU');
         $data['product'] = $this->Product_model->get_product_ByID($SKU);
-        if($this->session->userdata('login_id') == 'admin') {
+         if ($this->session->userdata('login_id') == 'admin') {
 
+            $data['admin'] = true;
             $this->load->view('nav/navbar.php');
         } else {
+            $data['admin'] = false;
             $this->load->view('nav/navbar_kasir.php');
 
         }
@@ -136,6 +141,7 @@ class Product extends CI_Controller {
         $materialPrice = $this->input->post('materialPrice');
         $productionPrice = $this->input->post('productionPrice');
         $this->Product_model->update_product($SKU, $productName, $productDescription, $sellingPrice, $distributorPrice, $materialPrice, $productionPrice);
+        
 
         // $data['product'] = $this->Product_model->get_product();
         // $this->load->view('purcase/add_purcasing_view.php', $data);

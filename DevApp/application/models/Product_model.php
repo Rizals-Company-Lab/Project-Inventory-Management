@@ -178,6 +178,7 @@ class Product_model extends CI_Model {
             'productDescription' => $productDescription,
             'sellingPrice' => $sellingPrice,
             'distributorPrice' => $distributorPrice,
+            'materialPrice' => $materialPrice,
             'productionPrice' => $productionPrice
         );
 

@@ -464,7 +464,7 @@ class Export extends CI_Controller
             $pdf->SetX(3);
 
 
-            $pdf->Cell(70, 3, $count . '. ' . $row->productName, 0, 1, 'L');
+            $pdf->Cell(70, 3, $count . '. (' .  $row->qtyOrder.'x) '.$row->productName, 0, 1, 'L');
 
             $count++;
             // $PRICEAMOUNT += $row->priceAmount;

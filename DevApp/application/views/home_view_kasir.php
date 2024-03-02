@@ -100,6 +100,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             </a>
             <!-- card3 -->
+            <a class=" flex sm:w-96 ml-3 w-auto flex-col rounded-xl mx-auto mb-3 hover:backdrop-blur-sm hover:bg-white/95  bg-white bg-clip-border text-gray-700 shadow-md group"
+                href="<?= base_url() ?>report/spending">
+                <div>
+                    <div class="p-6 hover:mt-3">
+                        <h5
+                            class="mb-2 block font-sans sm:text-xl text-base font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                            <i class="fa fa-cart-arrow-down w-10 " aria-hidden="true"></i>
+                            MENU PENGELUARAN
+                        </h5>
+                        <p
+                            class="block font-sans text-base font-light leading-relaxed text-inherit antialiased group-hover:text-blue-500">
+                            menampilkan Daftar pengeluaran yang telah diinputkan </p>
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button
+                            class="select-none rounded-lg bg-bg2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button" data-ripple-light="true">
+                            Details
+                        </button>
+                    </div>
+                </div>
+
+            </a>
+            <!-- card3 -->
             <!-- <div
                 class="sm:ml-3 flex sm:w-96 hover:-mt-3 w-auto flex-col rounded-xl mx-auto mb-3 hover:backdrop-blur-sm hover:bg-white/95  bg-white bg-clip-border text-gray-700 shadow-md group">
                 <div class="p-6 ">

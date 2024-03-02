@@ -7,6 +7,12 @@ class Report extends CI_Controller {
         parent::__construct();
         $this->load->model('Report_model');
         $this->load->model('Product_model');
+        
+
+    }
+
+    public function index($row_no = 0) {
+        //search text
         if(!$this->session->userdata('login_id')) {
             redirect('Auth/login');
         } else {
@@ -14,11 +20,6 @@ class Report extends CI_Controller {
                 redirect('Home');
             }
         }
-
-    }
-
-    public function index($row_no = 0) {
-        //search text
         $dateStart = "";
         $dateEnd = "";
         $searchITEMNAME = "";
@@ -40,7 +41,8 @@ class Report extends CI_Controller {
                 $searchITEMNAME = $this->session->userdata('searchITEMNAME');
             }
         }
-
+        $datetimeStart = $dateStart . " 00:00:00";
+        $datetimeEnd = $dateEnd . " 23:59:59";
         //--pagination--
         $row_per_page = 5;
 
@@ -50,7 +52,7 @@ class Report extends CI_Controller {
 
         // Pagination Configuration
         // All record count
-        $config['total_rows'] = $this->Report_model->get_report_count_byProduct($dateStart, $dateEnd, $searchITEMNAME);
+        $config['total_rows'] = $this->Report_model->get_report_count_byProduct($datetimeStart, $datetimeEnd, $searchITEMNAME);
         $config['base_url'] = base_url().'report/index';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
@@ -61,7 +63,7 @@ class Report extends CI_Controller {
         $data['pagination'] = $this->pagination->create_links();
 
         // Get record
-        $data['report'] = $this->Report_model->get_report_byProduct($row_no, $row_per_page, $dateStart, $dateEnd, $searchITEMNAME);
+        $data['report'] = $this->Report_model->get_report_byProduct($row_no, $row_per_page, $datetimeStart, $datetimeEnd, $searchITEMNAME);
         $data['grandTotal'] = $this->Report_model->get_report();
 
         $data['row'] = $row_no;
@@ -71,8 +73,9 @@ class Report extends CI_Controller {
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
         $data['totalSpending'] = $this->Report_model->get_total_spending();
+        $data['totalProfit'] = $this->Report_model->get_total_profit();
 
-
+// var_dump($data['totalProfit']);
 
         // var_dump($this->Report_model->get_report());
 
@@ -81,9 +84,17 @@ class Report extends CI_Controller {
     }
 
     public function details($row_no = 0) {
+        if(!$this->session->userdata('login_id')) {
+            redirect('Auth/login');
+        } else {
+            if($this->session->userdata('login_id') != 'admin') {
+                redirect('Home');
+            }
+        }
         //search text
         $dateStart = "";
         $dateEnd = "";
+        
         $searchITEMNAME = "";
         if($this->input->post('search') != '') {
             $dateStart = $this->input->post('dateStart');
@@ -103,7 +114,9 @@ class Report extends CI_Controller {
                 $searchITEMNAME = $this->session->userdata('searchITEMNAME');
             }
         }
-
+        $datetimeStart = $dateStart . " 00:00:00";
+        $datetimeEnd = $dateEnd . " 23:59:59";
+        
         //--pagination--
         $row_per_page = 5;
 
@@ -113,7 +126,7 @@ class Report extends CI_Controller {
 
         // Pagination Configuration
         // All record count
-        $config['total_rows'] = $this->Report_model->get_report_count_details_byProduct($dateStart, $dateEnd, $searchITEMNAME);
+        $config['total_rows'] = $this->Report_model->get_report_count_details_byProduct($datetimeStart, $datetimeEnd, $searchITEMNAME);
         $config['base_url'] = base_url().'report/details';
         $config['use_page_numbers'] = true;
         $config['per_page'] = $row_per_page;
@@ -124,11 +137,14 @@ class Report extends CI_Controller {
         $data['pagination'] = $this->pagination->create_links();
 
         // Get record
-        $data['reportDetailProduct'] = $this->Report_model->get_report_details_byProduct($row_no, $row_per_page, $dateStart, $dateEnd, $searchITEMNAME);
-        $data['grandTotalPurcase'] = $this->Report_model->get_purcasing_details($dateStart, $dateEnd, $searchITEMNAME)->result()[0];
-        $data['grandTotalOrder'] = $this->Report_model->get_order_details($dateStart, $dateEnd, $searchITEMNAME)->result()[0];
-        $data['grandTotalSpending'] = $this->Report_model->get_spending_details($dateStart, $dateEnd)->result()[0];
-        $data['spending'] = $this->Report_model->get_spending_filter($dateStart, $dateEnd)->result();
+        $data['reportDetailProduct'] = $this->Report_model->get_report_details_byProduct($row_no, $row_per_page, $datetimeStart, $datetimeEnd, $searchITEMNAME);
+        $data['grandTotalPurcase'] = $this->Report_model->get_purcasing_details($datetimeStart, $datetimeEnd, $searchITEMNAME)->result()[0];
+        $data['grandTotalOrder'] = $this->Report_model->get_order_details($datetimeStart, $datetimeEnd, $searchITEMNAME)->result()[0];
+        $data['grandTotalSpending'] = $this->Report_model->get_spending_details($datetimeStart, $datetimeEnd)->result()[0];
+        $data['spending'] = $this->Report_model->get_spending_filter($datetimeStart, $datetimeEnd)->result();
+
+        $data['totalSpending'] = $this->Report_model->get_total_spending_filter($datetimeStart, $datetimeEnd);
+        $data['totalProfit'] = $this->Report_model->get_total_profit_filter($datetimeStart, $datetimeEnd);
 
         $data['row'] = $row_no;
 
@@ -137,6 +153,8 @@ class Report extends CI_Controller {
         $data['searchITEMNAME'] = $searchITEMNAME;
         $data['totalRow'] = $config['total_rows'];
 
+        // var_dump($data['totalProfit']);
+        // var_dump($data['totalSpending']);
         // var_dump($this->Report_model->get_report_details_byProduct($dateStart, $dateEnd, $searchITEMNAME)->result());
 
 
@@ -146,6 +164,28 @@ class Report extends CI_Controller {
 
         $this->load->view('report/report_detail_view.php', $data);
         // $this->load->view('report/report_view', $data);
+    }
+
+    public function spending($row_no = 0) {
+        //search text
+        $dateStart = date("Y-m-d");
+        $dateEnd = date("Y-m-d");
+       
+        $dateStart = $dateStart . " 00:00:00";
+        $dateEnd = $dateEnd . " 23:59:59";
+        $data['spending'] = $this->Report_model->get_spending_filter($dateStart, $dateEnd)->result();
+
+
+        // var_dump($this->Report_model->get_report_details_byProduct($dateStart, $dateEnd, $searchITEMNAME)->result());
+
+
+        // var_dump($this->Report_model->get_report_count_details_byProduct($dateStart, $dateEnd, $searchITEMNAME));
+        // var_dump($this->Report_model->get_purcasing_details($dateStart, $dateEnd, $searchITEMNAME)->result());
+        // var_dump($this->Report_model->get_order_details($dateStart, $dateEnd, $searchITEMNAME)->result());
+
+        // var_dump( $data['spending']);
+        // $this->load->view('report/report_detail_view.php', $data);
+        $this->load->view('report/report_spending', $data);
     }
 
 }

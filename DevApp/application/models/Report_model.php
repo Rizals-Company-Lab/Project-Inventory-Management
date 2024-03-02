@@ -31,11 +31,32 @@ class Report_model extends CI_Model {
         return $result;
     }
 
+    public function get_total_profit() {
+        $this->db->select_sum('orderProfitAmount');
+        $result = $this->db->get('tbl_order')->row()->orderProfitAmount;
+
+        return $result;
+    }
+
+    public function get_total_profit_filter($startDate, $endDate) {
+        $this->db->select_sum('orderProfitAmount');
+        $this->db->where("paidTimestamp BETWEEN '$startDate' AND '$endDate'");
+        $result = $this->db->get('tbl_order')->row()->orderProfitAmount;
+// echo $startDate . $endDate;
+        return $result;
+    }
 
     public function get_total_spending() {
         $this->db->select_sum('totalSpending');
         $result = $this->db->get('tbl_spending')->row()->totalSpending;
 
+        return $result;
+    }
+
+    public function get_total_spending_filter($startDate, $endDate) {
+        $this->db->select_sum('totalSpending');
+        $this->db->where("spendingTimestamp BETWEEN '$startDate' AND '$endDate'");
+        $result = $this->db->get('tbl_spending')->row()->totalSpending;
         return $result;
     }
     public function get_spending() {

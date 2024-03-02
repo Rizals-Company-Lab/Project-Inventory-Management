@@ -34,26 +34,35 @@
                         <label for="sellingPrice">HARGA JUAL UMUM</label>
                         <input
                             class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            type="number" name="sellingPrice" id="sellingPrice" min="1" value="">
+                            type="number" name="sellingPrice" id="sellingPrice" min="0" value="">
                     </div>
                     <div class="sm:ml-5">
                         <label for="distributorPrice">HARGA JUAL PEMBORONG</label>
                         <input
                             class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            type="number" name="distributorPrice" id="distributorPrice" min="1" value="">
+                            type="number" name="distributorPrice" id="distributorPrice" min="0" value="">
                     </div>
                     <div class="sm:ml-5">
                         <label for="materialPrice">HARGA JUAL MATERIAL</label>
                         <input
                             class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            type="number" name="materialPrice" id="materialPrice" min="1" value="">
+                            type="number" name="materialPrice" id="materialPrice" min="0" value="">
                     </div>
-                    <div class="sm:ml-5">
-                        <label for="productionPrice">HARGA JUAL PRODUKSI</label>
-                        <input
-                            class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            type="number" name="productionPrice" id="productionPrice" min="1" value="">
-                    </div>
+                    <?php if ($admin == true): ?>
+
+                        <div class="sm:ml-5">
+                            <label for="productionPrice">HARGA JUAL PRODUKSI</label>
+                            <input
+                                class="mt-2 appearance-none block  w-full mx-auto bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="number" name="productionPrice" id="productionPrice" min="0" value="">
+                        </div>
+                    <?php else: ?>
+                        <div class="sm:ml-5">
+                            <input
+                            hidden
+                            type="number" name="productionPrice" id="productionPrice" value="0">
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <br>
             </div>

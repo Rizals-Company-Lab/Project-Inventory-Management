@@ -134,6 +134,26 @@
                 </div>
             </form>
             <div class=" text-white ml-5 mr-5">
+                <H1 class="text-center rounded-md sm:text-3xl text-sm  font-bold  bg-red-500  py-3 ">LABA
+                </H1>
+                <div class="sm:flex">
+                    <div class="rounded-md sm:mb-5 w-full  mt-3 py-3 px-3 bg-red-600">
+                        <h1 class="font-bold text-white">
+                            Kotor
+                            <input
+                                class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                disabled value="<?= $totalProfit ?>" type="text">
+                        </h1>
+                    </div>
+                    <div class="rounded-md sm:mb-5 w-full sm:ml-5  mt-3 py-3 px-3 bg-red-600">
+                        <h1 class="font-bold text-white">
+                            Bersih
+                            <input
+                                class="mt-2 text-center font-bold appearance-none w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                disabled value="<?= $totalProfit - $totalSpending ?>" type="text">
+                        </h1>
+                    </div>
+                </div>
                 <H1 class="text-center rounded-md sm:text-3xl text-sm  font-bold  bg-blue-500  py-3 ">KOLAKAN
                 </H1>
                 <div class="sm:flex">
