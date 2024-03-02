@@ -19,7 +19,7 @@
     ?>
             <h1 class="font-bold sm:text-2xl text-base mb-3 py-3 bg-bg2 text-center">
                 <?php
-                if (isset($idOrderTransaction)):
+                if (!isset($idOrderTransaction)):
                     ?>
                     TAMBAH TRANSAKSI MATERIAL
                     <?php
