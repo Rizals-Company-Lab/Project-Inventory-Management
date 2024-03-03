@@ -60,6 +60,19 @@ class Report_model extends CI_Model {
         $result = $this->db->get('tbl_spending')->row()->totalSpending;
         return $result;
     }
+    
+    public function get_spending_plain($startDate, $endDate) {
+        $this->db->select('*');
+        $this->db->from('tbl_spending AS TS');
+        $this->db->join('tbl_spending_category AS TSC', 'TS.idCategory = TSC.idCategory');
+        $this->db->where("spendingTimestamp BETWEEN '$startDate' AND '$endDate'");
+
+        $result = $this->db->get();
+
+
+        return $result;
+    }
+
     public function get_spending() {
         $this->db->select_sum('TS.totalSpending');
         $this->db->select('TSC.categorySpending');
@@ -92,6 +105,12 @@ class Report_model extends CI_Model {
 
 
         return $result;
+    }
+    
+    public function delete_spending($idSpending) {
+        $this->db->where('idSpending', $idSpending);
+        $this->db->delete('tbl_spending');
+
     }
 
 

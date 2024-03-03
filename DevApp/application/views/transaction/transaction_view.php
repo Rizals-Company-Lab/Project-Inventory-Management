@@ -223,12 +223,21 @@
         </div>
         <div class="bg-white font-bold rounded-md mb-1 mt-1 py-3">
             <div class="sm:ml-20 ml-5 ">
-                <div class="flex mt-2 mr-3">
-                    <p class="sm:px-5 sm:py-2 py-2 w-[200px]">Total Penjualan</p><span
-                        class="sm:w-[200px]  hover:bg-slate-300 w-[200px] px-5 py-2  rounded-md">=
-                        <?= ($transactionToday == NULL) ? '0' : $transactionToday ?>
-                    </span>
-                </div>
+
+            <?php if ($admin == true): ?>
+
+
+                    <div class="flex mt-2 mr-3">
+                        <p class="sm:px-5 sm:py-2 py-2 w-[200px]">Total Penjualan</p><span
+                            class="sm:w-[200px]  hover:bg-slate-300 w-[200px] px-5 py-2  rounded-md">=
+                            <?= ($transactionToday == NULL) ? '0' : $transactionToday ?>
+                        </span>
+                    </div>  
+                <?php else: ?>
+                    
+                <?php endif; ?>
+
+                
                 <div class="flex mt-2 mr-3">
                     <p class="sm:px-5 sm:py-2 py-2 w-[200px]">Total Pengeluaran</p><span
                         class="sm:w-[200px] w-[200px] hover:bg-slate-300  text-red-500 px-5 py-2  rounded-md">=
@@ -240,15 +249,15 @@
                 <?php if ($admin == true): ?>
 
 
-                            <div class="flex mt-2 mr-3">
-                                <p class="sm:px-5 sm:py-2 py-2 w-[200px]">Total Laba</p><span
-                                    class="sm:w-[200px] w-[200px] hover:bg-slate-300 text-green-500 px-5 py-2  rounded-md">=
-                                    <?= ($get_total_final_profit_today == NULL) ? '0' : $get_total_final_profit_today ?>
-                                </span>
-                            </div>
-                        <?php else: ?>
-                            
-                        <?php endif; ?>
+                    <div class="flex mt-2 mr-3">
+                        <p class="sm:px-5 sm:py-2 py-2 w-[200px]">Total Laba</p><span
+                            class="sm:w-[200px] w-[200px] hover:bg-slate-300 text-green-500 px-5 py-2  rounded-md">=
+                            <?= ($get_total_final_profit_today == NULL) ? '0' : $get_total_final_profit_today ?>
+                        </span>
+                    </div>
+                <?php else: ?>
+                    
+                <?php endif; ?>
             </div>
         </div>
     </div>

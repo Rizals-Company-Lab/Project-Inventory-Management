@@ -285,7 +285,7 @@
                                 <input type="number"
                                     class="sm:mt-2 mb-4 sm:w-full sm:h-[40px] w-[200px] border text-black sm:px-5 py-2 px-3  rounded-md shadow-md "
                                     placeholder="Masukan Nominal" id="totalPayment" name="totalPayment"
-                                    max="<?= $kekurangan ?>" min="0">
+                                    max="<?= $kekurangan ?>"  min="0" value="<?= $kekurangan ?>">
                                 <div class="sm:mt-3 mt-1 sm:ml-5">
 
                                     <button type="submit" value="payment" id="payment" name="payment"

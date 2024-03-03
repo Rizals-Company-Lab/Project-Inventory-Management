@@ -253,7 +253,7 @@ class Export extends CI_Controller
         $pdf->MultiCell(
             34,
             3,
-            $Transaction[0]->buyerAddress . "sfdsddfsdffhkjsfhksdjhfkhkjhkjsdfgsdgssdgsdgsdf",
+            $Transaction[0]->buyerAddress,
             0,
             'L'
         );
@@ -271,7 +271,7 @@ class Export extends CI_Controller
         $pdf->MultiCell(
             34,
             3,
-            $Transaction[0]->buyerAddress . "sfdsddfsdffhkjsfhksdjhfkhkjhkjsdfgsdgssdgsdgsdf",
+            $Transaction[0]->buyerAddress,
             0,
             'L'
         );

@@ -166,14 +166,17 @@ class Report extends CI_Controller {
         // $this->load->view('report/report_view', $data);
     }
 
-    public function spending($row_no = 0) {
+    public function spending() {
         //search text
         $dateStart = date("Y-m-d");
         $dateEnd = date("Y-m-d");
        
         $dateStart = $dateStart . " 00:00:00";
         $dateEnd = $dateEnd . " 23:59:59";
-        $data['spending'] = $this->Report_model->get_spending_filter($dateStart, $dateEnd)->result();
+        // $data['spending'] = $this->Report_model->get_spending_filter($dateStart, $dateEnd)->result();
+        // $data['spending_plain'] = $this->Report_model->get_spending_plain($dateStart, $dateEnd)->result();
+        $data['spending_plain'] = $this->Report_model->get_spending_plain($dateStart, $dateEnd);
+// var_dump($data['spending_plain']);
 
 
         // var_dump($this->Report_model->get_report_details_byProduct($dateStart, $dateEnd, $searchITEMNAME)->result());
@@ -186,6 +189,21 @@ class Report extends CI_Controller {
         // var_dump( $data['spending']);
         // $this->load->view('report/report_detail_view.php', $data);
         $this->load->view('report/report_spending', $data);
+    }
+    
+    
+    public function delete_spending() {
+        $idSpending = $this->input->post('idSpending');
+        // var_dump($idSpending);
+        // die;
+        $this->Report_model->delete_spending($idSpending);
+
+        // $data['product'] = $this->Product_model->get_product();
+        // $this->load->view('purcase/add_purcasing_view.php', $data);
+
+        // $data['spending_plain'] = $this->Report_model->get_spending_plain($dateStart, $dateEnd)->result();
+        redirect('Report/spending');
+        
     }
 
 }
